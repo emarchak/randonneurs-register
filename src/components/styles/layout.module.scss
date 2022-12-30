@@ -2,6 +2,9 @@
 
 $footer-height: 4.3rem;
 @include body-link();
+body {
+  background-color: get-color(background);
+}
 .content {
   @include max-width();
 

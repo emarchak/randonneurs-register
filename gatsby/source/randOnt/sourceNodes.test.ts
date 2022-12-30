@@ -76,7 +76,7 @@ describe('chapters()', () => {
         expect(chapters('Simcoe-Muskoka')).toBe('Simcoe')
         expect(chapters('XOttawa')).toBe('Ottawa')
         expect(chapters('Club')).toBe('Club')
-        expect(chapters('Something weird')).toBe('Other')
+        expect(chapters('Something weird')).toBe('Club')
     })
 })
 describe('eventTypes()', () => {

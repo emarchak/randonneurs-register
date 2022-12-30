@@ -18,7 +18,6 @@ export const registration = [
 ]
 
 export const loneliness = [
-  { label: 'Club', route: '/loneliness/' },
   { label: 'Shop', route: '/shop/audax-a-distance/' },
   { label: 'Trace', route: '/registration/trace-virtuelle/' },
 ]

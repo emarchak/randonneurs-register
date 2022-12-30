@@ -1,0 +1,15 @@
+@import "../../components/styles/theme";
+
+.submenuLink {
+  color: get-color(text);
+  text-decoration: none;
+  padding: get-spacing(small) 0;
+  // font-size: get-font-size(medium);
+  margin-right: get-spacing(large);
+  border-bottom: 2px solid transparent;
+  transition: border-bottom 0.2s ease-in-out;
+  &:hover, &:focus {
+    color: get-color(secondary, darkest);
+    border-bottom: 2px solid get-color(secondary);
+  }
+}

@@ -43,7 +43,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
           startLocation
           date
           season
-          path: gatsbyPath(filePath: "/event/{event.season}/{event.route}-{event.date}")
+          path: gatsbyPath(filePath: "/event/{event.season}/{event.chapter}/{event.route}-{event.date}")
         }
       }
     }`)

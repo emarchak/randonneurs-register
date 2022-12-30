@@ -9,7 +9,6 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         Huron
         Ottawa
         Simcoe
-        Other
     }
     enum EventType {
         Brevet

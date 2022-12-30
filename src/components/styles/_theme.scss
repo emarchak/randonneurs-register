@@ -2,21 +2,21 @@
 
 $theme-colors: (
   "primary": (
-    "normal": #c5eada,
-    "desaturate": desaturate(#c5eada, 90%),
-    "light": lighten(#c5eada, 10%),
-    "dark": darken(#c5eada, 10%),
-    "darkest": desaturate(darken(#c5eada, 20%), 10%),
+    "normal": #DBF2FF,
+    "desaturate": desaturate(#DBF2FF, 90%),
+    "light": lighten(#DBF2FF, 10%),
+    "dark": darken(#DBF2FF, 10%),
+    "darkest": desaturate(darken(#DBF2FF, 20%), 10%),
   ),
   "secondary": (
-    "normal": #b888a0,
-    "light": lighten(#b888a0, 20%),
-    "dark": darken(#b888a0, 30%),
-    "darkest": desaturate(darken(#b888a0, 30%), 10%),
+    "normal": #D2879E,
+    "light": lighten(#D2879E, 20%),
+    "dark": darken(#D2879E, 30%),
+    "darkest": desaturate(darken(#D2879E, 30%), 10%),
   ),
   "tertiary": (
-    "normal": #88b2b8,
-    "light": lighten(#88b2b8, 20%),
+    "normal": #D9C5A9,
+    "light": lighten(#D9C5A9, 20%),
   ),
   "success": (
     "normal": #28a745,
@@ -35,7 +35,7 @@ $theme-colors: (
     "normal": #ffc107,
   ),
   "background": (
-    "normal": #fff,
+    "normal": #fffffd,
     "darken": lighten(#333333, 75%),
     "subtle": lighten(#333333, 10%),
   )

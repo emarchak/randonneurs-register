@@ -3,7 +3,6 @@ import { graphql, useStaticQuery } from "gatsby"
 import { getImage } from "gatsby-plugin-image"
 import { ContentChild, ContentWrapper } from "src/components/content-wrapper"
 import { Gallery } from "src/components/Gallery"
-import { getDateTimeLong } from "src/utils"
 import { Layout } from "src/components/layout"
 import { Link } from "src/components/Link"
 import { LinkButton } from "src/components/Buttons"
@@ -14,25 +13,10 @@ import { Chapter, useEvents } from "src/data/events"
 
 import * as styles from "./styles/index.module.scss"
 import { iframe } from "src/components/styles/iframe.module.scss"
+import UpcomingEvents from "src/components/UpcomingEvents"
 
 const pageQuery = graphql`
   query indexPageQuery {
-    allMail(limit: 3, sort: { sentAt: DESC }) {
-      nodes {
-        id
-        name
-        teaser
-        subject
-      }
-    }
-    allSitePage(limit: 3, filter: { context: { type: { eq: mail } } }) {
-      nodes {
-        path
-        context {
-          id
-        }
-      }
-    }
     allFile(
       filter: {
         extension: { regex: "/(jpg|JPG|jpeg)/" }
@@ -52,80 +36,70 @@ const pageQuery = graphql`
 `
 
 const IndexPage = () => {
-  const {
-    allSitePage: { nodes: pages },
-    allMail: { nodes: newsletters },
-  } = useStaticQuery(pageQuery)
-  const { brevets } = useEvents({ chapter: Chapter.Toronto, limit: 2 })
+  const { brevets: torontoBrevets } = useEvents({
+    chapter: Chapter.Toronto,
+    limit: 2,
+  })
+  const { brevets: huronBrevets } = useEvents({
+    chapter: Chapter.Huron,
+    limit: 2,
+  })
+  const { brevets: ottawaBrevets } = useEvents({
+    chapter: Chapter.Ottawa,
+    limit: 2,
+  })
+  const { brevets: simcoeBrevets } = useEvents({
+    chapter: Chapter.Simcoe,
+    limit: 2,
+  })
   const { posts } = useBlog({ limit: 2 })
 
   return (
     <Layout>
-      <ContentWrapper container>
-        <ContentChild>
-          <h3>About us</h3>
-          <p>
-            The Toronto Randonneurs are a chapter of Randonneurs Ontario
-            ultra-distance cycling club. We've been riding 200km+ events
-            southern Ontario since 1982.
-          </p>
-          <p>
-            <Link href="https://randonneursontario.ca/">
-              Randonneurs Ontario
-            </Link>{" "}
-            is affiliated with the{" "}
-            <Link href="https://www.audax-club-parisien.com/en">
-              Audax Club Parisien
-            </Link>
-            , the parent organization governing the qualification of riders
-            wishing to participate in the 1200K Paris - Brest - Paris Randonnee.
-            The club is also affiliated with{" "}
-            <Link href="https://www.audax-club-parisien.com/en/our-organizations/brm-world/">
-              Les Randonneurs Mondiaux
-            </Link>
-            , which provides recognition for brevets other than Paris - Brest -
-            Paris that are longer than 1000K.
-          </p>
-          <LinkButton
-            small
-            secondary
-            block
-            href="https://randonneursontario.ca/who/index.html"
-          >
-            Learn more about Randonneurs Ontario
-          </LinkButton>
-        </ContentChild>
-        <ContentChild>
-          <h3>Upcoming events</h3>
-          <ul className={styles.eventWrapper}>
-            {brevets.map((event) => (
-              <li key={event.id} className={styles.eventRow}>
-                <Link to={event.path}>
-                  <strong>
-                    {event.route} {event.distance}
-                  </strong>
-                </Link>
-                <br />
-                {getDateTimeLong(new Date(event.date))}
-                <br />
-                {event.startLocation}
-              </li>
-            ))}
-          </ul>
-          <footer className={styles.eventFooter}>
-            <LinkButton to="/registration/" primary small block>
-              Register to ride
-            </LinkButton>
-          </footer>
-        </ContentChild>
-      </ContentWrapper>
-
       <ContentWrapper>
+        <h2>Upcoming Events</h2>
+      </ContentWrapper>
+      <ContentWrapper container>
+        <UpcomingEvents chapter={Chapter.Toronto} events={torontoBrevets} />
+        <UpcomingEvents chapter={Chapter.Huron} events={huronBrevets} />
+        <UpcomingEvents chapter={Chapter.Ottawa} events={ottawaBrevets} />
+        <UpcomingEvents chapter={Chapter.Simcoe} events={simcoeBrevets} />
+      </ContentWrapper>
+      <ContentWrapper>
+        <footer className={styles.eventFooter}>
+          <LinkButton to="/registration/" primary small block>
+            Register to ride
+          </LinkButton>
+        </footer>
         <ContentChild>
           <Gallery />
         </ContentChild>
       </ContentWrapper>
-
+      <ContentWrapper>
+        <h3>About us</h3>
+        <p>
+          The Randonneurs Ontario are an ultra-distance cycling club. We've been
+          riding 200km+ events southern Ontario since 1982.
+        </p>
+        <p>
+          <Link href="https://randonneursontario.ca/">Randonneurs Ontario</Link>{" "}
+          is affiliated with the{" "}
+          <Link href="https://www.audax-club-parisien.com/en">
+            Audax Club Parisien
+          </Link>
+          , the parent organization governing the qualification of riders
+          wishing to participate in the 1200K Paris - Brest - Paris Randonnee.
+          The club is also affiliated with{" "}
+          <Link href="https://www.audax-club-parisien.com/en/our-organizations/brm-world/">
+            Les Randonneurs Mondiaux
+          </Link>
+          , which provides recognition for brevets other than Paris - Brest -
+          Paris that are longer than 1000K.
+        </p>
+        <Link href="https://randonneursontario.ca/who/index.html">
+          Learn more about Randonneurs Ontario
+        </Link>
+      </ContentWrapper>
       <ContentWrapper>
         <h2>Recent member reports</h2>
         <ContentWrapper container>
@@ -169,24 +143,6 @@ const IndexPage = () => {
               </Link>
             </p>
           </ContentChild>
-        </ContentWrapper>
-      </ContentWrapper>
-
-      <ContentWrapper>
-        <h2>Newsletters</h2>
-        <ContentWrapper container>
-          {newsletters.map(({ name, subject, teaser, id }) => (
-            <ContentChild key={id}>
-              <h3>{name}</h3>
-              <h4>{subject}</h4>
-              <p>
-                {teaser}...{" "}
-                <Link to={pages.find((page) => page.context.id === id)?.path}>
-                  {"continue reading >>"}
-                </Link>
-              </p>
-            </ContentChild>
-          ))}
         </ContentWrapper>
       </ContentWrapper>
     </Layout>
