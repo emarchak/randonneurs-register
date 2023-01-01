@@ -43,6 +43,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
           startLocation
           date
           season
+          scheduleId
           path: gatsbyPath(filePath: "/event/{event.season}/{event.chapter}/{event.route}-{event.date}")
         }
       }
@@ -63,7 +64,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
       title: `${event.route} ${event.distance}km ${event.eventType}`,
       description: buildCalendarDescription(event),
       location: event.startLocation,
-      url: `https://randoneurs.to${event.path}`,
+      url: `https://register.randonneursontario.ca${event.path}`,
       duration: getBrevetTimeLimit(event.distance),
     }])
   })
