@@ -2,13 +2,14 @@
 module.exports = {
   transform: {
     '^.+\\.(tsx?|jsx?)$': `<rootDir>/jest/jest-preprocess.js`,
-    "\\.(gql|graphql)$": "@jagi/jest-transform-graphql"
+    "\\.(gql|graphql)$": "@graphql-tools/jest-transform"
   },
   moduleNameMapper: {
     ".+\\.(scss|css)$": `identity-obj-proxy`,
     '^src/(.*)$': '<rootDir>/src/$1',
     '^gatsby/(.*)$': '<rootDir>/gatsby/$1',
-    "^gatsby-page-utils/(.*)$": `gatsby-page-utils/dist/$1`, // Workaround for https://github.com/facebook/jest/issues/9771
+    "^gatsby-page-utils/(.*)$": `gatsby-page-utils/$1`, // Workaround for https://github.com/facebook/jest/issues/9771
+    "^nanoid(/(.*)|$)": "nanoid$1", //https://github.com/ai/nanoid/issues/363#issuecomment-1140906651
   },
   testPathIgnorePatterns: [`node_modules`, `\\.cache`, `<rootDir>.*/public`],
   transformIgnorePatterns: [`node_modules/(?!(gatsby)/)`],
@@ -18,11 +19,13 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'js'],
   collectCoverage: true,
   coverageReporters: ['lcov', 'text'],
-  testURL: `http://localhost`,
   globalSetup: `<rootDir>/jest/globalSetup.js`,
   setupFiles: [
     `<rootDir>/jest/setupFiles.js`,
   ],
   setupFilesAfterEnv: ['<rootDir>/jest/setupFilesAfterEnv.js'],
-  testEnvironment: 'jsdom'
+  testEnvironment: 'jsdom',
+  testEnvironmentOptions: {
+    url: "http://localhost/"
+  }
 }

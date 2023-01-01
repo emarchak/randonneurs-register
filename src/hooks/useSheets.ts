@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-unfetch'
+import fetch from 'cross-fetch'
 
 const sheets = [
   'registration',
@@ -9,17 +9,17 @@ const sheets = [
 type addRowParams = {
   sheet: string,
   row: {
-    [key: string]: string | boolean
+    [key: string]: string | boolean | number
   }
 }
 
 export const useSheets = () => {
-  const addRow = async ({sheet, row}: addRowParams) => {
+  const addRow = async ({ sheet, row }: addRowParams) => {
     if (sheets.indexOf(sheet) === -1) {
       throw new Error(`Invalid sheet: ${sheet}`)
     }
     const formattedRow = {}
-    
+
     Object.keys(row).forEach((key) => {
       if (typeof row[key] === 'boolean') {
         formattedRow[key] = row[key] ? 'Yes' : 'No'
@@ -37,8 +37,8 @@ export const useSheets = () => {
           row: formattedRow
         }),
       })
-      
-    return response.ok
+
+      return response.ok
     }
     catch (err) {
       return false

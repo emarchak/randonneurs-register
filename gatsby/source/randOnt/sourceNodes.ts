@@ -1,5 +1,5 @@
 import { GatsbyNode } from 'gatsby'
-import fetch from 'isomorphic-unfetch'
+import fetch from 'cross-fetch'
 import { nodeType } from '.'
 
 const endpoint = process.env.RO_ENDPOINT
@@ -11,7 +11,7 @@ const rwgpsRegex = /^((?:https?:)?\/\/)?((?:www)\.)?((?:ridewithgps\.com))(\/rou
 export const getSeason = (event: Date): String => event.getFullYear().toString()
 
 export const eventTypes = (test: string) => ['Brevet', 'Permanent', 'Fleche', 'Populaire'].find(eventType => eventType === test) || 'Other'
-export const chapters = (test: string) => ['Club', 'Toronto', 'Huron', 'Ottawa', 'Simcoe'].find(chapter => test.includes(chapter)) || 'Other'
+export const chapters = (test: string) => ['Club', 'Toronto', 'Huron', 'Ottawa', 'Simcoe'].find(chapter => test.includes(chapter)) || 'Club'
 
 export const sourceNodes: GatsbyNode['sourceNodes'] = async ({
     actions,
@@ -36,7 +36,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({
                 distance: parseInt(rawEvent.distance),
                 rwgpsUrl: rawEvent.rwgps,
                 rwgpsId: rwgps.pop(),
-                startLocation: rawEvent.startloc,
+                startLocation: rawEvent.startloc.replaceAll(/<[^>]*>/g, ''),
                 date: eventDate.toISOString(),
                 season: getSeason(eventDate),
                 scheduleId: rawEvent.sched_id,

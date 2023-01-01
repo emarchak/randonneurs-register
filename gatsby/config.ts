@@ -11,25 +11,19 @@ export const flags = {
 }
 
 export const siteMetadata = {
-  title: 'Toronto Randonneurs',
-  description: "The Toronto Randonneurs are a chapter of Randonneurs Ontario ultra-distance cycling club. We've been riding long distance rides from of Toronto and southern Ontario since 1982.",
+  title: 'Randonneurs Ontario',
+  description: "The Randonneurs Ontario ultra-distance cycling club. We've been riding long distance rides from of Toronto and southern Ontario since 1982.",
   author: '@emarchak',
-  siteURL: 'https://randonneurs.to',
+  siteURL: 'https://register.randonneursontario.ca',
 }
 
 export const plugins = [
   'gatsby-plugin-root-import',
-  'gatsby-plugin-react-helmet',
   'gatsby-plugin-typescript',
   'gatsby-transformer-sharp',
   'gatsby-plugin-sharp',
   'gatsby-plugin-image',
-  {
-    resolve: 'gatsby-plugin-sass',
-    options: {
-      implementation: require('node-sass'),
-    },
-  },
+  'gatsby-plugin-sass',
   {
     resolve: 'gatsby-source-rss-feed',
     options: {

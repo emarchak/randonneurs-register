@@ -4,9 +4,9 @@ export const shop = [
 ]
 
 export const seasons = [
+  { label: '2023', route: '/event/2023/' },
   { label: '2022', route: '/event/2022/' },
   { label: '2021', route: '/event/2021/' },
-  { label: '2020', route: '/event/2020/' },
   { label: 'Archive', route: '/event/' }
 ]
 
@@ -18,7 +18,6 @@ export const registration = [
 ]
 
 export const loneliness = [
-  { label: 'Club', route: '/loneliness/' },
   { label: 'Shop', route: '/shop/audax-a-distance/' },
   { label: 'Trace', route: '/registration/trace-virtuelle/' },
 ]
