@@ -25,7 +25,7 @@ const buildCalendarDescription = (event: EventCalendarFeedsQuery['allEvent']['no
   Start time: ${getDateTimeLong(new Date(event.date))}
   Brevet time limit: ${getBrevetTimeLimit(event.distance).hours} hours, ${getBrevetTimeLimit(event.distance).minutes} minutes
   Chapter: ${event.chapter}\n\
-  Visit https://randoneurs.to${event.path} for more information.
+  Visit https://register.randonneursontario.ca${event.path} for more information.
 `)
 
 export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {

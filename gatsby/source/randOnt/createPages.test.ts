@@ -74,12 +74,12 @@ describe('createPages', () => {
   Start time: Sat August 14 2021 08:00
   Brevet time limit: 40 hours, 0 minutes
   Chapter: Huron
-  Visit https://randoneurs.to/event/2021/brouses-beach-browser-august-14-2021-0800-edt for more information.\n`,
+  Visit https://register.randonneursontario.ca/event/2021/brouses-beach-browser-august-14-2021-0800-edt for more information.\n`,
       duration: { "hours": 40, "minutes": 0 },
       location: "Goderich, Ontario",
       start: [2021, 8, 14, 12, 0],
       title: "Brouse's Beach Browser 600km brevet",
-      url: "https://randoneurs.to/event/2021/brouses-beach-browser-august-14-2021-0800-edt"
+      url: "https://register.randonneursontario.ca/event/2021/brouses-beach-browser-august-14-2021-0800-edt"
     })])
   })
 
