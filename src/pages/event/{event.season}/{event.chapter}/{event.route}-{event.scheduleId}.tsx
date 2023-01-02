@@ -136,14 +136,17 @@ const Event = ({ data: { event } }: EventProps) => {
       <ContentWrapper>
         <h2>Who's riding</h2>
         {isLoading && <Loading />}
-        {data && (
-          <ul>
-            {data.riders.length === 0 && <li>No riders registered</li>}
-            {data.riders.map(({ rider }) => (
-              <li>{rider.riderName}</li>
-            ))}
-          </ul>
-        )}
+        <ul>
+          {!data && <li>No riders registered</li>}
+          {data && (
+            <>
+              {data.riders.length === 0 && <li>No riders registered</li>}
+              {data.riders.map(({ rider }) => (
+                <li>{rider.riderName}</li>
+              ))}
+            </>
+          )}
+        </ul>
       </ContentWrapper>
       <SeasonsCta />
       <LatestsPosts />

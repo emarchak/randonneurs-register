@@ -9,6 +9,7 @@ import { TabMenu } from "src/components/Menu"
 import { Link } from "src/components/Link"
 import { SeasonPageQuery } from "src/gatsby.gql"
 import * as styles from "../styles/event.module.scss"
+import { LatestsPosts } from "src/components/Blog"
 type SeasonProps = PageProps<SeasonPageQuery>
 
 export const query = graphql`
@@ -89,6 +90,7 @@ const Season = ({
     </ContentWrapper>
 
     <SeasonsCta />
+    <LatestsPosts />
   </Layout>
 )
 

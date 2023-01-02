@@ -22,7 +22,7 @@ describe('sourceNodes', () => {
             sourceNodes(args, pluginOptions, pluginCallback)
         ])
 
-        expect(createNodeId).toHaveBeenCalledWith('event-871')
+        expect(createNodeId).toHaveBeenCalledWith('Event-871')
         expect(createNode).toHaveBeenCalledWith(expect.objectContaining({
             'rwgpsId': '31557200',
             'season': "2021",

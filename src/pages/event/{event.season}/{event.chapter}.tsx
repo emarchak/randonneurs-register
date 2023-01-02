@@ -12,6 +12,7 @@ import { Link, MapLink } from "src/components/Link"
 import { EventPageQuery } from "src/gatsby.gql"
 import { useEvent } from "src/data/events"
 import { Loading } from "src/components/form/components"
+import { LatestsPosts } from "src/components/Blog"
 
 type SeasonChapterProps = PageProps<SeasonChapterPageQuery>
 
@@ -80,6 +81,7 @@ const SeasonChapter = ({
     </ContentWrapper>
 
     <SeasonsCta />
+    <LatestsPosts />
   </Layout>
 )
 
