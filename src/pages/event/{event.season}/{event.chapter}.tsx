@@ -29,7 +29,7 @@ export const query = graphql`
         date
         season
         path: gatsbyPath(
-          filePath: "/event/{event.season}/{event.chapter}/{event.route}-{event.date}"
+          filePath: "/event/{event.season}/{event.chapter}/{event.route}-{event.scheduleId}"
         )
       }
     }

@@ -19,7 +19,7 @@ query EventData{
       startLocation
       date
       scheduleId
-      path: gatsbyPath(filePath: "/event/{event.season}/{event.chapter}/{event.route}-{event.date}")
+      path: gatsbyPath(filePath: "/event/{event.season}/{event.chapter}/{event.route}-{event.scheduleId}")
     }
   }
 }

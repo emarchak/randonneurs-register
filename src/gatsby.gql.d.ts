@@ -370,6 +370,213 @@ export type DuotoneGradient = {
   shadow: Scalars['String'];
 };
 
+export type Event = Node & {
+  __typename?: 'Event';
+  chapter?: Maybe<Chapter>;
+  children: Array<Node>;
+  contact?: Maybe<Scalars['String']>;
+  date?: Maybe<Scalars['Date']>;
+  distance?: Maybe<Scalars['Int']>;
+  event?: Maybe<Scalars['String']>;
+  eventType?: Maybe<EventType>;
+  gatsbyPath?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  internal: Internal;
+  organizer?: Maybe<Scalars['String']>;
+  parent?: Maybe<Node>;
+  route?: Maybe<Scalars['String']>;
+  rwgps?: Maybe<Scalars['String']>;
+  rwgpsId?: Maybe<Scalars['String']>;
+  rwgpsUrl?: Maybe<Scalars['String']>;
+  sched_id?: Maybe<Scalars['String']>;
+  scheduleId?: Maybe<Scalars['String']>;
+  season?: Maybe<Scalars['String']>;
+  startLocation?: Maybe<Scalars['String']>;
+  startloc?: Maybe<Scalars['String']>;
+  stime?: Maybe<Scalars['String']>;
+  unixtime?: Maybe<Scalars['Int']>;
+};
+
+
+export type EventDateArgs = {
+  difference?: InputMaybe<Scalars['String']>;
+  formatString?: InputMaybe<Scalars['String']>;
+  fromNow?: InputMaybe<Scalars['Boolean']>;
+  locale?: InputMaybe<Scalars['String']>;
+};
+
+
+export type EventGatsbyPathArgs = {
+  filePath?: InputMaybe<Scalars['String']>;
+};
+
+export type EventConnection = {
+  __typename?: 'EventConnection';
+  distinct: Array<Scalars['String']>;
+  edges: Array<EventEdge>;
+  group: Array<EventGroupConnection>;
+  max?: Maybe<Scalars['Float']>;
+  min?: Maybe<Scalars['Float']>;
+  nodes: Array<Event>;
+  pageInfo: PageInfo;
+  sum?: Maybe<Scalars['Float']>;
+  totalCount: Scalars['Int'];
+};
+
+
+export type EventConnectionDistinctArgs = {
+  field: EventFieldSelector;
+};
+
+
+export type EventConnectionGroupArgs = {
+  field: EventFieldSelector;
+  limit?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type EventConnectionMaxArgs = {
+  field: EventFieldSelector;
+};
+
+
+export type EventConnectionMinArgs = {
+  field: EventFieldSelector;
+};
+
+
+export type EventConnectionSumArgs = {
+  field: EventFieldSelector;
+};
+
+export type EventEdge = {
+  __typename?: 'EventEdge';
+  next?: Maybe<Event>;
+  node: Event;
+  previous?: Maybe<Event>;
+};
+
+export type EventFieldSelector = {
+  chapter?: InputMaybe<FieldSelectorEnum>;
+  children?: InputMaybe<NodeFieldSelector>;
+  contact?: InputMaybe<FieldSelectorEnum>;
+  date?: InputMaybe<FieldSelectorEnum>;
+  distance?: InputMaybe<FieldSelectorEnum>;
+  event?: InputMaybe<FieldSelectorEnum>;
+  eventType?: InputMaybe<FieldSelectorEnum>;
+  gatsbyPath?: InputMaybe<FieldSelectorEnum>;
+  id?: InputMaybe<FieldSelectorEnum>;
+  internal?: InputMaybe<InternalFieldSelector>;
+  organizer?: InputMaybe<FieldSelectorEnum>;
+  parent?: InputMaybe<NodeFieldSelector>;
+  route?: InputMaybe<FieldSelectorEnum>;
+  rwgps?: InputMaybe<FieldSelectorEnum>;
+  rwgpsId?: InputMaybe<FieldSelectorEnum>;
+  rwgpsUrl?: InputMaybe<FieldSelectorEnum>;
+  sched_id?: InputMaybe<FieldSelectorEnum>;
+  scheduleId?: InputMaybe<FieldSelectorEnum>;
+  season?: InputMaybe<FieldSelectorEnum>;
+  startLocation?: InputMaybe<FieldSelectorEnum>;
+  startloc?: InputMaybe<FieldSelectorEnum>;
+  stime?: InputMaybe<FieldSelectorEnum>;
+  unixtime?: InputMaybe<FieldSelectorEnum>;
+};
+
+export type EventFilterInput = {
+  chapter?: InputMaybe<ChapterQueryOperatorInput>;
+  children?: InputMaybe<NodeFilterListInput>;
+  contact?: InputMaybe<StringQueryOperatorInput>;
+  date?: InputMaybe<DateQueryOperatorInput>;
+  distance?: InputMaybe<IntQueryOperatorInput>;
+  event?: InputMaybe<StringQueryOperatorInput>;
+  eventType?: InputMaybe<EventTypeQueryOperatorInput>;
+  gatsbyPath?: InputMaybe<StringQueryOperatorInput>;
+  id?: InputMaybe<StringQueryOperatorInput>;
+  internal?: InputMaybe<InternalFilterInput>;
+  organizer?: InputMaybe<StringQueryOperatorInput>;
+  parent?: InputMaybe<NodeFilterInput>;
+  route?: InputMaybe<StringQueryOperatorInput>;
+  rwgps?: InputMaybe<StringQueryOperatorInput>;
+  rwgpsId?: InputMaybe<StringQueryOperatorInput>;
+  rwgpsUrl?: InputMaybe<StringQueryOperatorInput>;
+  sched_id?: InputMaybe<StringQueryOperatorInput>;
+  scheduleId?: InputMaybe<StringQueryOperatorInput>;
+  season?: InputMaybe<StringQueryOperatorInput>;
+  startLocation?: InputMaybe<StringQueryOperatorInput>;
+  startloc?: InputMaybe<StringQueryOperatorInput>;
+  stime?: InputMaybe<StringQueryOperatorInput>;
+  unixtime?: InputMaybe<IntQueryOperatorInput>;
+};
+
+export type EventGroupConnection = {
+  __typename?: 'EventGroupConnection';
+  distinct: Array<Scalars['String']>;
+  edges: Array<EventEdge>;
+  field: Scalars['String'];
+  fieldValue?: Maybe<Scalars['String']>;
+  group: Array<EventGroupConnection>;
+  max?: Maybe<Scalars['Float']>;
+  min?: Maybe<Scalars['Float']>;
+  nodes: Array<Event>;
+  pageInfo: PageInfo;
+  sum?: Maybe<Scalars['Float']>;
+  totalCount: Scalars['Int'];
+};
+
+
+export type EventGroupConnectionDistinctArgs = {
+  field: EventFieldSelector;
+};
+
+
+export type EventGroupConnectionGroupArgs = {
+  field: EventFieldSelector;
+  limit?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type EventGroupConnectionMaxArgs = {
+  field: EventFieldSelector;
+};
+
+
+export type EventGroupConnectionMinArgs = {
+  field: EventFieldSelector;
+};
+
+
+export type EventGroupConnectionSumArgs = {
+  field: EventFieldSelector;
+};
+
+export type EventSortInput = {
+  chapter?: InputMaybe<SortOrderEnum>;
+  children?: InputMaybe<NodeSortInput>;
+  contact?: InputMaybe<SortOrderEnum>;
+  date?: InputMaybe<SortOrderEnum>;
+  distance?: InputMaybe<SortOrderEnum>;
+  event?: InputMaybe<SortOrderEnum>;
+  eventType?: InputMaybe<SortOrderEnum>;
+  gatsbyPath?: InputMaybe<SortOrderEnum>;
+  id?: InputMaybe<SortOrderEnum>;
+  internal?: InputMaybe<InternalSortInput>;
+  organizer?: InputMaybe<SortOrderEnum>;
+  parent?: InputMaybe<NodeSortInput>;
+  route?: InputMaybe<SortOrderEnum>;
+  rwgps?: InputMaybe<SortOrderEnum>;
+  rwgpsId?: InputMaybe<SortOrderEnum>;
+  rwgpsUrl?: InputMaybe<SortOrderEnum>;
+  sched_id?: InputMaybe<SortOrderEnum>;
+  scheduleId?: InputMaybe<SortOrderEnum>;
+  season?: InputMaybe<SortOrderEnum>;
+  startLocation?: InputMaybe<SortOrderEnum>;
+  startloc?: InputMaybe<SortOrderEnum>;
+  stime?: InputMaybe<SortOrderEnum>;
+  unixtime?: InputMaybe<SortOrderEnum>;
+};
+
 export enum EventType {
   Brevet = 'Brevet',
   Fleche = 'Fleche',
@@ -3701,217 +3908,10 @@ export type Db_Routes_Stream_Cursor_Value_Input = {
   startLocation?: InputMaybe<Scalars['String']>;
 };
 
-export type Event = Node & {
-  __typename?: 'event';
-  chapter?: Maybe<Chapter>;
-  children: Array<Node>;
-  contact?: Maybe<Scalars['String']>;
-  date?: Maybe<Scalars['Date']>;
-  distance?: Maybe<Scalars['Int']>;
-  event?: Maybe<Scalars['String']>;
-  eventType?: Maybe<EventType>;
-  gatsbyPath?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  internal: Internal;
-  organizer?: Maybe<Scalars['String']>;
-  parent?: Maybe<Node>;
-  route?: Maybe<Scalars['String']>;
-  rwgps?: Maybe<Scalars['String']>;
-  rwgpsId?: Maybe<Scalars['String']>;
-  rwgpsUrl?: Maybe<Scalars['String']>;
-  sched_id?: Maybe<Scalars['String']>;
-  scheduleId?: Maybe<Scalars['String']>;
-  season?: Maybe<Scalars['String']>;
-  startLocation?: Maybe<Scalars['String']>;
-  startloc?: Maybe<Scalars['String']>;
-  stime?: Maybe<Scalars['String']>;
-  unixtime?: Maybe<Scalars['Int']>;
-};
-
-
-export type EventDateArgs = {
-  difference?: InputMaybe<Scalars['String']>;
-  formatString?: InputMaybe<Scalars['String']>;
-  fromNow?: InputMaybe<Scalars['Boolean']>;
-  locale?: InputMaybe<Scalars['String']>;
-};
-
-
-export type EventGatsbyPathArgs = {
-  filePath?: InputMaybe<Scalars['String']>;
-};
-
-export type EventConnection = {
-  __typename?: 'eventConnection';
-  distinct: Array<Scalars['String']>;
-  edges: Array<EventEdge>;
-  group: Array<EventGroupConnection>;
-  max?: Maybe<Scalars['Float']>;
-  min?: Maybe<Scalars['Float']>;
-  nodes: Array<Event>;
-  pageInfo: PageInfo;
-  sum?: Maybe<Scalars['Float']>;
-  totalCount: Scalars['Int'];
-};
-
-
-export type EventConnectionDistinctArgs = {
-  field: EventFieldSelector;
-};
-
-
-export type EventConnectionGroupArgs = {
-  field: EventFieldSelector;
-  limit?: InputMaybe<Scalars['Int']>;
-  skip?: InputMaybe<Scalars['Int']>;
-};
-
-
-export type EventConnectionMaxArgs = {
-  field: EventFieldSelector;
-};
-
-
-export type EventConnectionMinArgs = {
-  field: EventFieldSelector;
-};
-
-
-export type EventConnectionSumArgs = {
-  field: EventFieldSelector;
-};
-
-export type EventEdge = {
-  __typename?: 'eventEdge';
-  next?: Maybe<Event>;
-  node: Event;
-  previous?: Maybe<Event>;
-};
-
-export type EventFieldSelector = {
-  chapter?: InputMaybe<FieldSelectorEnum>;
-  children?: InputMaybe<NodeFieldSelector>;
-  contact?: InputMaybe<FieldSelectorEnum>;
-  date?: InputMaybe<FieldSelectorEnum>;
-  distance?: InputMaybe<FieldSelectorEnum>;
-  event?: InputMaybe<FieldSelectorEnum>;
-  eventType?: InputMaybe<FieldSelectorEnum>;
-  gatsbyPath?: InputMaybe<FieldSelectorEnum>;
-  id?: InputMaybe<FieldSelectorEnum>;
-  internal?: InputMaybe<InternalFieldSelector>;
-  organizer?: InputMaybe<FieldSelectorEnum>;
-  parent?: InputMaybe<NodeFieldSelector>;
-  route?: InputMaybe<FieldSelectorEnum>;
-  rwgps?: InputMaybe<FieldSelectorEnum>;
-  rwgpsId?: InputMaybe<FieldSelectorEnum>;
-  rwgpsUrl?: InputMaybe<FieldSelectorEnum>;
-  sched_id?: InputMaybe<FieldSelectorEnum>;
-  scheduleId?: InputMaybe<FieldSelectorEnum>;
-  season?: InputMaybe<FieldSelectorEnum>;
-  startLocation?: InputMaybe<FieldSelectorEnum>;
-  startloc?: InputMaybe<FieldSelectorEnum>;
-  stime?: InputMaybe<FieldSelectorEnum>;
-  unixtime?: InputMaybe<FieldSelectorEnum>;
-};
-
-export type EventFilterInput = {
-  chapter?: InputMaybe<ChapterQueryOperatorInput>;
-  children?: InputMaybe<NodeFilterListInput>;
-  contact?: InputMaybe<StringQueryOperatorInput>;
-  date?: InputMaybe<DateQueryOperatorInput>;
-  distance?: InputMaybe<IntQueryOperatorInput>;
-  event?: InputMaybe<StringQueryOperatorInput>;
-  eventType?: InputMaybe<EventTypeQueryOperatorInput>;
-  gatsbyPath?: InputMaybe<StringQueryOperatorInput>;
-  id?: InputMaybe<StringQueryOperatorInput>;
-  internal?: InputMaybe<InternalFilterInput>;
-  organizer?: InputMaybe<StringQueryOperatorInput>;
-  parent?: InputMaybe<NodeFilterInput>;
-  route?: InputMaybe<StringQueryOperatorInput>;
-  rwgps?: InputMaybe<StringQueryOperatorInput>;
-  rwgpsId?: InputMaybe<StringQueryOperatorInput>;
-  rwgpsUrl?: InputMaybe<StringQueryOperatorInput>;
-  sched_id?: InputMaybe<StringQueryOperatorInput>;
-  scheduleId?: InputMaybe<StringQueryOperatorInput>;
-  season?: InputMaybe<StringQueryOperatorInput>;
-  startLocation?: InputMaybe<StringQueryOperatorInput>;
-  startloc?: InputMaybe<StringQueryOperatorInput>;
-  stime?: InputMaybe<StringQueryOperatorInput>;
-  unixtime?: InputMaybe<IntQueryOperatorInput>;
-};
-
-export type EventGroupConnection = {
-  __typename?: 'eventGroupConnection';
-  distinct: Array<Scalars['String']>;
-  edges: Array<EventEdge>;
-  field: Scalars['String'];
-  fieldValue?: Maybe<Scalars['String']>;
-  group: Array<EventGroupConnection>;
-  max?: Maybe<Scalars['Float']>;
-  min?: Maybe<Scalars['Float']>;
-  nodes: Array<Event>;
-  pageInfo: PageInfo;
-  sum?: Maybe<Scalars['Float']>;
-  totalCount: Scalars['Int'];
-};
-
-
-export type EventGroupConnectionDistinctArgs = {
-  field: EventFieldSelector;
-};
-
-
-export type EventGroupConnectionGroupArgs = {
-  field: EventFieldSelector;
-  limit?: InputMaybe<Scalars['Int']>;
-  skip?: InputMaybe<Scalars['Int']>;
-};
-
-
-export type EventGroupConnectionMaxArgs = {
-  field: EventFieldSelector;
-};
-
-
-export type EventGroupConnectionMinArgs = {
-  field: EventFieldSelector;
-};
-
-
-export type EventGroupConnectionSumArgs = {
-  field: EventFieldSelector;
-};
-
-export type EventSortInput = {
-  chapter?: InputMaybe<SortOrderEnum>;
-  children?: InputMaybe<NodeSortInput>;
-  contact?: InputMaybe<SortOrderEnum>;
-  date?: InputMaybe<SortOrderEnum>;
-  distance?: InputMaybe<SortOrderEnum>;
-  event?: InputMaybe<SortOrderEnum>;
-  eventType?: InputMaybe<SortOrderEnum>;
-  gatsbyPath?: InputMaybe<SortOrderEnum>;
-  id?: InputMaybe<SortOrderEnum>;
-  internal?: InputMaybe<InternalSortInput>;
-  organizer?: InputMaybe<SortOrderEnum>;
-  parent?: InputMaybe<NodeSortInput>;
-  route?: InputMaybe<SortOrderEnum>;
-  rwgps?: InputMaybe<SortOrderEnum>;
-  rwgpsId?: InputMaybe<SortOrderEnum>;
-  rwgpsUrl?: InputMaybe<SortOrderEnum>;
-  sched_id?: InputMaybe<SortOrderEnum>;
-  scheduleId?: InputMaybe<SortOrderEnum>;
-  season?: InputMaybe<SortOrderEnum>;
-  startLocation?: InputMaybe<SortOrderEnum>;
-  startloc?: InputMaybe<SortOrderEnum>;
-  stime?: InputMaybe<SortOrderEnum>;
-  unixtime?: InputMaybe<SortOrderEnum>;
-};
-
 export type EventCalendarFeedsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type EventCalendarFeedsQuery = { __typename?: 'Query', allEvent: { __typename?: 'eventConnection', nodes: Array<{ __typename?: 'event', chapter?: Chapter | null, distance?: number | null, eventType?: EventType | null, id: string, organizer?: string | null, route?: string | null, startLocation?: string | null, date?: any | null, season?: string | null, scheduleId?: string | null, path?: string | null }> } };
+export type EventCalendarFeedsQuery = { __typename?: 'Query', allEvent: { __typename?: 'EventConnection', nodes: Array<{ __typename?: 'Event', chapter?: Chapter | null, distance?: number | null, eventType?: EventType | null, id: string, organizer?: string | null, route?: string | null, startLocation?: string | null, date?: any | null, season?: string | null, scheduleId?: string | null, path?: string | null }> } };
 
 export type GatsbyImageSharpFixedFragment = { __typename?: 'ImageSharpFixed', base64?: string | null, width: number, height: number, src: string, srcSet: string };
 
@@ -3967,7 +3967,7 @@ export type UseBlogQueryQuery = { __typename?: 'Query', allFeedblog: { __typenam
 export type EventDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type EventDataQuery = { __typename?: 'Query', allEvent: { __typename?: 'eventConnection', nodes: Array<{ __typename?: 'event', chapter?: Chapter | null, distance?: number | null, eventType?: EventType | null, id: string, organizer?: string | null, route?: string | null, rwgpsUrl?: string | null, startLocation?: string | null, date?: any | null, scheduleId?: string | null, path?: string | null }> } };
+export type EventDataQuery = { __typename?: 'Query', allEvent: { __typename?: 'EventConnection', nodes: Array<{ __typename?: 'Event', chapter?: Chapter | null, distance?: number | null, eventType?: EventType | null, id: string, organizer?: string | null, route?: string | null, rwgpsUrl?: string | null, startLocation?: string | null, date?: any | null, scheduleId?: string | null, path?: string | null }> } };
 
 export type UseRoutesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3984,7 +3984,7 @@ export type SeasonPageQueryVariables = Exact<{
 }>;
 
 
-export type SeasonPageQuery = { __typename?: 'Query', allEvent: { __typename?: 'eventConnection', nodes: Array<{ __typename?: 'event', chapter?: Chapter | null, distance?: number | null, eventType?: EventType | null, id: string, organizer?: string | null, route?: string | null, startLocation?: string | null, date?: any | null, season?: string | null, path?: string | null }> } };
+export type SeasonPageQuery = { __typename?: 'Query', allEvent: { __typename?: 'EventConnection', nodes: Array<{ __typename?: 'Event', chapter?: Chapter | null, distance?: number | null, eventType?: EventType | null, id: string, organizer?: string | null, route?: string | null, startLocation?: string | null, date?: any | null, season?: string | null, path?: string | null }> } };
 
 export type SeasonChapterPageQueryVariables = Exact<{
   season?: InputMaybe<Scalars['String']>;
@@ -3992,14 +3992,14 @@ export type SeasonChapterPageQueryVariables = Exact<{
 }>;
 
 
-export type SeasonChapterPageQuery = { __typename?: 'Query', allEvent: { __typename?: 'eventConnection', nodes: Array<{ __typename?: 'event', chapter?: Chapter | null, distance?: number | null, eventType?: EventType | null, id: string, organizer?: string | null, route?: string | null, startLocation?: string | null, date?: any | null, season?: string | null, path?: string | null }> } };
+export type SeasonChapterPageQuery = { __typename?: 'Query', allEvent: { __typename?: 'EventConnection', nodes: Array<{ __typename?: 'Event', chapter?: Chapter | null, distance?: number | null, eventType?: EventType | null, id: string, organizer?: string | null, route?: string | null, startLocation?: string | null, date?: any | null, season?: string | null, path?: string | null }> } };
 
 export type EventPageQueryVariables = Exact<{
   id?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type EventPageQuery = { __typename?: 'Query', event?: { __typename?: 'event', chapter?: Chapter | null, date?: any | null, distance?: number | null, eventType?: EventType | null, id: string, route?: string | null, rwgpsId?: string | null, rwgpsUrl?: string | null, scheduleId?: string | null, season?: string | null, startLocation?: string | null } | null };
+export type EventPageQuery = { __typename?: 'Query', event?: { __typename?: 'Event', chapter?: Chapter | null, date?: any | null, distance?: number | null, eventType?: EventType | null, id: string, route?: string | null, rwgpsId?: string | null, rwgpsUrl?: string | null, scheduleId?: string | null, season?: string | null, startLocation?: string | null } | null };
 
 export type IndexPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -4143,7 +4143,7 @@ declare module '*/{event.chapter}.tsx' {
 }
     
 
-declare module '*/{event.route}-{event.date}.tsx' {
+declare module '*/{event.route}-{event.scheduleId}.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const EventPage: DocumentNode;
@@ -4315,7 +4315,7 @@ export const EventCalendarFeeds = gql`
       season
       scheduleId
       path: gatsbyPath(
-        filePath: "/event/{event.season}/{event.chapter}/{event.route}-{event.date}"
+        filePath: "/event/{event.season}/{event.chapter}/{event.route}-{event.scheduleId}"
       )
     }
   }
@@ -4400,7 +4400,7 @@ export const EventData = gql`
       date
       scheduleId
       path: gatsbyPath(
-        filePath: "/event/{event.season}/{event.chapter}/{event.route}-{event.date}"
+        filePath: "/event/{event.season}/{event.chapter}/{event.route}-{event.scheduleId}"
       )
     }
   }
@@ -4447,7 +4447,7 @@ export const SeasonPage = gql`
       date
       season
       path: gatsbyPath(
-        filePath: "/event/{event.season}/{event.chapter}/{event.route}-{event.date}"
+        filePath: "/event/{event.season}/{event.chapter}/{event.route}-{event.scheduleId}"
       )
     }
   }
@@ -4467,7 +4467,7 @@ export const SeasonChapterPage = gql`
       date
       season
       path: gatsbyPath(
-        filePath: "/event/{event.season}/{event.chapter}/{event.route}-{event.date}"
+        filePath: "/event/{event.season}/{event.chapter}/{event.route}-{event.scheduleId}"
       )
     }
   }

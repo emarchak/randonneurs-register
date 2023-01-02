@@ -1,6 +1,6 @@
 import { GatsbyNode } from 'gatsby'
 import { createPageSchemaCustomization } from './createSchemaCustomization'
-import { createEventSchemaCustomization, sourceEventNodes, createEventPages } from '../source/randOnt'
+import { createEventSchemaCustomization, sourceEventNodes, createEventPages, onCreateEventNode } from '../source/randOnt'
 
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ actions }) => {
   actions.setWebpackConfig({
@@ -35,4 +35,9 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
   createPageSchemaCustomization(...args)
   // Events
   createEventSchemaCustomization(...args)
+}
+
+export const onCreateNode: GatsbyNode['onCreateNode'] = (...args) => {
+  // Events
+  onCreateEventNode(...args)
 }

@@ -44,7 +44,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql }) => {
           date
           season
           scheduleId
-          path: gatsbyPath(filePath: "/event/{event.season}/{event.chapter}/{event.route}-{event.date}")
+          path: gatsbyPath(filePath: "/event/{event.season}/{event.chapter}/{event.route}-{event.scheduleId}")
         }
       }
     }`)

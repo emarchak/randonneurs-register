@@ -17,11 +17,12 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         Populaire
         Other
     }
-    type event implements Node {
+    type Event implements Node {
         season: String
         rwgpsId: String
         chapter: Chapter
         eventType: EventType
+        scheduleId: String
     }
   `)
 }
