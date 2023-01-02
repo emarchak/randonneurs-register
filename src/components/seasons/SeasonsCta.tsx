@@ -9,9 +9,8 @@ export const SeasonsCta = () => (
     <ContentWrapper>
       <h3>About us</h3>
       <p>
-        The Randonneurs Ontario are an ultra-distance cycling club. We've been
-        riding long distance rides from of Toronto and southern Ontario since
-        1982.
+        Randonneurs Ontario is an ultra-distance cycling club. We've been riding
+        long distance rides from of Toronto and southern Ontario since 1982.
       </p>
       <p>
         <Link href="https://randonneursontario.ca/">Randonneurs Ontario</Link>{" "}

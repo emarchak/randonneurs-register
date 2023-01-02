@@ -75,7 +75,7 @@ const IndexPage = () => {
       <ContentWrapper>
         <h3>About us</h3>
         <p>
-          The Randonneurs Ontario are an ultra-distance cycling club. We've been
+          Randonneurs Ontario is an ultra-distance cycling club. We've been
           riding 200km+ events southern Ontario since 1982.
         </p>
         <p>
