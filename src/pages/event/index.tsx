@@ -7,6 +7,7 @@ import { Link } from "src/components/Link"
 import { SeasonsCta } from "src/components/seasons"
 import { SEO } from "src/components/seo"
 import { TabMenu } from "src/components/Menu"
+import { LatestsPosts } from "src/components/Blog"
 
 const pageQuery = graphql`
   query eventPageQuery {
@@ -64,6 +65,7 @@ const Seasons = ({ path }: PageProps) => {
         </ContentChild>
       </ContentWrapper>
       <SeasonsCta />
+      <LatestsPosts />
     </Layout>
   )
 }

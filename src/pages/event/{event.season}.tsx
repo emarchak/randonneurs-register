@@ -9,6 +9,7 @@ import { TabMenu } from "src/components/Menu"
 import { Link } from "src/components/Link"
 import { SeasonPageQuery } from "src/gatsby.gql"
 import * as styles from "../styles/event.module.scss"
+import { LatestsPosts } from "src/components/Blog"
 type SeasonProps = PageProps<SeasonPageQuery>
 
 export const query = graphql`
@@ -25,7 +26,7 @@ export const query = graphql`
         date
         season
         path: gatsbyPath(
-          filePath: "/event/{event.season}/{event.chapter}/{event.route}-{event.date}"
+          filePath: "/event/{event.season}/{event.chapter}/{event.route}-{event.scheduleId}"
         )
       }
     }
@@ -89,6 +90,7 @@ const Season = ({
     </ContentWrapper>
 
     <SeasonsCta />
+    <LatestsPosts />
   </Layout>
 )
 

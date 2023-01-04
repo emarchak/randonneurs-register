@@ -12,6 +12,7 @@ import { Link, MapLink } from "src/components/Link"
 import { EventPageQuery } from "src/gatsby.gql"
 import { useEvent } from "src/data/events"
 import { Loading } from "src/components/form/components"
+import { LatestsPosts } from "src/components/Blog"
 
 type SeasonChapterProps = PageProps<SeasonChapterPageQuery>
 
@@ -29,7 +30,7 @@ export const query = graphql`
         date
         season
         path: gatsbyPath(
-          filePath: "/event/{event.season}/{event.chapter}/{event.route}-{event.date}"
+          filePath: "/event/{event.season}/{event.chapter}/{event.route}-{event.scheduleId}"
         )
       }
     }
@@ -80,6 +81,7 @@ const SeasonChapter = ({
     </ContentWrapper>
 
     <SeasonsCta />
+    <LatestsPosts />
   </Layout>
 )
 

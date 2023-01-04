@@ -12,6 +12,7 @@ import { Link, MapLink } from "src/components/Link"
 import { EventPageQuery } from "src/gatsby.gql"
 import { useEvent } from "src/data/events"
 import { Loading } from "src/components/form/components"
+import { LatestsPosts } from "src/components/Blog"
 
 type EventProps = PageProps<EventPageQuery>
 
@@ -135,16 +136,20 @@ const Event = ({ data: { event } }: EventProps) => {
       <ContentWrapper>
         <h2>Who's riding</h2>
         {isLoading && <Loading />}
-        {data && (
-          <ul>
-            {data.riders.length === 0 && <li>No riders registered</li>}
-            {data.riders.map(({ rider }) => (
-              <li>{rider.riderName}</li>
-            ))}
-          </ul>
-        )}
+        <ul>
+          {!data && <li>No riders registered</li>}
+          {data && (
+            <>
+              {data.riders.length === 0 && <li>No riders registered</li>}
+              {data.riders.map(({ rider }) => (
+                <li>{rider.riderName}</li>
+              ))}
+            </>
+          )}
+        </ul>
       </ContentWrapper>
       <SeasonsCta />
+      <LatestsPosts />
     </Layout>
   )
 }

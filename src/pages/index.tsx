@@ -6,9 +6,8 @@ import { Gallery } from "src/components/Gallery"
 import { Layout } from "src/components/layout"
 import { Link } from "src/components/Link"
 import { LinkButton } from "src/components/Buttons"
-import { PostTeaser } from "src/components/Blog"
+import { LatestsPosts } from "src/components/Blog"
 import { SEO } from "src/components/seo"
-import { useBlog } from "src/data/blog"
 import { Chapter, useEvents } from "src/data/events"
 
 import * as styles from "./styles/index.module.scss"
@@ -52,8 +51,6 @@ const IndexPage = () => {
     chapter: Chapter.Simcoe,
     limit: 2,
   })
-  const { posts } = useBlog({ limit: 2 })
-
   return (
     <Layout>
       <ContentWrapper>
@@ -78,7 +75,7 @@ const IndexPage = () => {
       <ContentWrapper>
         <h3>About us</h3>
         <p>
-          The Randonneurs Ontario are an ultra-distance cycling club. We've been
+          Randonneurs Ontario is an ultra-distance cycling club. We've been
           riding 200km+ events southern Ontario since 1982.
         </p>
         <p>
@@ -100,16 +97,7 @@ const IndexPage = () => {
           Learn more about Randonneurs Ontario
         </Link>
       </ContentWrapper>
-      <ContentWrapper>
-        <h2>Recent member reports</h2>
-        <ContentWrapper container>
-          {posts.map((post, i) => (
-            <ContentChild key={i}>
-              <PostTeaser post={post} />
-            </ContentChild>
-          ))}
-        </ContentWrapper>
-      </ContentWrapper>
+      <LatestsPosts />
       <ContentWrapper>
         <h2>2021 Virtual Symposium</h2>
         <ContentWrapper container>
