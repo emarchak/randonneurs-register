@@ -1,6 +1,6 @@
 # Randonneurs TO
 
-[![Netlify](https://img.shields.io/netlify/17a06075-366c-485f-9e60-34bfee1fee3c)](https://app.netlify.com/sites/randonneursto/deploys) [![Coverage](https://img.shields.io/codecov/c/github/emarchak/randonneurs-to)](https://app.codecov.io/gh/emarchak/randonneurs-to) [![Percy.io](https://percy.io/static/images/percy-badge.svg)](https://percy.io/830709d1/randonneurs-to)
+[![Netlify](https://img.shields.io/netlify/eac51034-bdec-4e1b-b922-3d6621b5353f)](https://app.netlify.com/sites/ro-register/deploys) [![Coverage](https://img.shields.io/codecov/c/github/emarchak/randonneurs-register)](https://app.codecov.io/gh/emarchak/randonneurs-register) [![Percy.io](https://percy.io/static/images/percy-badge.svg)](https://percy.io/830709d1/randonneurs-register)
 
 Automations and marketing for Toronto Randonneurs
 
