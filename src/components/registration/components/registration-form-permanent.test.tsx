@@ -6,7 +6,7 @@ import * as useMail from 'src/data/mail'
 import * as useSlack from 'src/hooks/useSlack'
 import * as Gatsby from 'gatsby'
 
-const db = {
+export const routeDB = {
   routes: [
     {
       id: 'route1',
@@ -44,7 +44,7 @@ describe('<RegistrationFormPermanent>', () => {
   const staticQuerySpy = jest.spyOn(Gatsby, 'useStaticQuery')
 
   beforeEach(() => {
-    staticQuerySpy.mockReturnValue({ db })
+    staticQuerySpy.mockReturnValue({ db: routeDB })
   })
 
   afterEach(() => {
