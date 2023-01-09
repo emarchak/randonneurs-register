@@ -3969,10 +3969,10 @@ export type EventDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type EventDataQuery = { __typename?: 'Query', allEvent: { __typename?: 'EventConnection', nodes: Array<{ __typename?: 'Event', chapter?: Chapter | null, distance?: number | null, eventType?: EventType | null, id: string, organizer?: string | null, route?: string | null, rwgpsUrl?: string | null, startLocation?: string | null, date?: any | null, scheduleId?: string | null, path?: string | null }> } };
 
-export type UseRoutesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+export type UseRoutesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type UseRoutesQueryQuery = { __typename?: 'Query', db: { __typename?: 'db', routes: Array<{ __typename?: 'db_routes', startLocation?: string | null, name?: string | null, id?: number | null, distance?: number | null, chapter?: string | null }> } };
+export type UseRoutesQuery = { __typename?: 'Query', db: { __typename?: 'db', routes: Array<{ __typename?: 'db_routes', startLocation?: string | null, name?: string | null, id?: number | null, distance?: number | null, chapter?: string | null, cuesheet?: string | null }> } };
 
 export type EventPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -4109,7 +4109,7 @@ declare module '*/useEvents.ts' {
 declare module '*/useRoutes.ts' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const useRoutesQuery: DocumentNode;
+  export const useRoutes: DocumentNode;
 
   export default defaultDocument;
 }
@@ -4406,8 +4406,8 @@ export const EventData = gql`
   }
 }
     `;
-export const UseRoutesQuery = gql`
-    query useRoutesQuery {
+export const UseRoutes = gql`
+    query useRoutes {
   db {
     routes(order_by: {chapter: asc, distance: asc}) {
       startLocation
@@ -4415,6 +4415,7 @@ export const UseRoutesQuery = gql`
       id
       distance
       chapter
+      cuesheet
     }
   }
 }

@@ -1,18 +1,12 @@
 
 import { graphql, useStaticQuery } from 'gatsby'
-import { Chapter } from 'src/data/events'
+import { UseRoutesQuery } from 'src/gatsby.gql.d'
 
-export type Route = {
-  chapter: Chapter
-  distance: number
-  startLocation: string
-  name: string
-  id: number
-}
+export type Route = UseRoutesQuery['db']['routes'][0]
 
 export const useRoutes = () => {
-  const { db: { routes } } = useStaticQuery(graphql`
-    query useRoutesQuery {
+  const { db: { routes } } = useStaticQuery<UseRoutesQuery>(graphql`
+    query useRoutes {
       db {
         routes(
           order_by: {chapter: asc, distance: asc}
@@ -22,6 +16,7 @@ export const useRoutes = () => {
           id
           distance
           chapter
+          cuesheet
         }
       }
     }
