@@ -6,37 +6,37 @@ import * as useMail from 'src/data/mail'
 import * as useSlack from 'src/hooks/useSlack'
 import * as Gatsby from 'gatsby'
 
-const db =  {
+export const routeDB = {
   routes: [
     {
       id: 'route1',
       chapter: 'Toronto',
       distance: 200,
       startLocation: 'Starbucks',
-      name: 'Urban'
+      name: 'Urban',
     },
     {
       id: 'route2',
       chapter: 'Huron',
       distance: 300,
       startLocation: 'Careys House',
-      name: 'Golf'
+      name: 'Golf',
     },
     {
       id: 'route3',
       chapter: 'Simcoe',
       distance: 90,
       startLocation: 'Tims',
-      name: 'Shortest ride'
+      name: 'Shortest ride',
     },
     {
       id: 'route4',
       chapter: 'Ottawa',
       distance: 170,
       startLocation: 'Tims',
-      name: 'Shorter ride'
-    }
-  ]
+      name: 'Shorter ride',
+    },
+  ],
 }
 
 describe('<RegistrationFormPermanent>', () => {
@@ -44,8 +44,8 @@ describe('<RegistrationFormPermanent>', () => {
   const staticQuerySpy = jest.spyOn(Gatsby, 'useStaticQuery')
 
   beforeEach(() => {
-    staticQuerySpy.mockReturnValue({db})
-  });
+    staticQuerySpy.mockReturnValue({ db: routeDB })
+  })
 
   afterEach(() => {
     fetchSpy.mockClear()
@@ -87,17 +87,13 @@ describe('<RegistrationFormPermanent>', () => {
 
     expect(mount.getByText('Register')).toBeDisabled()
 
-    expect(
-      mount.getByText(/name is required/i)
-    ).toBeTruthy()
+    expect(mount.getByText(/name is required/i)).toBeTruthy()
 
     expect(
       mount.getByText(/higgeldy-piggeldy is not a valid email/i)
     ).toBeTruthy()
 
-    expect(
-      mount.getByText(/OCA risk awareness is required/i)
-    ).toBeTruthy()
+    expect(mount.getByText(/OCA risk awareness is required/i)).toBeTruthy()
 
     expect(
       mount.getByText(/Randonneurs Ontario risk policy is required/i)
@@ -113,14 +109,17 @@ describe('<RegistrationFormPermanent>', () => {
     useMailMock.mockReturnValue({ sendMail: sendMailSpy })
 
     const useSlacklMock = jest.spyOn(useSlack, 'useSlack')
-    const sendSlackMsgSpy = jest.fn().mockName('sendSlackMsg').mockReturnValue(true)
+    const sendSlackMsgSpy = jest
+      .fn()
+      .mockName('sendSlackMsg')
+      .mockReturnValue(true)
     useSlacklMock.mockReturnValue({ sendSlackMsg: sendSlackMsgSpy })
 
     fireEvent.change(mount.getByLabelText(/name/i), {
       target: { value: 'Foo Bar' },
     })
     fireEvent.blur(mount.getByLabelText(/name/i), {
-      target: { value: 'Foo Bar' }
+      target: { value: 'Foo Bar' },
     })
 
     fireEvent.change(mount.getByLabelText(/email/i), {
@@ -137,8 +136,16 @@ describe('<RegistrationFormPermanent>', () => {
       target: { value: '12:00' },
     })
 
-    fireEvent.click(mount.getByLabelText(/I have read Randonneurs Ontario's Club Risk Management Policy/i))
-    fireEvent.click(mount.getByLabelText(/I have read the Ontario Cycling Association's Progressive Return to Cycling/i))
+    fireEvent.click(
+      mount.getByLabelText(
+        /I have read Randonneurs Ontario's Club Risk Management Policy/i
+      )
+    )
+    fireEvent.click(
+      mount.getByLabelText(
+        /I have read the Ontario Cycling Association's Progressive Return to Cycling/i
+      )
+    )
 
     fireEvent.change(mount.getByLabelText(/notes/i), {
       target: { value: 'notes' },
@@ -149,44 +156,49 @@ describe('<RegistrationFormPermanent>', () => {
     await waitFor(() => {
       expect(sendMailSpy).toHaveBeenCalled()
       expect(sendSlackMsgSpy).toHaveBeenCalled()
-      expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/sheets', expect.objectContaining({
-        body: JSON.stringify({
-          sheet: 'registration-permanent',
-          row: {
-            name: 'Foo Bar',
-            email: 'foo@bar.com',
-            membership: 'Individual Membership',
-            route: 'Urban',
-            startTime: '08:00',
-            startLocation: 'Starbucks',
-            chapter: 'Toronto',
-            distance: 200,
-            notes: 'notes',
-            ocaConsent: 'Yes',
-            roConsent: 'Yes',
-            rideType: 'permanent',
-            submitted: 'Thu December 31 2020 19:00',
-            startDate: 'Sat October 9'
-          }
-        }),
-        method: 'POST'
-      }))
+      expect(fetchSpy).toHaveBeenCalledWith(
+        '/.netlify/functions/sheets',
+        expect.objectContaining({
+          body: JSON.stringify({
+            sheet: 'registration-permanent',
+            row: {
+              name: 'Foo Bar',
+              email: 'foo@bar.com',
+              membership: 'Individual Membership',
+              route: 'Urban',
+              startTime: '08:00',
+              startLocation: 'Starbucks',
+              direction: 'as-posted',
+              chapter: 'Toronto',
+              distance: 200,
+              notes: 'notes',
+              ocaConsent: 'Yes',
+              roConsent: 'Yes',
+              rideType: 'Permanent',
+              submitted: 'Thu December 31 2020 19:00',
+              startDate: 'Sat October 9',
+            },
+          }),
+          method: 'POST',
+        })
+      )
 
       expect(mount.getByText(/Thank you for registering to ride/)).toBeTruthy()
     })
   })
 
   it('shows an error when unable to submit', async () => {
-    fetchSpy.mockImplementation(async () => {throw new Error('nope')})
+    fetchSpy.mockImplementation(async () => {
+      throw new Error('nope')
+    })
 
     const mount = render(<RegistrationFormPermanent />)
     fireEvent.change(mount.getByLabelText(/name/i), {
       target: { value: 'Foo Bar' },
     })
     fireEvent.blur(mount.getByLabelText(/name/i), {
-      target: { value: 'Foo Bar' }
+      target: { value: 'Foo Bar' },
     })
-
 
     fireEvent.change(mount.getByLabelText(/email/i), {
       target: { value: 'foo@bar.com' },
@@ -206,14 +218,22 @@ describe('<RegistrationFormPermanent>', () => {
       target: { value: 'Starbucks' },
     })
 
-    fireEvent.click(mount.getByLabelText(/I have read Randonneurs Ontario's Club Risk Management Policy/i))
-    fireEvent.click(mount.getByLabelText(/I have read the Ontario Cycling Association's Progressive Return to Cycling/i))
+    fireEvent.click(
+      mount.getByLabelText(
+        /I have read Randonneurs Ontario's Club Risk Management Policy/i
+      )
+    )
+    fireEvent.click(
+      mount.getByLabelText(
+        /I have read the Ontario Cycling Association's Progressive Return to Cycling/i
+      )
+    )
 
     fireEvent.change(mount.getByLabelText(/notes/i), {
       target: { value: 'notes' },
     })
 
-    fireEvent.click(mount.getByRole('button', {name: 'Register'}))
+    fireEvent.click(mount.getByRole('button', { name: 'Register' }))
 
     await waitFor(async () => {
       expect(fetchSpy).toHaveBeenCalled()
@@ -236,7 +256,7 @@ describe('<RegistrationFormPermanent>', () => {
     expect(mount.baseElement).toHaveTextContent(/Shortest/i)
 
     fireEvent.change(DistanceSelector, {
-      target: { value: '< 100' }
+      target: { value: '< 100' },
     })
 
     expect(mount.baseElement).not.toHaveTextContent(/Urban/i)
