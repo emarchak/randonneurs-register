@@ -1,6 +1,6 @@
-import React, { useState, ChangeEvent, ReactChild } from "react"
-import { ContentWrapper } from "src/components/content-wrapper"
-import { FormState } from "src/components/form/utils"
+import React, { useState, ChangeEvent, ReactChild } from 'react'
+import { ContentWrapper } from 'src/components/content-wrapper'
+import { FormState } from 'src/components/form/utils'
 import {
   InputField,
   DateTimeField,
@@ -11,76 +11,76 @@ import {
   SubmitButton,
   SelectField,
   SelectOptionType,
-} from "src/components/form/components"
-import { Callout } from "src/components/callout"
-import { SelectPermanents } from "./select-permanents"
-import { useAllowedStartTimes } from "../hooks/useAllowedStartTimes"
-import { Rider } from "src/data/riders"
-import { Route } from "src/data/routes"
-import { Link } from "src/components/Link"
-import { useRegistrationForm } from "../hooks/useRegistrationForm"
-import { validate, RequiredFields } from "src/components/form/utils"
-import * as styles from "src/components/styles/registration.module.scss"
-import { NameField } from "src/components/form/components/NameField"
-import { Chapter, EventType } from "src/gatsby.gql.d"
+} from 'src/components/form/components'
+import { Callout } from 'src/components/callout'
+import { SelectPermanents } from './select-permanents'
+import { useAllowedStartTimes } from '../hooks/useAllowedStartTimes'
+import { Rider } from 'src/data/riders'
+import { Route } from 'src/data/routes'
+import { Link } from 'src/components/Link'
+import { useRegistrationForm } from '../hooks/useRegistrationForm'
+import { validate, RequiredFields } from 'src/components/form/utils'
+import * as styles from 'src/components/styles/registration.module.scss'
+import { NameField } from 'src/components/form/components/NameField'
+import { Chapter, EventType } from 'src/gatsby.gql.d'
 
-const formName = "registration-permanent"
+const formName = 'registration-permanent'
 interface FormData {
   name: string
   email: string
-  membership: Rider["membership"] | "missing" | ""
-  route: Route["name"]
+  membership: Rider['membership'] | 'missing' | ''
+  route: Route['name']
   distance: Number
-  startTime: Date | ""
+  startTime: Date | ''
   startLocation: string
-  direction: "as-posted" | "reversed"
-  chapter: Route["chapter"] | ""
+  direction: 'as-posted' | 'reversed'
+  chapter: Route['chapter'] | ''
   notes: string
   ocaConsent: boolean
   roConsent: boolean
 }
 
 const defaultFormData: FormData = {
-  name: "",
-  email: "",
-  membership: "",
-  route: "",
-  startTime: "",
-  startLocation: "",
-  direction: "as-posted",
-  chapter: "",
+  name: '',
+  email: '',
+  membership: '',
+  route: '',
+  startTime: '',
+  startLocation: '',
+  direction: 'as-posted',
+  chapter: '',
   distance: 0,
-  notes: "",
+  notes: '',
   ocaConsent: false,
   roConsent: false,
 }
 
 const fieldLabels = {
-  name: "Your name",
-  email: "Your email",
-  route: "Route",
-  startTime: "Starting time",
-  startLocation: "Starting location",
-  direction: "Ride direction",
-  notes: "Notes for the organizer",
-  ocaConsent: "OCA risk awareness",
-  roConsent: "Randonneurs Ontario risk policy",
+  name: 'Your name',
+  email: 'Your email',
+  route: 'Route',
+  startTime: 'Starting time',
+  startLocation: 'Starting location',
+  direction: 'Ride direction',
+  notes: 'Notes for the organizer',
+  ocaConsent: 'OCA risk awareness',
+  roConsent: 'Randonneurs Ontario risk policy',
 }
 
 const requiredFields: RequiredFields<FormData> = [
-  "name",
-  "email",
-  "route",
-  "startTime",
-  "startLocation",
-  "direction",
-  "ocaConsent",
-  "roConsent",
+  'name',
+  'email',
+  'route',
+  'startTime',
+  'startLocation',
+  'direction',
+  'ocaConsent',
+  'roConsent',
 ]
 
 const directionOptions: SelectOptionType[] = [
-  { value: "as-posted", label: "As posted" },
-  { value: "reversed", label: "Reversed" },
+  { value: 'as-posted', label: 'As posted' },
+  { value: 'reversed', label: 'Reversed' },
 ]
 
 export const RegistrationFormPermanent = () => {
@@ -91,15 +91,15 @@ export const RegistrationFormPermanent = () => {
   const { onSubmit, loading } = useRegistrationForm({ formName, fieldLabels })
   const { allowedStartTimes } = useAllowedStartTimes()
 
-  const isSubmitted = formState === "submitted"
-  const isDirty = formState === "dirty"
+  const isSubmitted = formState === 'submitted'
+  const isDirty = formState === 'dirty'
   const hasError = Boolean(formErrors.length)
 
   const handleValidStartTimes = (requestedStartTime: Date) =>
     allowedStartTimes(requestedStartTime)
 
   const dirtyForm = (newFormData: Partial<FormData>) => {
-    setFormState("dirty")
+    setFormState('dirty')
     setFormData({
       ...formData,
       ...newFormData,
@@ -109,7 +109,7 @@ export const RegistrationFormPermanent = () => {
   const handleInputChange = (
     evt: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    const { value = "", name } = evt.currentTarget
+    const { value = '', name } = evt.currentTarget
     dirtyForm({ [name]: value })
   }
 
@@ -124,8 +124,8 @@ export const RegistrationFormPermanent = () => {
 
   const handlePermanentChange = (permanent: Route) => {
     dirtyForm({
-      route: permanent.name || "",
-      startLocation: permanent.startLocation || "",
+      route: permanent.name || '',
+      startLocation: permanent.startLocation || '',
       chapter: permanent.chapter || Chapter.Toronto,
       distance: permanent.distance || 0,
     })
@@ -149,9 +149,9 @@ export const RegistrationFormPermanent = () => {
       rideType: EventType.Permanent,
     })
     if (success) {
-      setFormState("submitted")
+      setFormState('submitted')
     } else {
-      setFormErrors(["Server error! Try again later."])
+      setFormErrors(['Server error! Try again later.'])
     }
   }
 
@@ -160,12 +160,12 @@ export const RegistrationFormPermanent = () => {
       <ContentWrapper>
         <>
           <NameField
-            label={fieldLabels["name"]}
+            label={fieldLabels['name']}
             value={formData.name}
             onChange={handleNameChange}
           />
           <InputField
-            label={fieldLabels["email"]}
+            label={fieldLabels['email']}
             name="email"
             type="email"
             value={formData.email}
@@ -173,21 +173,21 @@ export const RegistrationFormPermanent = () => {
           />
           <SelectPermanents onChange={handlePermanentChange} />
           <DateTimeField
-            label={fieldLabels["startTime"]}
+            label={fieldLabels['startTime']}
             name="startTime"
             value={formData.startTime}
             onChange={handleDateChange}
             allowedRange={handleValidStartTimes}
           />
           <InputField
-            label={fieldLabels["startLocation"]}
+            label={fieldLabels['startLocation']}
             name="startLocation"
             value={formData.startLocation}
             onChange={handleInputChange}
             help="A Permanent can start at any Control on the posted route, so long as the posted route is followed completely."
           />
           <SelectField
-            label={fieldLabels["direction"]}
+            label={fieldLabels['direction']}
             name="direction"
             value={formData.direction}
             onChange={handleInputChange}
@@ -195,7 +195,7 @@ export const RegistrationFormPermanent = () => {
             help="A Permanent can be ridden as posted or in reverse, so long as the posted route is followed completely."
           />
           <InputField
-            label={fieldLabels["notes"]}
+            label={fieldLabels['notes']}
             name="notes"
             value={formData.notes}
             onChange={handleInputChange}
@@ -208,11 +208,11 @@ export const RegistrationFormPermanent = () => {
               value={formData.ocaConsent}
               onChange={handleCheckboxChange}
             >
-              I have read the{" "}
+              I have read the{' '}
               <Link href="https://www.ontariocycling.org/forms/oca-progressive-return-to-cycling-policy/">
                 Ontario Cycling Association's Progressive Return to Cycling
                 Policy
-              </Link>{" "}
+              </Link>{' '}
               and understand the risks.
             </CheckboxField>
             <CheckboxField
@@ -220,10 +220,10 @@ export const RegistrationFormPermanent = () => {
               value={formData.roConsent}
               onChange={handleCheckboxChange}
             >
-              I have read{" "}
+              I have read{' '}
               <Link href="http://randonneursontario.ca/down/RO%20Risk%20Management%20Plan%202016.pdf">
                 Randonneurs Ontario's Club Risk Management Policy
-              </Link>{" "}
+              </Link>{' '}
               and understand my responsibilities.
             </CheckboxField>
           </Callout>
@@ -241,7 +241,7 @@ export const RegistrationFormPermanent = () => {
                 <>
                   A copy of your registration request has been sent to your
                   email, and the ride organizer will be in contact to confirm
-                  your registration.{" "}
+                  your registration.{' '}
                 </>
                 <>Refresh the page to submit again.</>
               </p>
