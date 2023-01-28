@@ -1,5 +1,5 @@
 tasks:
-  - init: yarn install
+  - init: nvm use && yarn install
 image:
   file: .gitpod.Dockerfile
 

@@ -22,7 +22,7 @@ module.exports = {
   },
   'registration-permanent': {
     id: process.env.GS_REGISTRATIONPERM_ID,
-    title: 'Permanents 2021',
+    title: 'Permanents 2023',
     columns: [
       'num',
       'distance',
@@ -30,7 +30,8 @@ module.exports = {
       'startTime',
       'route',
       'name',
-      'startLocation'
+      'startLocation',
+      'direction'
     ]
   },
   'covid-screening': {
