@@ -84,5 +84,6 @@ describe('eventTypes()', () => {
         expect(eventTypes('Brevet')).toBe('Brevet')
         expect(eventTypes('Permanent')).toBe('Permanent')
         expect(eventTypes('Something weird')).toBe('Other')
+        expect(eventTypes('Populaire (spring equinox)')).toBe('Populaire')
     })
 })
