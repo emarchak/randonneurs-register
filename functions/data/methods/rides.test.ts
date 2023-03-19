@@ -79,3 +79,7 @@ describe('createRide', () => {
     })
 
 })
+
+describe('cancelRide', () => {
+
+})
