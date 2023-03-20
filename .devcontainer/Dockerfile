@@ -16,4 +16,4 @@ RUN su node -c "umask 0002 && npm install -g ${NODE_MODULES}" \
 # RUN su node -c "source /usr/local/share/nvm/nvm.sh && nvm install"
 
 # [Optional] Uncomment if you want to install more global node packages
-RUN su node -c "npm install -g heroku"
+RUN su node -c "npm install -g heroku netlify"
