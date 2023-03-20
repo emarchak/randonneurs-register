@@ -54,3 +54,39 @@ export const createRide = async (event: HandlerEvent): Promise<HandlerResponse> 
     }
   }
 }
+
+export const cancelRide = async () => {
+  // TODO:; Fix all these dup emails first
+  /**
+   * select rider_email,  array_agg(rider_id), count(*)
+from rider
+group by rider_email
+HAVING count(*) > 1
+   */
+
+  // TODO: update uniqueness based off of email, not name
+
+  // Get rider from email
+  /**
+  */
+
+
+  // Cancel the ride
+  /**
+  mutation CancelRide {
+  update_ride(
+    where: {
+    ride_rider: {_eq: 3},
+    ride_event: {_eq: 1037}},
+    _set: {ride_cancelled: false}) {
+    returning {
+      ride_rider
+      ride_event
+      ride_cancelled
+    }
+  }
+}
+
+   */
+
+}
