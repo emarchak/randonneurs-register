@@ -80,13 +80,13 @@ const GrantPage = () => (
       This grant is possible thanks to the generosity of:
     </ContentWrapper>
     <ContentWrapper container>
-      <ContentChild><center>the Ontario Ministry of Heritage, Sport, Tourism & Culture Industries </center></ContentChild>
-      <ContentChild><center>Ontario Cycling through their Member Club Rebuild program</center></ContentChild>
+      <ContentChild><center><Link href="http://www.mtc.gov.on.ca/en/home.shtml">Ontario Ministry of Heritage,<br/> Sport, Tourism & Culture Industries </Link></center></ContentChild>
+      <ContentChild><center><Link href="https://ontariocycling.org">Ontario Cycling<br />through their Member Club Rebuild program</Link></center></ContentChild>
     </ContentWrapper>
     <ContentWrapper container>
-      <ContentChild><center>Black Arrow Cycles</center></ContentChild>
-      <ContentChild><center>Internet Light and Power</center></ContentChild>
-      <ContentChild><center>Urbane Cyclist</center></ContentChild>
+      <ContentChild><center><Link href="https://www.blackarrowcycles.ca">Black Arrow Cycles</Link></center></ContentChild>
+      <ContentChild><center><Link href="https://www.ilap.com">Internet Light and Power</Link></center></ContentChild>
+      <ContentChild><center><Link href="https://www.ucycle.com">Urbane Cyclist</Link></center></ContentChild>
     </ContentWrapper>
     <SeasonsCta />
     <LatestsPosts />
