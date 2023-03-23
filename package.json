@@ -84,7 +84,7 @@
     "build:test": "gatsby build",
     "build:schema": "graphql-codegen --config codegen.yml",
     "build:production": "GATSBY_CPU_COUNT=1 gatsby build",
-    "develop": "gatsby develop -p 8000 -o",
+    "develop": "gatsby develop -p 8000 -H 0.0.0.0",
     "develop:functions": "netlify functions:serve",
     "develop:live": "netlify dev --live",
     "test": "jest --watch",
