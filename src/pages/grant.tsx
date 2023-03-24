@@ -8,13 +8,30 @@ import { Layout } from "src/components/layout"
 import { Link } from "src/components/Link"
 import { SeasonsCta } from "src/components/seasons"
 import { SEO } from "src/components/seo"
-import {BlackArrow} from "src/components/grant/BlackArrow"
-import {Urbane} from "src/components/grant/Urbane"
+import { graphql, useStaticQuery } from "gatsby"
 
-const GrantPage = () => (
+const pageGrantQuery =  graphql`
+query PageGrantQuery {
+  allFile(
+    filter: { relativeDirectory: {eq: "grant"}}
+  ) {
+    nodes {
+      name
+      publicURL
+    }
+  }
+}
+`
+
+const GrantPage = () => {
+  const { allFile: { nodes: images } } = useStaticQuery(pageGrantQuery)
+  const BlackArrowImg = images.find(img => img.name === "BlackArrow")
+  const UrbaneImg = images.find(img => img.name ==="Urbane")
+
+  return (
   <Layout>
     <ContentWrapper>
-      <h1>Randonneurs Ontario</h1><h2>Access Grant</h2>
+        <h1>Randonneurs Ontario</h1><h2>Access Grant</h2>
     </ContentWrapper>
     <ContentWrapper container>
       <ContentChild>
@@ -79,18 +96,27 @@ const GrantPage = () => (
     </ContentWrapper>
     <ContentWrapper>
       <h3>Supporters</h3>
-      If your company would like to get involved, please email us at grant@randonneurs.to. This grant is possible thanks to the generosity of:
+        <p>If your company would like to get involved, please email us at grant@randonneurs.to.</p>
+        <p>This grant is possible thanks to the generosity of:</p>
     </ContentWrapper>
     <ContentWrapper container>
       <ContentChild><center><Link href="http://www.mtc.gov.on.ca/en/home.shtml">Ontario Ministry of Heritage,<br/> Sport, Tourism & Culture Industries </Link></center></ContentChild>
       <ContentChild><center><Link href="https://ontariocycling.org">Ontario Cycling<br />through their Member Club Rebuild program</Link></center></ContentChild>
     </ContentWrapper>
     <ContentWrapper container>
-      <ContentChild><center>
-        <Link href="https://www.blackarrowcycles.ca"><BlackArrow />Black Arrow Cycles</Link>
+        <ContentChild><center>
+          <Link href="https://www.blackarrowcycles.ca"><img
+              src={BlackArrowImg.publicURL}
+              height={200}
+              alt="Black Arrow Cycles"
+          /></Link>
       </center></ContentChild>
       <ContentChild><center><Link href="https://www.ilap.com">Internet Light and Power</Link></center></ContentChild>
-      <ContentChild><center><Link href="https://www.ucycle.com"><Urbane/> Urbane Cyclist</Link></center></ContentChild>
+        <ContentChild><center><Link href="https://www.ucycle.com"><img
+            src={UrbaneImg.publicURL}
+            alt="Urbane Cyclist"
+            height={200}
+          /></Link></center></ContentChild>
     </ContentWrapper>
     <SeasonsCta />
     <LatestsPosts />

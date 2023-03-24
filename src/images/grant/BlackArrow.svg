@@ -1,5 +1,5 @@
 
-export const BlackArrow = () => (<svg width="10901" height="1466.7" version="1.1" viewBox="0 0 10901 1466.7" xmlns="http://www.w3.org/2000/svg">
+<svg width="10901" height="1466.7" version="1.1" viewBox="0 0 10901 1466.7" xmlns="http://www.w3.org/2000/svg">
  <defs>
   <clipPath id="clipPath34">
    <path d="m0 1100h8175.8v-1100h-8175.8z"/>
@@ -161,4 +161,4 @@ export const BlackArrow = () => (<svg width="10901" height="1466.7" version="1.1
    </g>
   </g>
  </g>
-</svg>)
+</svg>
