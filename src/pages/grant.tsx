@@ -47,6 +47,8 @@ const GrantPage = () => {
   } = useStaticQuery(pageGrantQuery)
   const BlackArrowImg = logos.nodes.find((img) => img.name === 'BlackArrow')
   const UrbaneImg = logos.nodes.find((img) => img.name === 'Urbane')
+  const VelotiqueImg = logos.nodes.find((img) => img.name === 'Velotique')
+  const FullCycleImg = logos.nodes.find((img) => img.name === 'FullCycle')
   const OntarioImg = logos.nodes.find((img) => img.name === 'Ontario')
   const OntarioCyclingImg = logos.nodes.find(
     (img) => img.name === 'OntarioCycling'
@@ -74,6 +76,12 @@ const GrantPage = () => {
               RAR’s SJ Brooks Scholarship
             </Link>
             .
+          </p>
+          <p>
+            <strong>
+              We will be accepting applications until midnight EDT on May 14,
+              2023
+            </strong>
           </p>
           <LinkButton primary block href="https://forms.gle/2zWxxf9Pix3gQQM7A">
             Apply for the RO Access Grant
@@ -195,6 +203,7 @@ const GrantPage = () => {
               <li>Gwyneth Mitchell</li>
               <li>Erin Marchak</li>
               <li>Carey Chappelle</li>
+              <li>Martin Cooper</li>
             </ul>
           </p>
         </ContentChild>
@@ -222,8 +231,10 @@ const GrantPage = () => {
                 alt="Ontario Ministry of Heritage, Sport, Tourism & Culture Industries"
               />
               <br />
-              Ontario Ministry of Heritage,
-              <br /> Sport, Tourism & Culture Industries
+              <h4>
+                Ontario Ministry of Heritage,
+                <br /> Sport, Tourism & Culture Industries
+              </h4>
             </Link>
           </center>
         </ContentChild>
@@ -265,12 +276,29 @@ const GrantPage = () => {
       <ContentWrapper container>
         <ContentChild>
           <center>
-            <Link href="https://www.ilap.com">Internet Light and Power</Link>
+            <Link href="https://www.ilap.com">
+              <h4>Internet Light and Power</h4>
+            </Link>
           </center>
         </ContentChild>
         <ContentChild>
           <center>
-            <Link href="https://www.velotique.com">Velotique</Link>
+            <Link href="https://www.velotique.com">
+              <GatsbyImage
+                image={VelotiqueImg.childImageSharp.gatsbyImageData}
+                alt="Velotique"
+              />
+            </Link>
+          </center>
+        </ContentChild>
+        <ContentChild>
+          <center>
+            <Link href="https://www.fullcycle.ca">
+              <GatsbyImage
+                image={FullCycleImg.childImageSharp.gatsbyImageData}
+                alt="Full Cycle"
+              />
+            </Link>
           </center>
         </ContentChild>
       </ContentWrapper>
