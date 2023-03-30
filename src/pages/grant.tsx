@@ -10,6 +10,7 @@ import { SeasonsCta } from 'src/components/seasons'
 import { SEO } from 'src/components/seo'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import * as styles from './styles/grant.module.scss'
 
 const pageGrantQuery = graphql`
   query PageGrantQuery {
@@ -18,7 +19,7 @@ const pageGrantQuery = graphql`
         name
         publicURL
         childImageSharp {
-          gatsbyImageData(height: 300, formats: JPG)
+          gatsbyImageData(height: 600, formats: JPG)
         }
       }
     }
@@ -47,11 +48,13 @@ const GrantPage = () => {
   } = useStaticQuery(pageGrantQuery)
   const BlackArrowImg = logos.nodes.find((img) => img.name === 'BlackArrow')
   const UrbaneImg = logos.nodes.find((img) => img.name === 'Urbane')
+  const VelotiqueImg = logos.nodes.find((img) => img.name === 'Velotique')
+  const FullCycleImg = logos.nodes.find((img) => img.name === 'FullCycle')
   const OntarioImg = logos.nodes.find((img) => img.name === 'Ontario')
   const OntarioCyclingImg = logos.nodes.find(
     (img) => img.name === 'OntarioCycling'
   )
-  const GrantImg = logos.nodes.find((img) => img.name === 'ROAG')
+  const GrantImg = logos.nodes.find((img) => img.name === 'slide1')
 
   return (
     <Layout>
@@ -75,6 +78,12 @@ const GrantPage = () => {
             </Link>
             .
           </p>
+          <p>
+            <strong>
+              We will be accepting applications until midnight EDT on May 14,
+              2023
+            </strong>
+          </p>
           <LinkButton primary block href="https://forms.gle/2zWxxf9Pix3gQQM7A">
             Apply for the RO Access Grant
           </LinkButton>
@@ -97,19 +106,21 @@ const GrantPage = () => {
           <h3>Recipients</h3>
           <p>
             The grant is meant to reduce barriers for individuals who intend on
-            completing an ACP Brevet of at least 200km.
+            completing a Brevet of at least 200km.
           </p>
           <p>
-            You must be able to physically attend an event on the Randonneurs
-            Ontario schedule
+            You must be able to physically attend{' '}
+            <Link to="/registration">
+              an event on the Randonneurs Ontario schedule
+            </Link>
           </p>
           <p>
             The ideal recipient will be someone who:
             <ul>
               <li>have existing experience with cycling in their community</li>
               <li>
-                have a plan for training and completing an ACP Brevet of at
-                least 200km
+                have a plan for training and completing an Brevet of at least
+                200km
               </li>
               <li>
                 are enthusiastic about riding bicycles and growing their
@@ -191,12 +202,15 @@ const GrantPage = () => {
             The grant committee is responsible for determining the recipient of
             the grant. They are the only ones who will view your answers to this
             submission. They are:
-            <ul>
-              <li>Gwyneth Mitchell</li>
-              <li>Erin Marchak</li>
-              <li>Carey Chappelle</li>
-            </ul>
           </p>
+          <ul>
+            <li>Carey Chappelle</li>
+            <li>Charles Horslin</li>
+            <li>Erin Marchak</li>
+            <li>Gwyneth Mitchell</li>
+            <li>Martin Cooper</li>
+            <li>Peter Leiss</li>
+          </ul>
         </ContentChild>
         <ContentChild>
           <GatsbyImage
@@ -209,73 +223,83 @@ const GrantPage = () => {
         <h3>Supporters</h3>
         <p>
           If your company would like to get involved, please email us at
-          grant@randonneurs.to.
+          vp@randonneurs.to.
         </p>
         <p>This grant is possible thanks to the generosity of:</p>
       </ContentWrapper>
       <ContentWrapper container>
-        <ContentChild>
-          <center>
-            <Link href="http://www.mtc.gov.on.ca/en/home.shtml">
-              <GatsbyImage
-                image={OntarioImg.childImageSharp.gatsbyImageData}
-                alt="Ontario Ministry of Heritage, Sport, Tourism & Culture Industries"
-              />
-              <br />
+        <ContentChild className={styles.partnersLogo}>
+          <Link href="http://www.mtc.gov.on.ca/en/home.shtml">
+            <GatsbyImage
+              image={OntarioImg.childImageSharp.gatsbyImageData}
+              alt="Ontario Ministry of Heritage, Sport, Tourism & Culture Industries"
+            />
+            <br />
+            <h4>
               Ontario Ministry of Heritage,
               <br /> Sport, Tourism & Culture Industries
-            </Link>
-          </center>
+            </h4>
+          </Link>
         </ContentChild>
-        <ContentChild>
-          <center>
-            <Link href="https://ontariocycling.org">
-              <GatsbyImage
-                image={OntarioCyclingImg.childImageSharp.gatsbyImageData}
-                alt="Ontario Cycling"
-              />
-            </Link>
-          </center>
+        <ContentChild className={styles.partnersLogo}>
+          <Link href="https://ontariocycling.org">
+            <GatsbyImage
+              image={OntarioCyclingImg.childImageSharp.gatsbyImageData}
+              alt="Ontario Cycling"
+            />
+          </Link>
         </ContentChild>
       </ContentWrapper>
       <ContentWrapper container>
-        <ContentChild>
-          <center>
-            <Link href="https://www.blackarrowcycles.ca">
-              <img
-                src={BlackArrowImg.publicURL}
-                height={200}
-                alt="Black Arrow Cycles"
-              />
-            </Link>
-          </center>
+        <ContentChild className={styles.partnersLogo}>
+          <Link href="https://www.blackarrowcycles.ca">
+            <img
+              src={BlackArrowImg.publicURL}
+              height={200}
+              alt="Black Arrow Cycles"
+            />
+          </Link>
         </ContentChild>
-        <ContentChild>
-          <center>
-            <Link href="https://www.ucycle.com">
-              <img
-                src={UrbaneImg.publicURL}
-                alt="Urbane Cyclist"
-                height={200}
-              />
-            </Link>
-          </center>
+        <ContentChild className={styles.partnersLogo}>
+          <Link href="https://www.ucycle.com">
+            <img src={UrbaneImg.publicURL} alt="Urbane Cyclist" height={200} />
+          </Link>
         </ContentChild>
       </ContentWrapper>
       <ContentWrapper container>
-        <ContentChild>
-          <center>
-            <Link href="https://www.ilap.com">Internet Light and Power</Link>
-          </center>
+        <ContentChild className={styles.partnersLogo}>
+          <Link href="https://www.velotique.com">
+            <GatsbyImage
+              image={VelotiqueImg.childImageSharp.gatsbyImageData}
+              alt="Velotique"
+            />
+          </Link>
         </ContentChild>
-        <ContentChild>
-          <center>
-            <Link href="https://www.velotique.com">Velotique</Link>
-          </center>
+        <ContentChild className={styles.partnersLogo}>
+          <Link href="https://www.fullcycle.ca">
+            <GatsbyImage
+              image={FullCycleImg.childImageSharp.gatsbyImageData}
+              alt="Full Cycle"
+            />
+          </Link>
         </ContentChild>
       </ContentWrapper>
 
+      <ContentWrapper container>
+        <ContentChild className={styles.partnersLogo}>
+          <Link href="https://www.ilap.com">
+            <h2>
+              Internet Light
+              <br /> and Power
+            </h2>
+          </Link>
+        </ContentChild>
+      </ContentWrapper>
       <ContentWrapper>
+        <p>
+          Photography provided by members of Randonneurs Ontario: Scheherazade
+          Haque, Stephen Jones, Tiago Varella-Cid
+        </p>
         <Gallery />
       </ContentWrapper>
       <SeasonsCta />
