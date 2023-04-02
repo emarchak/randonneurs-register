@@ -9,7 +9,9 @@
             "ppa": "false"
         }
 	},
-
+	"hostRequirements": {
+		"cpus": 8
+ 	},
 	// Configure tool-specific properties.
 	"customizations": {
 		// Configure properties specific to VS Code.

@@ -1,34 +1,32 @@
-import React from "react"
-import { graphql, useStaticQuery } from "gatsby"
-import { getImage } from "gatsby-plugin-image"
-import { ContentChild, ContentWrapper } from "src/components/content-wrapper"
-import { Gallery } from "src/components/Gallery"
-import { Layout } from "src/components/layout"
-import { Link } from "src/components/Link"
-import { LinkButton } from "src/components/Buttons"
-import { LatestsPosts } from "src/components/Blog"
-import { SEO } from "src/components/seo"
-import { Chapter, useEvents } from "src/data/events"
+import React from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { ContentChild, ContentWrapper } from 'src/components/content-wrapper'
+import { Gallery } from 'src/components/Gallery'
+import { Layout } from 'src/components/layout'
+import { Link } from 'src/components/Link'
+import { LinkButton } from 'src/components/Buttons'
+import { LatestsPosts } from 'src/components/Blog'
+import { SEO } from 'src/components/seo'
+import { Chapter, useEvents } from 'src/data/events'
 
-import * as styles from "./styles/index.module.scss"
-import { iframe } from "src/components/styles/iframe.module.scss"
-import UpcomingEvents from "src/components/UpcomingEvents"
+import * as styles from './styles/index.module.scss'
+import { iframe } from 'src/components/styles/iframe.module.scss'
+import UpcomingEvents from 'src/components/UpcomingEvents'
+import { Callout } from 'src/components/callout'
 
 const pageQuery = graphql`
   query indexPageQuery {
-    allFile(
-      filter: {
-        extension: { regex: "/(jpg|JPG|jpeg)/" }
-        relativeDirectory: { eq: "gallery" }
-      }
-      limit: 6
-      sort: { birthTime: DESC }
+    seoImage: file(
+      relativePath: { eq: "gallery/Screen-Shot-2021-07-21-at-1.30.35-PM.jpg" }
     ) {
-      nodes {
-        name
-        childImageSharp {
-          gatsbyImageData(aspectRatio: 1, height: 300, formats: JPG)
-        }
+      childImageSharp {
+        gatsbyImageData(aspectRatio: 1, height: 600, formats: JPG)
+      }
+    }
+    grantImage: file(relativePath: { eq: "grant/slide1.png" }) {
+      childImageSharp {
+        gatsbyImageData(aspectRatio: 1, height: 600, formats: JPG)
       }
     }
   }
@@ -51,6 +49,8 @@ const IndexPage = () => {
     chapter: Chapter.Simcoe,
     limit: 2,
   })
+  const { grantImage } = useStaticQuery(pageQuery)
+
   return (
     <Layout>
       <ContentWrapper>
@@ -68,9 +68,39 @@ const IndexPage = () => {
             Register to ride
           </LinkButton>
         </footer>
-        <ContentChild>
-          <Gallery />
-        </ContentChild>
+        <Callout>
+          <ContentWrapper container>
+            <ContentChild>
+              <h3>Randonneurs Ontario Access Grant</h3>
+              <p>
+                The Randonneurs Ontario Access Grant is designed to reduce
+                barriers to the ultra-distance riding community. This access
+                grant is for someone from a group under-represented in the
+                ultra-distance riding community that would have otherwise not
+                been able to participate in Randonneurs Ontario events.
+              </p>
+              <p>
+                <strong>
+                  We will be accepting applications until midnight EDT on May
+                  14, 2023
+                </strong>
+              </p>
+              <LinkButton
+                primary
+                block
+                href="https://forms.gle/2zWxxf9Pix3gQQM7A"
+              >
+                Apply for the RO Access Grant
+              </LinkButton>
+            </ContentChild>
+            <ContentChild>
+              <GatsbyImage
+                image={grantImage.childImageSharp.gatsbyImageData}
+                alt="Randonneurs Ontario Access Grant"
+              />
+            </ContentChild>
+          </ContentWrapper>
+        </Callout>
       </ContentWrapper>
       <ContentWrapper>
         <h3>About us</h3>
@@ -79,14 +109,14 @@ const IndexPage = () => {
           riding 200km+ events southern Ontario since 1982.
         </p>
         <p>
-          <Link href="https://randonneursontario.ca/">Randonneurs Ontario</Link>{" "}
-          is affiliated with the{" "}
+          <Link href="https://randonneursontario.ca/">Randonneurs Ontario</Link>{' '}
+          is affiliated with the{' '}
           <Link href="https://www.audax-club-parisien.com/en">
             Audax Club Parisien
           </Link>
           , the parent organization governing the qualification of riders
           wishing to participate in the 1200K Paris - Brest - Paris Randonnee.
-          The club is also affiliated with{" "}
+          The club is also affiliated with{' '}
           <Link href="https://www.audax-club-parisien.com/en/our-organizations/brm-world/">
             Les Randonneurs Mondiaux
           </Link>
@@ -97,14 +127,17 @@ const IndexPage = () => {
           Learn more about Randonneurs Ontario
         </Link>
       </ContentWrapper>
+      <ContentWrapper>
+        <Gallery />
+      </ContentWrapper>
       <LatestsPosts />
       <ContentWrapper>
-        <h2>2021 Virtual Symposium</h2>
+        <h2>2022 Virtual Symposium</h2>
         <ContentWrapper container>
           <ContentChild>
             <iframe
               className={iframe}
-              title="2021 Symposium video recording"
+              title="2022 Symposium video recording"
               src="https://www.youtube.com/embed/1_QZSRRFpP4?start=203"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -127,7 +160,7 @@ const IndexPage = () => {
             </p>
             <p>
               <Link to="symposium/2021">
-                {"View the full recording and slide deck >>"}
+                {'View the full recording and slide deck >>'}
               </Link>
             </p>
           </ContentChild>
@@ -138,15 +171,12 @@ const IndexPage = () => {
 }
 
 export const Head = () => {
-  const {
-    allFile: { nodes: images },
-  } = useStaticQuery(pageQuery)
-  const seoImage = getImage(images[0])
+  const { seoImage } = useStaticQuery(pageQuery)
 
   return (
     <SEO
       description="Part of Randonneurs Ontario, a long distance cycling club affiliated with the Audax Club Parisien"
-      image={seoImage}
+      image={getImage(seoImage)}
     />
   )
 }

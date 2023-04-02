@@ -206,6 +206,7 @@ const GrantPage = () => {
           <ul>
             <li>Carey Chappelle</li>
             <li>Charles Horslin</li>
+            <li>Dave Thompson</li>
             <li>Erin Marchak</li>
             <li>Gwyneth Mitchell</li>
             <li>Martin Cooper</li>
