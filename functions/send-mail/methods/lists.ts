@@ -57,7 +57,7 @@ export const getListByProperty = async (event: HandlerEvent): Promise<HandlerRes
     const { statusCode, body } = await getLists(event)
 
     const lists: ContactList[] = JSON.parse(body)
-    const list = lists.find(list => (scheduleId && list.scheduleId === scheduleId) || (name && list.name === name.replace(/\+/g, ' ')))
+    const list = lists.find(list => (scheduleId && list.scheduleId === scheduleId) || (name && new RegExp(name.replace(/\+/g, ' '), 'i').test(list.name)))
 
     return {
       statusCode: statusCode,

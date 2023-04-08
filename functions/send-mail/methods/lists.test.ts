@@ -54,7 +54,7 @@ describe('send-mail', () => {
     })
 
     const { body: byName } = await getListByProperty(
-      { ...event, queryStringParameters: { name: 'Named+list' } }
+      { ...event, queryStringParameters: { name: 'named+list' } }
     )
     expect(JSON.parse(byName)).toEqual({
       id: '91011',

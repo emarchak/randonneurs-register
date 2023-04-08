@@ -85,11 +85,7 @@ const IndexPage = () => {
                   14, 2023
                 </strong>
               </p>
-              <LinkButton
-                primary
-                block
-                href="https://forms.gle/2zWxxf9Pix3gQQM7A"
-              >
+              <LinkButton primary block to="grant">
                 Apply for the RO Access Grant
               </LinkButton>
             </ContentChild>
