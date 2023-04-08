@@ -11,6 +11,7 @@ import { SEO } from 'src/components/seo'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import * as styles from './styles/grant.module.scss'
+import { MailingForm } from 'src/components/MailingForm/MailingForm'
 
 const pageGrantQuery = graphql`
   query PageGrantQuery {
@@ -220,6 +221,19 @@ const GrantPage = () => {
           />
         </ContentChild>
       </ContentWrapper>
+      <MailingForm listName="grant">
+        <h3>Subscribe for Grant updates</h3>
+        <p>
+          If you'd like reminders and news as the deadline draws closer,
+          subscribe below!
+        </p>
+        <p>
+          For all Randonneurs Ontario updates,{' '}
+          <Link href="http://www.randonneursontario.ca/who/Mailing_Lists.html">
+            please subscribe to the RandoList mailing list
+          </Link>
+        </p>
+      </MailingForm>
       <ContentWrapper>
         <h3>Supporters</h3>
         <p>

@@ -1,6 +1,6 @@
 import * as isomorphicUnfetch from 'cross-fetch'
 import { HandlerEvent } from '@netlify/functions'
-import getLists, { addList, getListByScheduleId } from './lists'
+import getLists, { addList, getListByProperty } from './lists'
 
 const event: HandlerEvent = {} as any
 describe('send-mail', () => {
@@ -25,6 +25,11 @@ describe('send-mail', () => {
       contactCount: 1,
       url: 'https://api.sendgrid.com/v3/marketing/lists/5678',
       scheduleId: '421'
+    }, {
+      id: '91011',
+      name: 'Named list',
+      contactCount: 2,
+      url: 'https://api.sendgrid.com/v3/marketing/lists/91011',
     }])
   })
 
@@ -35,23 +40,37 @@ describe('send-mail', () => {
     expect(statusCode).toEqual(500)
   })
 
-  it('should getListByScheduleId', async () => {
-    const { statusCode, body } = await getListByScheduleId({ ...event, queryStringParameters: { scheduleId: '420' } })
+  it('should getListByProperty', async () => {
+    const { statusCode, body: byScheduleId } = await getListByProperty(
+      { ...event, queryStringParameters: { scheduleId: '420' } }
+    )
     expect(statusCode).toEqual(200)
-    expect(JSON.parse(body)).toEqual({
+    expect(JSON.parse(byScheduleId)).toEqual({
       id: '1234',
       name: '420 - Example list',
       contactCount: 1,
       url: 'https://api.sendgrid.com/v3/marketing/lists/1234',
       scheduleId: '420'
     })
+
+    const { body: byName } = await getListByProperty(
+      { ...event, queryStringParameters: { name: 'named+list' } }
+    )
+    expect(JSON.parse(byName)).toEqual({
+      id: '91011',
+      name: 'Named list',
+      contactCount: 2,
+      url: 'https://api.sendgrid.com/v3/marketing/lists/91011',
+    })
   })
 
-
-  it('should return an empty object if no getListByScheduleId', async () => {
-    const { statusCode, body } = await getListByScheduleId({ ...event, queryStringParameters: { scheduleId: '000' } })
+  it('should return an empty object if no getListByProperty', async () => {
+    const { statusCode, body: byScheduleId } = await getListByProperty({ ...event, queryStringParameters: { scheduleId: '000' } })
     expect(statusCode).toEqual(200)
-    expect(JSON.parse(body)).toEqual({})
+    expect(JSON.parse(byScheduleId)).toEqual({})
+
+    const { body: byName } = await getListByProperty({ ...event, queryStringParameters: { name: 'Missing' } })
+    expect(JSON.parse(byName)).toEqual({})
   })
 
   it('should addlist', async () => {
@@ -65,10 +84,10 @@ describe('send-mail', () => {
     )
   })
 
-  it('should handle errors with getListByScheduleId', async () => {
+  it('should handle errors with getListByProperty', async () => {
     fetchSpy
       .mockRejectedValueOnce(new Error('Something went wrong'))
-    const { statusCode } = await getListByScheduleId(event)
+    const { statusCode } = await getListByProperty(event)
 
     expect(statusCode).toEqual(500)
     fetchSpy.mockClear()
