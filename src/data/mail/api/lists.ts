@@ -4,6 +4,7 @@ import { Event } from 'src/data/events'
 
 type GetListParams = {
   scheduleId?: Event['scheduleId']
+  name?: string
 }
 
 type ContactList = {
@@ -12,20 +13,22 @@ type ContactList = {
   scheduleId: Event['scheduleId'],
 }
 
-export const getList = async ({ scheduleId }: GetListParams): Promise<ContactList> => {
+export const getList = async (getListParams: GetListParams): Promise<ContactList> => {
   try {
-    const response = await fetch(`/.netlify/functions/send-mail/list?scheduleId=${scheduleId}`, {
+    const params = new URLSearchParams([...Object.entries(getListParams)]).toString()
+    const response = await fetch(`/.netlify/functions/send-mail/list?${params}`, {
       method: 'GET',
     })
+
     if (!response.ok) {
-      throw new Error(`Could not get list ${scheduleId}`)
+      throw new Error(`Could not get list ${JSON.stringify(getListParams)}`)
     }
 
     const list = await response.json()
     return {
       id: list?.id,
       name: list?.name || '',
-      scheduleId
+      scheduleId: getListParams.scheduleId || '',
     }
   }
   catch (err) {

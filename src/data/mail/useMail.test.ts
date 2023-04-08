@@ -58,7 +58,7 @@ describe('useMail()', () => {
         }))
     })
 
-    it('fetches list', async () => {
+    it('fetches list with scheduleId', async () => {
         const { result } = renderHook(() => useMail())
         const response = await result.current.getList({ scheduleId: '420' })
 
@@ -71,6 +71,22 @@ describe('useMail()', () => {
             '/.netlify/functions/send-mail/list?scheduleId=420',
             { method: 'GET' }
         )
+    })
+
+    it('fetches list with name', async () => {
+        const { result } = renderHook(() => useMail())
+        const response = await result.current.getList({ name: 'Named list' })
+
+        expect(fetchSpy).toHaveBeenCalledWith(
+            '/.netlify/functions/send-mail/list?name=Named+list',
+            { method: 'GET' }
+        )
+
+        expect(response).toEqual({
+            id: '91011',
+            name: 'Named list',
+            scheduleId: ''
+        })
     })
 
     it('fetches list with errors', async () => {

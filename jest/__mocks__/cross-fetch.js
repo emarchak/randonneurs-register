@@ -175,7 +175,26 @@ const fetch = jest.fn().mockImplementation(async (endpoint = '', body = {}) => {
           _metadata: {
             self: 'https://api.sendgrid.com/v3/marketing/lists/5678'
           }
+        },{
+          id: '91011',
+          name: 'Named list',
+          contact_count: 2,
+          _metadata: {
+            self: 'https://api.sendgrid.com/v3/marketing/lists/91011'
+          }
         }]
+      })
+    }
+  }
+
+  if (endpoint.match(/functions\/send-mail\/list\?name=Named\+list/) && body.method === 'GET') {
+    return {
+      status: 200,
+      ok: true,
+      json: jest.fn().mockResolvedValue({
+        id: '91011',
+        name: 'Named list',
+        scheduleId: ''
       })
     }
   }

@@ -51,13 +51,13 @@ const getLists = async (event: HandlerEvent): Promise<HandlerResponse> => {
   }
 }
 
-export const getListByScheduleId = async (event: HandlerEvent): Promise<HandlerResponse> => {
+export const getListByProperty = async (event: HandlerEvent): Promise<HandlerResponse> => {
   try {
-    const scheduleId = event.queryStringParameters.scheduleId
+    const { name, scheduleId } = event.queryStringParameters
     const { statusCode, body } = await getLists(event)
 
     const lists: ContactList[] = JSON.parse(body)
-    const list = lists.find(list => (list.scheduleId === scheduleId))
+    const list = lists.find(list => (scheduleId && list.scheduleId === scheduleId) || (name && list.name === name.replace(/\+/g, ' ')))
 
     return {
       statusCode: statusCode,
