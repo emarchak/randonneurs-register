@@ -1,6 +1,7 @@
 import React from 'react'
 import { render, fireEvent, waitFor } from '@testing-library/react'
 import { RegistrationFormPermanent } from './registration-form-permanent'
+import MockDate from 'mockdate'
 import * as fetch from 'cross-fetch'
 import * as useMail from 'src/data/mail'
 import * as useSlack from 'src/hooks/useSlack'
@@ -44,6 +45,7 @@ describe('<RegistrationFormPermanent>', () => {
   const staticQuerySpy = jest.spyOn(Gatsby, 'useStaticQuery')
 
   beforeEach(() => {
+    MockDate.set(new Date('Wed August 4 2021 09:00:00 EDT'))
     staticQuerySpy.mockReturnValue({ db: routeDB })
   })
 
@@ -175,8 +177,8 @@ describe('<RegistrationFormPermanent>', () => {
               ocaConsent: 'Yes',
               roConsent: 'Yes',
               rideType: 'Permanent',
-              submitted: 'Thu December 31 2020 19:00',
-              startDate: 'Sat October 9',
+              submitted: 'Wed August 4 2021 09:00',
+              startDate: 'Fri August 6',
             },
           }),
           method: 'POST',
