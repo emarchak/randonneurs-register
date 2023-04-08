@@ -10,7 +10,7 @@
         }
 	},
 	"hostRequirements": {
-		"cpus": 8
+		"cpus": 4
  	},
 	// Configure tool-specific properties.
 	"customizations": {
