@@ -64,7 +64,7 @@
     "babel-eslint": "^10.0.0",
     "babel-jest": "^29.5.0",
     "babel-preset-gatsby": "^3.8.0",
-    "core-js": "^3.29.1",
+    "core-js": "^3.30.1",
     "dotenv-cli": "^7.1.0",
     "eslint": "^8.36.0",
     "eslint-import-resolver-alias": "^1.1.2",
