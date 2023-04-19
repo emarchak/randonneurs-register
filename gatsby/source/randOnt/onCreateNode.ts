@@ -1,7 +1,7 @@
 import { GatsbyNode } from "gatsby"
 
 export const buildEventPath = (event) => {
-  const path = `/event/${event.season}/${event.chapter}/${event.route}-${event.scheduleId}/`.replace(/( |\.|:)/g, '-')
+  const path = `/event/${event.season}/${event.chapter}/${event.route}-${event.scheduleId}/`.replace(/('| |\.|:)/g, '-')
   return encodeURI(path).toLowerCase()
 }
 
