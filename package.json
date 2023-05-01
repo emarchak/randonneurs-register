@@ -6,7 +6,7 @@
   "author": "Erin Marchak <erin@emarchak.com>",
   "dependencies": {
     "@babel/core": "^7.21.3",
-    "@babel/preset-typescript": "^7.21.0",
+    "@babel/preset-typescript": "^7.21.5",
     "@bugsnag/core": "^7.19.0",
     "@bugsnag/js": "^7.20.0",
     "@bugsnag/plugin-react": "^7.19.0",
