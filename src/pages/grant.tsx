@@ -190,9 +190,9 @@ const GrantPage = () => {
           </p>
 
           <p>
-            This grant does not cover the Ontario Cycling Association
-            membership. OCA Membership is included in all racing licenses, or it
-            can be obtained with an OCA Affiliate Club Membership.
+            This grant does not cover the Ontario Cycling 
+            membership. OC Membership is included in all racing licenses, or it
+            can be obtained with an OC Affiliate Club Membership.
           </p>
         </Callout>
       </ContentWrapper>
