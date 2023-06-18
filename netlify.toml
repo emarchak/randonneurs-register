@@ -17,4 +17,5 @@
 [[redirects]]
   from="/schedule/*"
   to="/registration/"
-  status=302!
+  status=302
+  force=true
