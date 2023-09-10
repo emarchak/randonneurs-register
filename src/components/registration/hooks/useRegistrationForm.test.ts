@@ -120,10 +120,10 @@ describe('useRegistrationForm', () => {
           'route': '200',
           'startTime': new Date('2021-08-28T09:01:00.000Z')
         },
-        'replyTo': 'vp@randonneurs.to',
+        'replyTo': 'vp-toronto@randonneursontario.ca',
         'to': [
           'rider@example.com',
-          'vp@randonneurs.to'
+          'vp-toronto@randonneursontario.ca'
         ],
       },
         'brevetRegistration')
