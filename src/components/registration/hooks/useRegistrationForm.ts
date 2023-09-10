@@ -26,11 +26,11 @@ type FormData = {
 
 const permEmail = 'treasurer@randonneursontario.ca'
 const replyToEmails = {
-    "toronto": "vp@randonneurs.to",
+    "toronto": "vp-toronto@randonneursontario.ca",
     "simcoe": "vp-simcoe@randonneursontario.ca",
     "huron": "vp-huron@randonneursontario.ca",
     "ottawa": "vp-ottawa@randonneursontario.ca",
-    "default": "vp@randonneurs.to"
+    "default": "vp-toronto@randonneursontario.ca"
 }
 
 export const useRegistrationForm = ({ formName, fieldLabels }: useRegistrationFormParams) => {
