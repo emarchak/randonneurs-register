@@ -34,6 +34,7 @@ const pageGrantQuery = graphql`
     ) {
       nodes {
         name
+        publicURL
         childImageSharp {
           gatsbyImageData(aspectRatio: 1, height: 600, formats: JPG)
         }
@@ -79,15 +80,6 @@ const GrantPage = () => {
             </Link>
             .
           </p>
-          <p>
-            <strong>
-              We will be accepting applications until midnight EDT on May 14,
-              2023
-            </strong>
-          </p>
-          <LinkButton primary block href="https://forms.gle/2zWxxf9Pix3gQQM7A">
-            Apply for the RO Access Grant
-          </LinkButton>
         </ContentChild>
         <ContentChild>
           <GatsbyImage
@@ -190,9 +182,9 @@ const GrantPage = () => {
           </p>
 
           <p>
-            This grant does not cover the Ontario Cycling 
-            membership. OC Membership is included in all racing licenses, or it
-            can be obtained with an OC Affiliate Club Membership.
+            This grant does not cover the Ontario Cycling membership. OC
+            Membership is included in all racing licenses, or it can be obtained
+            with an OC Affiliate Club Membership.
           </p>
         </Callout>
       </ContentWrapper>
