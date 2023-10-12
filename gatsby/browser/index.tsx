@@ -1,18 +1,20 @@
-import React from "react"
-import Bugsnag from "@bugsnag/js"
+import React from 'react'
+import Bugsnag from '@bugsnag/js'
 import BugsnagPluginReact from '@bugsnag/plugin-react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
-import { BuyButtonProvider } from "src/components/buybutton"
+import { BuyButtonProvider } from 'src/components/buybutton'
 
-if (process.env.NODE_ENV !== 'development') {
+const unSnag = ['development', 'test'].includes(process.env.NODE_ENV)
+
+if (!unSnag) {
   Bugsnag.start({
     apiKey: process.env.GATSBY_BUGSNAG_API_KEY,
     plugins: [new BugsnagPluginReact()],
   })
 }
 
-const ErrorBoundary = process.env.NODE_ENV === 'development'
+const ErrorBoundary = unSnag
   ? React.Fragment
   : Bugsnag.getPlugin('react').createErrorBoundary(React)
 
@@ -22,13 +24,12 @@ export const wrapRootElement = ({ element }) => {
   return (
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
-        <BuyButtonProvider>
-          { element }
-        </BuyButtonProvider>
+        <BuyButtonProvider>{element}</BuyButtonProvider>
         <ReactQueryDevtools />
       </QueryClientProvider>
     </ErrorBoundary>
-)}
+  )
+}
 
 export const onClientEntry = () => {
   // IE11 timezone polyfill
