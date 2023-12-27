@@ -15,6 +15,8 @@ import { iframe } from 'src/components/styles/iframe.module.scss'
 import UpcomingEvents from 'src/components/UpcomingEvents'
 import { Callout } from 'src/components/callout'
 
+const currentSeason = '2024'
+
 const pageQuery = graphql`
   query indexPageQuery {
     seoImage: file(
@@ -57,10 +59,26 @@ const IndexPage = () => {
         <h2>Upcoming Events</h2>
       </ContentWrapper>
       <ContentWrapper container>
-        <UpcomingEvents chapter={Chapter.Toronto} events={torontoBrevets} />
-        <UpcomingEvents chapter={Chapter.Huron} events={huronBrevets} />
-        <UpcomingEvents chapter={Chapter.Ottawa} events={ottawaBrevets} />
-        <UpcomingEvents chapter={Chapter.Simcoe} events={simcoeBrevets} />
+        <UpcomingEvents
+          chapter={Chapter.Toronto}
+          events={torontoBrevets}
+          url={`event/${currentSeason}/toronto`}
+        />
+        <UpcomingEvents
+          chapter={Chapter.Huron}
+          events={huronBrevets}
+          url={`event/${currentSeason}/huron`}
+        />
+        <UpcomingEvents
+          chapter={Chapter.Ottawa}
+          events={ottawaBrevets}
+          url={`event/${currentSeason}/ottawa`}
+        />
+        <UpcomingEvents
+          chapter={Chapter.Simcoe}
+          events={simcoeBrevets}
+          url={`event/${currentSeason}/simcoe`}
+        />
       </ContentWrapper>
       <ContentWrapper>
         <footer className={styles.eventFooter}>
