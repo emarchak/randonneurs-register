@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Bugsnag from '@bugsnag/js'
 import { formatSlackMessage } from 'src/components/form/utils'
 import { useMail } from 'src/data/mail'
@@ -35,9 +35,16 @@ const replyToEmails = {
 
 export const useRegistrationForm = ({ formName, fieldLabels }: useRegistrationFormParams) => {
     const [loading, setLoading] = useState(false)
+    const [defaultEventId, setDefaultEventId] = useState<string | null>(null)
     const { sendMail } = useMail()
     const { sendSlackMsg } = useSlack()
     const { addRow } = useSheets()
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search)
+        const eventId = params.get('event')
+        setDefaultEventId(eventId)
+    }, [defaultEventId, setDefaultEventId])
 
     const onSubmit = async (data: FormData) => {
         setLoading(true)
@@ -78,6 +85,7 @@ export const useRegistrationForm = ({ formName, fieldLabels }: useRegistrationFo
         return successRegistration && successSheet
     }
     return {
+        defaultEventId,
         loading,
         onSubmit
     }
