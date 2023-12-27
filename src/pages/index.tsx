@@ -79,14 +79,9 @@ const IndexPage = () => {
                 ultra-distance riding community that would have otherwise not
                 been able to participate in Randonneurs Ontario events.
               </p>
-              <p>
-                <strong>
-                  We will be accepting applications until midnight EDT on May
-                  14, 2023
-                </strong>
-              </p>
+
               <LinkButton primary block to="grant">
-                Apply for the RO Access Grant
+                Learn more about the RO Access Grant
               </LinkButton>
             </ContentChild>
             <ContentChild>
