@@ -1,17 +1,19 @@
-import React from "react"
-import { ContentChild } from "src/components/content-wrapper"
-import { getDateTimeLong } from "src/utils"
-import { Link } from "src/components/Link"
-import { Chapter, Event } from "src/data/events"
+import React from 'react'
+import { ContentChild } from 'src/components/content-wrapper'
+import { getDateTimeLong } from 'src/utils'
+import { Link } from 'src/components/Link'
+import { Chapter, Event } from 'src/data/events'
 
-import * as styles from "../pages/styles/index.module.scss"
+import * as styles from '../pages/styles/index.module.scss'
 
 const UpcomingEvents = ({
   chapter,
   events,
+  url,
 }: {
   chapter: Chapter
   events: Event[]
+  url?: string
 }) =>
   events.length > 0 && (
     <ContentChild>
@@ -31,6 +33,11 @@ const UpcomingEvents = ({
           </li>
         ))}
       </ul>
+      {url && (
+        <Link className="normal-text" to={url}>
+          See all {chapter} events
+        </Link>
+      )}
     </ContentChild>
   )
 export default UpcomingEvents
