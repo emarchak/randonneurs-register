@@ -104,7 +104,7 @@ describe('<RegistrationFormPermanent>', () => {
 
   it('records the registration when submitted', async () => {
     const mount = render(<RegistrationFormPermanent />)
-    const rideDate = new Date('2021-10-09T12:00:00.000Z')
+    const rideDate = new Date('2021-08-06T12:00:00.000Z')
 
     const useMailMock = jest.spyOn(useMail, 'useMail')
     const sendMailSpy = jest.fn().mockName('sendMail').mockReturnValue(true)
