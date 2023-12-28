@@ -1,4 +1,10 @@
-import React, { useState, FormEvent, ChangeEvent, useMemo } from 'react'
+import React, {
+  useState,
+  FormEvent,
+  ChangeEvent,
+  useMemo,
+  useEffect,
+} from 'react'
 import { RadioTable, SelectField } from 'src/components/form/components'
 import { Fieldset, InlineInputs } from 'src/components/form/fieldset'
 import { useEvents, Brevet } from 'src/data/events'
@@ -10,93 +16,130 @@ import { getDistanceKey, getIsDistance, sortDistances } from './utils'
 const fieldSetID = 'upcoming_brevets'
 
 const columns = {
-    date: 'Date',
-    time: 'Start time',
-    chapter: 'Chapter',
-    distance: 'Distance',
-    event: 'Event'
+  date: 'Date',
+  time: 'Start time',
+  chapter: 'Chapter',
+  distance: 'Distance',
+  event: 'Event',
 }
 
 type Props = {
-    onChange: (Brevet) => void
+  onChange: (Brevet) => void
+  defaultScheduleId?: Brevet['scheduleId']
 }
 
-export const SelectBrevets = ({ onChange }: Props) => {
-    const { brevets } = useEvents({limit: false})
-    const { allowedToRegister, getBrevetRegistrationDeadline } = useAllowedStartTimes()
-    const [selectedBrevetId, setSelectedBrevetId] = useState<Brevet['id']>('')
-    const [filters, setFilters] = useState({
-        chapter: '',
-        distance: ''
+export const SelectBrevets = ({ onChange, defaultScheduleId }: Props) => {
+  const { brevets } = useEvents({ limit: false })
+  const { allowedToRegister, getBrevetRegistrationDeadline } =
+    useAllowedStartTimes()
+  const [selectedBrevetId, setSelectedBrevetId] = useState<Brevet['id']>('')
+  const [filters, setFilters] = useState({
+    chapter: '',
+    distance: '',
+  })
+
+  const handleFilterChange = (evt: ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = evt.currentTarget
+    setFilters({
+      ...filters,
+      [name]: value,
+    })
+  }
+  const handleBrevetChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    const { value } = evt.currentTarget
+    const brevet = brevets.find((brevet) => brevet.id === value)
+
+    setSelectedBrevetId(value)
+    onChange(brevet)
+  }
+
+  useEffect(() => {
+    if (!defaultScheduleId) {
+      return
+    }
+    const brevet = brevets.find(
+      (brevet) => brevet.scheduleId === defaultScheduleId
+    )
+    if (brevet && allowedToRegister(brevet)) {
+      setSelectedBrevetId(brevet.id)
+      onChange(brevet)
+    }
+  }, [defaultScheduleId])
+
+  const options = useMemo(() => {
+    const chapters = new Set<string>()
+    const distances = new Set<string>()
+    const availableBrevets = []
+
+    brevets.forEach((brevet) => {
+      const isChapter = filters.chapter
+        ? brevet.chapter === filters.chapter
+        : true
+      const isDistance = filters.distance
+        ? getIsDistance(brevet.distance, filters.distance)
+        : true
+
+      chapters.add(brevet.chapter)
+      distances.add(getDistanceKey(brevet.distance))
+
+      if (isChapter && isDistance) {
+        availableBrevets.push({
+          value: brevet.id,
+          disabled: !allowedToRegister(brevet),
+          columns: {
+            date: getDateLong(brevet.date),
+            time: getTime(brevet.date),
+            chapter: brevet.chapter,
+            distance: brevet.distance,
+            event: (
+              <BrevetColumn
+                brevet={brevet}
+                canRegister={allowedToRegister(brevet)}
+                registrationDeadline={getBrevetRegistrationDeadline(brevet)}
+              />
+            ),
+          },
+        })
+      }
     })
 
-    const handleFilterChange = (evt: ChangeEvent<HTMLSelectElement>) => {
-        const { name, value } = evt.currentTarget
-        setFilters({
-            ...filters,
-            [name]: value
-        })
+    return {
+      chapters: Array.from(chapters).sort(),
+      distances: Array.from(distances).sort(sortDistances),
+      brevets: availableBrevets,
     }
-    const handleBrevetChange = (evt: ChangeEvent<HTMLInputElement>) => {
-        const { value } = evt.currentTarget
-        const brevet = brevets.find(brevet => brevet.id === value)
+  }, [filters.chapter, filters.distance])
 
-        setSelectedBrevetId(value)
-        onChange(brevet)
-    }
-
-    const options = useMemo(() => {
-        const chapters = new Set<string>()
-        const distances = new Set<string>()
-        const availableBrevets = []
-
-        brevets.forEach((brevet) => {
-            const isChapter = filters.chapter ? brevet.chapter === filters.chapter : true
-            const isDistance = filters.distance ? getIsDistance(brevet.distance, filters.distance) : true
-
-            chapters.add(brevet.chapter)
-            distances.add(getDistanceKey(brevet.distance))
-
-            if (isChapter && isDistance) {
-                availableBrevets.push({
-                    value: brevet.id,
-                    disabled: !allowedToRegister(brevet),
-                    columns: {
-                        date: getDateLong(brevet.date),
-                        time: getTime(brevet.date),
-                        chapter: brevet.chapter,
-                        distance: brevet.distance,
-                        event: <BrevetColumn brevet={brevet} canRegister={allowedToRegister(brevet)} registrationDeadline={getBrevetRegistrationDeadline(brevet)} />
-                    }
-                })
-            }
-        })
-
-        return {
-            chapters: Array.from(chapters).sort(),
-            distances: Array.from(distances).sort(sortDistances),
-            brevets: availableBrevets
-        }
-    }, [filters.chapter, filters.distance])
-
-    return (
-        <Fieldset id={fieldSetID}>
-            <h2>Upcoming Rides</h2>
-            <InlineInputs>
-                <SelectField label={'Filter by chapter'} name="chapter" options={options.chapters} value={filters.chapter} onChange={handleFilterChange} />
-                <SelectField label={'Filter by distance'} name="distance" options={options.distances} value={filters.distance} onChange={handleFilterChange} />
-            </InlineInputs>
-            <RadioTable
-                name={fieldSetID}
-                label='Selected Rides'
-                hideLabel
-                labelColumn='event'
-                columns={columns}
-                options={options.brevets}
-                value={selectedBrevetId}
-                empty='No rides available'
-                onChange={handleBrevetChange}
-            />
-        </Fieldset>
-    )
+  return (
+    <Fieldset id={fieldSetID}>
+      <h2>Upcoming Rides</h2>
+      <InlineInputs>
+        <SelectField
+          label={'Filter by chapter'}
+          name="chapter"
+          options={options.chapters}
+          value={filters.chapter}
+          onChange={handleFilterChange}
+        />
+        <SelectField
+          label={'Filter by distance'}
+          name="distance"
+          options={options.distances}
+          value={filters.distance}
+          onChange={handleFilterChange}
+        />
+      </InlineInputs>
+      <RadioTable
+        name={fieldSetID}
+        label="Selected Rides"
+        hideLabel
+        labelColumn="event"
+        columns={columns}
+        options={options.brevets}
+        value={selectedBrevetId}
+        empty="No rides available"
+        onChange={handleBrevetChange}
+      />
+    </Fieldset>
+  )
 }
