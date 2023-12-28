@@ -34,6 +34,19 @@ export type Scalars = {
   timestamptz: any;
 };
 
+/** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
+export type Boolean_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['Boolean']>;
+  _gt?: InputMaybe<Scalars['Boolean']>;
+  _gte?: InputMaybe<Scalars['Boolean']>;
+  _in?: InputMaybe<Array<Scalars['Boolean']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['Boolean']>;
+  _lte?: InputMaybe<Scalars['Boolean']>;
+  _neq?: InputMaybe<Scalars['Boolean']>;
+  _nin?: InputMaybe<Array<Scalars['Boolean']>>;
+};
+
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
 export type Int_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['Int']>;
@@ -211,8 +224,14 @@ export type Mutation_Root = {
   __typename?: 'mutation_root';
   /** insert data into the table: "ride" */
   insert_ride?: Maybe<Ride_Mutation_Response>;
+  /** insert a single row into the table: "ride" */
+  insert_ride_one?: Maybe<Ride>;
   /** insert data into the table: "rider" */
   insert_rider?: Maybe<Rider_Mutation_Response>;
+  /** update data of the table: "ride" */
+  update_ride?: Maybe<Ride_Mutation_Response>;
+  /** update multiples rows of table: "ride" */
+  update_ride_many?: Maybe<Array<Maybe<Ride_Mutation_Response>>>;
 };
 
 
@@ -224,9 +243,30 @@ export type Mutation_RootInsert_RideArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsert_Ride_OneArgs = {
+  object: Ride_Insert_Input;
+  on_conflict?: InputMaybe<Ride_On_Conflict>;
+};
+
+
+/** mutation root */
 export type Mutation_RootInsert_RiderArgs = {
   objects: Array<Rider_Insert_Input>;
   on_conflict?: InputMaybe<Rider_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_RideArgs = {
+  _inc?: InputMaybe<Ride_Inc_Input>;
+  _set?: InputMaybe<Ride_Set_Input>;
+  where: Ride_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Ride_ManyArgs = {
+  updates: Array<Ride_Updates>;
 };
 
 /** column ordering options */
@@ -250,6 +290,8 @@ export type Query_Root = {
   /** fetch data from the table: "events" */
   events: Array<Events>;
   memberships?: Maybe<Array<Maybe<Membership>>>;
+  /** fetch data from the table: "ride" */
+  ride: Array<Ride>;
   /** fetch data from the table: "riders" */
   riders: Array<Riders>;
   /** fetch data from the table: "rides" */
@@ -270,6 +312,15 @@ export type Query_RootEventsArgs = {
 
 export type Query_RootMembershipsArgs = {
   where?: InputMaybe<QueryInput>;
+};
+
+
+export type Query_RootRideArgs = {
+  distinct_on?: InputMaybe<Array<Ride_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Ride_Order_By>>;
+  where?: InputMaybe<Ride_Bool_Exp>;
 };
 
 
@@ -299,6 +350,14 @@ export type Query_RootRoutesArgs = {
   where?: InputMaybe<Routes_Bool_Exp>;
 };
 
+/** columns and relationships of "ride" */
+export type Ride = {
+  __typename?: 'ride';
+  ride_cancelled: Scalars['Boolean'];
+  ride_event: Scalars['Int'];
+  ride_rider: Scalars['Int'];
+};
+
 /** input type for inserting array relation for remote table "ride" */
 export type Ride_Arr_Rel_Insert_Input = {
   data: Array<Ride_Insert_Input>;
@@ -311,19 +370,30 @@ export type Ride_Bool_Exp = {
   _and?: InputMaybe<Array<Ride_Bool_Exp>>;
   _not?: InputMaybe<Ride_Bool_Exp>;
   _or?: InputMaybe<Array<Ride_Bool_Exp>>;
+  ride_cancelled?: InputMaybe<Boolean_Comparison_Exp>;
+  ride_event?: InputMaybe<Int_Comparison_Exp>;
+  ride_rider?: InputMaybe<Int_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "ride" */
 export enum Ride_Constraint {
-  /** unique or primary key constraint on columns "ride_timestamp", "ride_id" */
+  /** unique or primary key constraint on columns "ride_id", "ride_timestamp" */
   RidePkey = 'ride_pkey',
-  /** unique or primary key constraint on columns "ride_rider", "ride_event" */
+  /** unique or primary key constraint on columns "ride_event", "ride_rider" */
   RideUnique = 'ride_unique'
 }
 
+/** input type for incrementing numeric columns in table "ride" */
+export type Ride_Inc_Input = {
+  ride_event?: InputMaybe<Scalars['Int']>;
+  ride_rider?: InputMaybe<Scalars['Int']>;
+};
+
 /** input type for inserting data into table "ride" */
 export type Ride_Insert_Input = {
+  ride_cancelled?: InputMaybe<Scalars['Boolean']>;
   ride_event?: InputMaybe<Scalars['Int']>;
+  ride_hidden?: InputMaybe<Scalars['Boolean']>;
   ride_rider?: InputMaybe<Scalars['Int']>;
   ride_starttime?: InputMaybe<Scalars['timestamptz']>;
   rider?: InputMaybe<Rider_Obj_Rel_Insert_Input>;
@@ -334,6 +404,8 @@ export type Ride_Mutation_Response = {
   __typename?: 'ride_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Ride>;
 };
 
 /** on_conflict condition type for table "ride" */
@@ -343,11 +415,66 @@ export type Ride_On_Conflict = {
   where?: InputMaybe<Ride_Bool_Exp>;
 };
 
-/** placeholder for update columns of table "ride" (current role has no relevant permissions) */
-export enum Ride_Update_Column {
-  /** placeholder (do not use) */
-  Placeholder = '_PLACEHOLDER'
+/** Ordering options when selecting data from "ride". */
+export type Ride_Order_By = {
+  ride_cancelled?: InputMaybe<Order_By>;
+  ride_event?: InputMaybe<Order_By>;
+  ride_rider?: InputMaybe<Order_By>;
+};
+
+/** select columns of table "ride" */
+export enum Ride_Select_Column {
+  /** column name */
+  RideCancelled = 'ride_cancelled',
+  /** column name */
+  RideEvent = 'ride_event',
+  /** column name */
+  RideRider = 'ride_rider'
 }
+
+/** input type for updating data in table "ride" */
+export type Ride_Set_Input = {
+  ride_cancelled?: InputMaybe<Scalars['Boolean']>;
+  ride_event?: InputMaybe<Scalars['Int']>;
+  ride_hidden?: InputMaybe<Scalars['Boolean']>;
+  ride_rider?: InputMaybe<Scalars['Int']>;
+};
+
+/** Streaming cursor of the table "ride" */
+export type Ride_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Ride_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Ride_Stream_Cursor_Value_Input = {
+  ride_cancelled?: InputMaybe<Scalars['Boolean']>;
+  ride_event?: InputMaybe<Scalars['Int']>;
+  ride_rider?: InputMaybe<Scalars['Int']>;
+};
+
+/** update columns of table "ride" */
+export enum Ride_Update_Column {
+  /** column name */
+  RideCancelled = 'ride_cancelled',
+  /** column name */
+  RideEvent = 'ride_event',
+  /** column name */
+  RideHidden = 'ride_hidden',
+  /** column name */
+  RideRider = 'ride_rider'
+}
+
+export type Ride_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Ride_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Ride_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Ride_Bool_Exp;
+};
 
 /** Boolean expression to filter rows from the table "rider". All fields are combined with a logical 'AND'. */
 export type Rider_Bool_Exp = {
@@ -358,7 +485,7 @@ export type Rider_Bool_Exp = {
 
 /** unique or primary key constraints on table "rider" */
 export enum Rider_Constraint {
-  /** unique or primary key constraint on columns "rider_timestamp", "rider_id" */
+  /** unique or primary key constraint on columns "rider_id", "rider_timestamp" */
   RiderPkey = 'rider_pkey',
   /** unique or primary key constraint on columns "rider_lastname", "rider_firstname" */
   RiderRiderFirstnameRiderLastnameKey = 'rider_rider_firstname_rider_lastname_key'
@@ -666,6 +793,10 @@ export type Subscription_Root = {
   events: Array<Events>;
   /** fetch data from the table in a streaming manner: "events" */
   events_stream: Array<Events>;
+  /** fetch data from the table: "ride" */
+  ride: Array<Ride>;
+  /** fetch data from the table in a streaming manner: "ride" */
+  ride_stream: Array<Ride>;
   /** fetch data from the table: "riders" */
   riders: Array<Riders>;
   /** fetch data from the table in a streaming manner: "riders" */
@@ -694,6 +825,22 @@ export type Subscription_RootEvents_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Events_Stream_Cursor_Input>>;
   where?: InputMaybe<Events_Bool_Exp>;
+};
+
+
+export type Subscription_RootRideArgs = {
+  distinct_on?: InputMaybe<Array<Ride_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Ride_Order_By>>;
+  where?: InputMaybe<Ride_Bool_Exp>;
+};
+
+
+export type Subscription_RootRide_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Ride_Stream_Cursor_Input>>;
+  where?: InputMaybe<Ride_Bool_Exp>;
 };
 
 
