@@ -158,19 +158,18 @@ describe('useRegistrationForm', () => {
       writable: true,
       value: {
         ...window.location,
-        search: '?event=1',
-        href: 'http://localhost:3000/registration?event=1'
+        search: '?schedule-id=1',
       },
     })
 
     const { result } = renderHook(() => useRegistrationForm({ formName, fieldLabels }))
 
-    expect(result.current.defaultEventId).toBe('1')
+    expect(result.current.defaultScheduleId).toBe('1')
   })
 
-  it('returns null defaultEventId if not in URL', async () => {
+  it('returns null defaultScheduleId if not in URL', async () => {
     const { result } = renderHook(() => useRegistrationForm({ formName, fieldLabels }))
 
-    expect(result.current.defaultEventId).toBeNull()
+    expect(result.current.defaultScheduleId).toBeNull()
   })
 })

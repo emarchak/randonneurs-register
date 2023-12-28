@@ -35,16 +35,16 @@ const replyToEmails = {
 
 export const useRegistrationForm = ({ formName, fieldLabels }: useRegistrationFormParams) => {
     const [loading, setLoading] = useState(false)
-    const [defaultEventId, setDefaultEventId] = useState<string | null>(null)
+    const [defaultScheduleId, setDefaultScheduleId] = useState<string | null>(null)
     const { sendMail } = useMail()
     const { sendSlackMsg } = useSlack()
     const { addRow } = useSheets()
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search)
-        const eventId = params.get('event')
-        setDefaultEventId(eventId)
-    }, [defaultEventId, setDefaultEventId])
+        const eventId = params.get('schedule-id')
+        setDefaultScheduleId(eventId)
+    }, [defaultScheduleId, setDefaultScheduleId])
 
     const onSubmit = async (data: FormData) => {
         setLoading(true)
@@ -85,7 +85,7 @@ export const useRegistrationForm = ({ formName, fieldLabels }: useRegistrationFo
         return successRegistration && successSheet
     }
     return {
-        defaultEventId,
+        defaultScheduleId,
         loading,
         onSubmit
     }
