@@ -4116,6 +4116,13 @@ export type TraceImageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type TraceImageQueryQuery = { __typename?: 'Query', file?: { __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null } | null };
 
+export type SchedulePageQueryVariables = Exact<{
+  scheduleId?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type SchedulePageQuery = { __typename?: 'Query', event?: { __typename?: 'Event', path?: string | null } | null };
+
 export type AudaxImageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -4270,6 +4277,15 @@ declare module '*/trace-virtuelle.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const traceImageQuery: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/{event.scheduleId}.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const SchedulePage: DocumentNode;
 
   export default defaultDocument;
 }
@@ -4654,6 +4670,15 @@ export const TraceImageQuery = gql`
     childImageSharp {
       gatsbyImageData(width: 500)
     }
+  }
+}
+    `;
+export const SchedulePage = gql`
+    query SchedulePage($scheduleId: String) {
+  event(scheduleId: {eq: $scheduleId}) {
+    path: gatsbyPath(
+      filePath: "/event/{event.season}/{event.chapter}/{event.route}-{event.scheduleId}"
+    )
   }
 }
     `;
