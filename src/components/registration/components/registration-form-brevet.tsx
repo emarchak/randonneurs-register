@@ -190,6 +190,13 @@ export const RegistrationFormBrevet = () => {
           onChange={handleBrevetChange}
           defaultScheduleId={defaultScheduleId}
         />
+        <InputField
+          label="Route"
+          name="route"
+          value={formData.route}
+          onChange={handleInputChange}
+          disabled
+        />
         <DateTimeField
           label={fieldLabels['startTime']}
           name="startTime"
@@ -265,7 +272,7 @@ export const RegistrationFormBrevet = () => {
             and understand my responsibilities.
           </CheckboxField>
         </Callout>
-        <HiddenField name="route" value={formData.route} />
+
         <HiddenField name="chapter" value={formData.chapter} />
         <HiddenField name="distance" value={formData.distance.toString()} />
         <HiddenField
