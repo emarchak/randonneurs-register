@@ -1,11 +1,11 @@
-import React from "react"
-import { PageProps } from "gatsby"
-import { ContentChild, ContentWrapper } from "src/components/content-wrapper"
-import { Layout } from "src/components/layout"
-import { Link } from "src/components/Link"
-import { LinkButton } from "src/components/Buttons"
-import { SEO } from "src/components/seo"
-import { TabMenu } from "src/components/Menu"
+import React from 'react'
+import { PageProps } from 'gatsby'
+import { ContentChild, ContentWrapper } from 'src/components/content-wrapper'
+import { Layout } from 'src/components/layout'
+import { Link } from 'src/components/Link'
+import { LinkButton } from 'src/components/Buttons'
+import { SEO } from 'src/components/seo'
+import { TabMenu } from 'src/components/Menu'
 
 const MemberRegistration = ({ path }: PageProps) => {
   return (
@@ -16,8 +16,8 @@ const MemberRegistration = ({ path }: PageProps) => {
 
         <p>
           For all sanctioned rides, we require riders to have Ontario Cycling
-          Association (OCA) membership. If you're not an OCA member, you can
-          purchase a membership during registration.
+          (OC) membership. If you're not an OC member, you can purchase a
+          membership during registration.
         </p>
 
         <p>
@@ -32,13 +32,14 @@ const MemberRegistration = ({ path }: PageProps) => {
         <ContentChild>
           <h3>Trial Member</h3>
           <h4>
-            <strong>FREE</strong> + OCA Membership
+            <strong>FREE</strong> + Ontario Cycling Membership
           </h4>
           <p>
             <small>
               There is no charge for rider for their first event, no matter the
-              distance. First time riders must have an OCA Membership through
-              Randonneurs Ontario or another OCA affiliated club.
+              distance. First time riders must have an Ontario Cycling
+              Membership through Randonneurs Ontario or another Ontario Cycling
+              affiliated club.
             </small>
           </p>
           <LinkButton
@@ -53,7 +54,7 @@ const MemberRegistration = ({ path }: PageProps) => {
         <ContentChild>
           <h3>Individual Membership</h3>
           <h4>
-            <strong>$40.00 CDN</strong> + OCA Membership{" "}
+            <strong>$40.00 CDN</strong> + Ontario Cycling Membership{' '}
           </h4>
           <p>
             <small>
@@ -74,7 +75,7 @@ const MemberRegistration = ({ path }: PageProps) => {
         <ContentChild>
           <h3>Family Membership</h3>
           <h4>
-            <strong>$40.00 CDN</strong> + OCA Membership{" "}
+            <strong>$40.00 CDN</strong> + Ontario Cycling Membership{' '}
             <strong>per family member</strong>
           </h4>
           <p>

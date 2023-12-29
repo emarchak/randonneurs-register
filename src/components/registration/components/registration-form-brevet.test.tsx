@@ -113,7 +113,9 @@ describe('<RegistrationForm>', () => {
       mount.getByText(/higgeldy-piggeldy is not a valid email/i)
     ).toBeTruthy()
 
-    expect(mount.getByText(/OCA risk awareness is required/i)).toBeTruthy()
+    expect(
+      mount.getByText(/Ontario Cycling risk awareness is required/i)
+    ).toBeTruthy()
 
     expect(
       mount.getByText(/Randonneurs Ontario risk policy is required/i)
@@ -151,7 +153,7 @@ describe('<RegistrationForm>', () => {
     )
     fireEvent.click(
       mount.getByLabelText(
-        /I have read the Ontario Cycling Association's Progressive Return to Cycling/i
+        /I have read Ontario Cycling's Progressive Return to Cycling/i
       )
     )
     fireEvent.click(mount.getByLabelText(/Share my registration/i))
@@ -225,7 +227,7 @@ describe('<RegistrationForm>', () => {
     )
     fireEvent.click(
       getByLabelText(
-        /I have read the Ontario Cycling Association's Progressive Return to Cycling/i
+        /I have read Ontario Cycling's Progressive Return to Cycling/i
       )
     )
 

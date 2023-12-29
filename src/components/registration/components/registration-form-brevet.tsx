@@ -69,7 +69,7 @@ const fieldLabels = {
   startTime: 'Starting time',
   startLocation: 'Starting location',
   notes: 'Notes for the organizer',
-  ocaConsent: 'OCA risk awareness',
+  ocaConsent: 'Ontario Cycling risk awareness',
   roConsent: 'Randonneurs Ontario risk policy',
   shareRide: 'Share my registration',
 }
@@ -254,9 +254,9 @@ export const RegistrationFormBrevet = () => {
             value={formData.ocaConsent}
             onChange={handleInputChange}
           >
-            I have read the{' '}
+            I have read{' '}
             <Link href="https://www.ontariocycling.org/forms/oca-progressive-return-to-cycling-policy/">
-              Ontario Cycling Association's Progressive Return to Cycling Policy
+              Ontario Cycling's Progressive Return to Cycling Policy
             </Link>{' '}
             and understand the risks.
           </CheckboxField>
