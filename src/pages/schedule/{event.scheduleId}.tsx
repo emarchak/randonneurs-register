@@ -1,6 +1,8 @@
 import React from 'react'
 import { graphql, PageProps } from 'gatsby'
 import { SchedulePageQuery } from 'src/gatsby.gql'
+import { useLocation } from '@reach/router'
+
 type ScheduleProps = PageProps<SchedulePageQuery>
 
 export const query = graphql`
@@ -15,11 +17,14 @@ export const query = graphql`
 
 const Schedule = () => <div />
 
-export const Head = ({ data: { event } }: ScheduleProps) => (
-  <meta
-    httpEquiv="refresh"
-    content={`0;url=${window.location.origin}${event.path}`}
-  />
-)
+export const Head = ({ data: { event } }: ScheduleProps) => {
+  const location = useLocation()
+  return (
+    <meta
+      httpEquiv="refresh"
+      content={`0;url=${location.origin}${event.path}`}
+    />
+  )
+}
 
 export default Schedule
