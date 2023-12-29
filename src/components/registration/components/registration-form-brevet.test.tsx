@@ -38,6 +38,17 @@ describe('<RegistrationForm>', () => {
           rwgpsUrl: 'https://rwgps.com',
           scheduleId: '123',
         },
+        {
+          chapter: 'Huron' as any,
+          eventType: 'populaire' as any,
+          distance: 60,
+          date: new Date('Sat August 14 2021 09:15:00 EDT'),
+          route: 'Huron Hustle 60',
+          startLocation: 'Tim Hortons, 585 Weber St N, Waterloo',
+          id: '2',
+          rwgpsUrl: 'https://rwgps.com',
+          scheduleId: '456',
+        },
       ],
     })
   })
@@ -102,7 +113,9 @@ describe('<RegistrationForm>', () => {
       mount.getByText(/higgeldy-piggeldy is not a valid email/i)
     ).toBeTruthy()
 
-    expect(mount.getByText(/OCA risk awareness is required/i)).toBeTruthy()
+    expect(
+      mount.getByText(/Ontario Cycling risk awareness is required/i)
+    ).toBeTruthy()
 
     expect(
       mount.getByText(/Randonneurs Ontario risk policy is required/i)
@@ -140,7 +153,7 @@ describe('<RegistrationForm>', () => {
     )
     fireEvent.click(
       mount.getByLabelText(
-        /I have read the Ontario Cycling Association's Progressive Return to Cycling/i
+        /I have read Ontario Cycling's Progressive Return to Cycling/i
       )
     )
     fireEvent.click(mount.getByLabelText(/Share my registration/i))
@@ -214,7 +227,7 @@ describe('<RegistrationForm>', () => {
     )
     fireEvent.click(
       getByLabelText(
-        /I have read the Ontario Cycling Association's Progressive Return to Cycling/i
+        /I have read Ontario Cycling's Progressive Return to Cycling/i
       )
     )
 
@@ -248,7 +261,7 @@ describe('<RegistrationForm>', () => {
     ).not.toHaveValue('Second Cup, 355 Danforth Ave, Toronto')
   })
 
-  it('preselects the event registration from defaultEvent param', async () => {
+  it('preselects the event registration from defaultEvent param', () => {
     const location = {
       ...window.location,
       search: '?schedule-id=123',
@@ -259,20 +272,26 @@ describe('<RegistrationForm>', () => {
     })
 
     const mount = render(<RegistrationFormBrevet />)
-    await waitFor(() => {
-      expect(mount.getByLabelText(/time select/i)).toHaveValue('09:15')
-      expect(mount.container.querySelector('[name="route"]')).toHaveValue(
-        'Rouge Ramble 60'
-      )
-      expect(mount.container.querySelector('[name="rideType"]')).toHaveValue(
-        'populaire'
-      )
-      expect(mount.container.querySelector('[name="eventId"]')).toHaveValue(
-        '123'
-      )
-      expect(
-        mount.getByRole('textbox', { name: 'Starting location' })
-      ).toHaveValue('Second Cup, 355 Danforth Ave, Toronto')
+    expect(mount.getByLabelText(/time select/i)).toHaveValue('09:15')
+    expect(mount.container.querySelector('[name="route"]')).toHaveValue(
+      'Rouge Ramble 60'
+    )
+    expect(mount.container.querySelector('[name="rideType"]')).toHaveValue(
+      'populaire'
+    )
+    expect(mount.container.querySelector('[name="eventId"]')).toHaveValue('123')
+    expect(
+      mount.getByRole('textbox', { name: 'Starting location' })
+    ).toHaveValue('Second Cup, 355 Danforth Ave, Toronto')
+  })
+
+  it('filters the events by chapter', () => {
+    const mount = render(<RegistrationFormBrevet />)
+
+    fireEvent.change(mount.getByLabelText(/Filter by chapter/i), {
+      target: { value: 'Huron' },
     })
+    expect(mount.baseElement).toHaveTextContent(/Huron Hustle 60/i)
+    expect(mount.baseElement).not.toHaveTextContent(/Rouge Ramble 60/i)
   })
 })
