@@ -7,6 +7,11 @@ type ScheduleProps = PageProps<SchedulePageQuery>
 
 export const query = graphql`
   query SchedulePage($scheduleId: String) {
+    site {
+      siteMetadata {
+        siteURL
+      }
+    }
     event(scheduleId: { eq: $scheduleId }) {
       path: gatsbyPath(
         filePath: "/event/{event.season}/{event.chapter}/{event.route}-{event.scheduleId}"
@@ -17,13 +22,14 @@ export const query = graphql`
 
 const Schedule = () => <div />
 
-export const Head = ({ data: { event } }: ScheduleProps) => {
+export const Head = ({ data: { event, site } }: ScheduleProps) => {
   const location = useLocation()
+  const path = `${location.origin || site.siteMetadata.siteURL}${event.path}`
   return (
-    <meta
-      httpEquiv="refresh"
-      content={`0;url=${location.origin}${event.path}`}
-    />
+    <>
+      <link rel="canonical" href={`${path}`} />
+      <meta httpEquiv="refresh" content={`0;url=${path}`} />
+    </>
   )
 }
 
