@@ -10,12 +10,3 @@
   from = "/register"
   to = "/registration"
   status = 301
-[[redirects]]
-  from="/event/2023/ottawa/dw_chenaux-1020/"
-  to="/event/2023/ottawa/dw-chenaux-1020/"
-  status=301
-[[redirects]]
-  from="/schedule/*"
-  to="/registration/"
-  status=302
-  force=true
