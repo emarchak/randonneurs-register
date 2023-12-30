@@ -19,11 +19,12 @@ const Schedule = () => <div />
 
 export const Head = ({ data: { event } }: ScheduleProps) => {
   const location = useLocation()
+  const path = `${location.origin}${event.path}`
   return (
-    <meta
-      httpEquiv="refresh"
-      content={`0;url=${location.origin}${event.path}`}
-    />
+    <>
+      <link rel="canonical" href={`${path}`} />
+      <meta httpEquiv="refresh" content={`0;url=${path}`} />
+    </>
   )
 }
 
