@@ -4121,7 +4121,7 @@ export type SchedulePageQueryVariables = Exact<{
 }>;
 
 
-export type SchedulePageQuery = { __typename?: 'Query', event?: { __typename?: 'Event', path?: string | null } | null };
+export type SchedulePageQuery = { __typename?: 'Query', site?: { __typename?: 'Site', siteMetadata?: { __typename?: 'SiteSiteMetadata', siteURL?: string | null } | null } | null, event?: { __typename?: 'Event', path?: string | null } | null };
 
 export type AudaxImageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -4675,6 +4675,11 @@ export const TraceImageQuery = gql`
     `;
 export const SchedulePage = gql`
     query SchedulePage($scheduleId: String) {
+  site {
+    siteMetadata {
+      siteURL
+    }
+  }
   event(scheduleId: {eq: $scheduleId}) {
     path: gatsbyPath(
       filePath: "/event/{event.season}/{event.chapter}/{event.route}-{event.scheduleId}"
