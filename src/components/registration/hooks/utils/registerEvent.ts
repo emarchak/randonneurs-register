@@ -28,12 +28,12 @@ export const registerEvent = async ({ eventId, name, route, shareRide, email, ge
 
   try {
     const list = await createList({ scheduleId: eventId, name: route })
-    if (!list) {
+    if (!list || !list.id) {
       throw new Error(`Unable to create list for event ${eventId}`)
     }
     lists.push(list.id)
   } catch (e) {
-    Bugsnag.notify('registerEvent error', null, (e, event) => {
+    Bugsnag.notify('Could not find list', null, (e, event) => {
       event.addMetadata('route', { route })
       event.addMetadata('eventId', { eventId })
       event.addMetadata('message', e.message)
