@@ -56,9 +56,21 @@ describe('registerEvent', () => {
     expect(fetchSpy).not.toHaveBeenCalledWith()
   })
 
-  it('should return false if list.id is missing', async () => {
+  it('should return register event even if list.id is missing', async () => {
     const response = await registerEvent({ ...event, eventId: '999' })
-    expect(response).toBeFalsy()
-    expect(fetchSpy).not.toHaveBeenCalledWith()
+    expect(response).toBeTruthy()
+    expect(fetchSpy).toHaveBeenNthCalledWith(4,
+      expect.stringContaining('send-mail/contact'),
+      expect.objectContaining({
+        method: 'PUT',
+        body: JSON.stringify({
+          first_name: 'John',
+          last_name: 'de la Doe',
+          email: 'test@test.com',
+          lists: [null],
+          custom_fields: { chapter: 'Toronto' }
+        })
+      })
+    )
   })
 })
