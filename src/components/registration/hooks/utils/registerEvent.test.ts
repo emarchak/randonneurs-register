@@ -58,6 +58,8 @@ describe('registerEvent', () => {
 
   it('should return register event even if list.id is missing', async () => {
     const response = await registerEvent({ ...event, eventId: '999' })
+    const callbackSpy = jest.fn()
+
     expect(response).toBeTruthy()
     expect(Bugsnag.notify).toHaveBeenCalledWith('Could not find list', null, expect.any(Function))
     expect(fetchSpy).toHaveBeenNthCalledWith(4,
@@ -73,5 +75,12 @@ describe('registerEvent', () => {
         })
       })
     )
+    // @ts-ignore-next-line
+    const callback = Bugsnag.notify.mock.calls[0][2]
+
+    callback(new Error('test'), { addMetadata: callbackSpy })
+    expect(callbackSpy).toHaveBeenCalledWith('route', { route: '200' })
+    expect(callbackSpy).toHaveBeenCalledWith('eventId', { eventId: '999' })
+    expect(callbackSpy).toHaveBeenCalledWith('message', 'test')
   })
 })
