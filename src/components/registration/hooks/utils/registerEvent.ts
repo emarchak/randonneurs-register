@@ -36,7 +36,6 @@ export const registerEvent = async ({ eventId, name, route, shareRide, email, ge
     Bugsnag.notify('Could not find list', null, (e, event) => {
       event.addMetadata('route', { route })
       event.addMetadata('eventId', { eventId })
-      event.addMetadata('message', e.message)
     })
 
   }

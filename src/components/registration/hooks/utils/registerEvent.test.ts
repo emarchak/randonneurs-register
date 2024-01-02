@@ -81,6 +81,5 @@ describe('registerEvent', () => {
     callback(new Error('test'), { addMetadata: callbackSpy })
     expect(callbackSpy).toHaveBeenCalledWith('route', { route: '200' })
     expect(callbackSpy).toHaveBeenCalledWith('eventId', { eventId: '999' })
-    expect(callbackSpy).toHaveBeenCalledWith('message', 'test')
   })
 })
