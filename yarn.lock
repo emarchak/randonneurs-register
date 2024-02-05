@@ -3273,10 +3273,10 @@
   resolved "https://registry.yarnpkg.com/@netlify/node-cookies/-/node-cookies-0.1.0.tgz#dda912ba618527695cf519fafa221c5e6777c612"
   integrity sha512-OAs1xG+FfLX0LoRASpqzVntVV/RpYkgpI0VrUnw2u0Q1qiZUzcPffxRK8HF3gc4GjuhG5ahOEMJ9bswBiZPq0g==
 
-"@netlify/open-api@^2.19.1", "@netlify/open-api@^2.26.0":
-  version "2.26.0"
-  resolved "https://registry.yarnpkg.com/@netlify/open-api/-/open-api-2.26.0.tgz#cdc8033371079955501f4b9a5323f2dcd76741c2"
-  integrity sha512-B7q+ySzQm6rJhaGbY0Pzqnb1p3FsBqwiPLnLtA17JgTsqmXgQ7j6OQImW9fRJy/Al1ob9M6Oxng/FA2c7aIW1g==
+"@netlify/open-api@^2.19.1", "@netlify/open-api@^2.28.0":
+  version "2.28.0"
+  resolved "https://registry.yarnpkg.com/@netlify/open-api/-/open-api-2.28.0.tgz#11f22423decd54e563a4c79135ffd21e1abed86f"
+  integrity sha512-lSx9yVn5mzTS7u9aevQyDRoWaHJYNl15B7CU373g8We39wW8fGh4sdNY7ciPWshf42FblOVlBdoasn/LpzquXg==
 
 "@netlify/plugins-list@^6.71.0":
   version "6.74.0"
@@ -15144,12 +15144,12 @@ netlify@13.1.10:
     p-wait-for "^4.0.0"
     qs "^6.9.6"
 
-netlify@^13.1.10, netlify@^13.1.11, netlify@^13.1.3:
-  version "13.1.11"
-  resolved "https://registry.yarnpkg.com/netlify/-/netlify-13.1.11.tgz#f5151bbd5e05cd5a67713f89c05a57dd6377b599"
-  integrity sha512-exrD6cqwo5avDNtU7YT9iuN0+yoW+aaEUxvr/39oP36wZRKreoPm6KNVisTR9d4lXrPeUG8XI+rERuLhwMQmdw==
+netlify@^13.1.10, netlify@^13.1.11, netlify@^13.1.14:
+  version "13.1.14"
+  resolved "https://registry.yarnpkg.com/netlify/-/netlify-13.1.14.tgz#fbba73e5d979b94c2b050037c9dbf16f10523801"
+  integrity sha512-7vSq6so7lPjr3HEpjbtLyde0F3IXOzD0ocJs3s2wnJR+nX+8pWOAVGe+KN6S98odsClJBJxCkWG2rLjTBzW9pw==
   dependencies:
-    "@netlify/open-api" "^2.26.0"
+    "@netlify/open-api" "^2.28.0"
     lodash-es "^4.17.21"
     micro-api-client "^3.3.0"
     node-fetch "^3.0.0"
