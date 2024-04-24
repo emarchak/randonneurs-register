@@ -89,17 +89,17 @@ const IndexPage = () => {
         <Callout>
           <ContentWrapper container>
             <ContentChild>
-              <h3>Randonneurs Ontario Access Grant</h3>
+              <h3>2023 Randonneurs Ontario Access Grant</h3>
               <p>
-                The Randonneurs Ontario Access Grant is designed to reduce
+                In 2023, we released the Randonneurs Ontario Access Grant to reduce
                 barriers to the ultra-distance riding community. This access
-                grant is for someone from a group under-represented in the
+                grant was for someone from a group under-represented in the
                 ultra-distance riding community that would have otherwise not
                 been able to participate in Randonneurs Ontario events.
               </p>
 
               <LinkButton primary block to="grant">
-                Learn more about the RO Access Grant
+                Learn more about the 2023 RO Access Grant
               </LinkButton>
             </ContentChild>
             <ContentChild>
