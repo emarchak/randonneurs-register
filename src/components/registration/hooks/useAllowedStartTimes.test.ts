@@ -148,6 +148,13 @@ describe('useAllowedStartTimes', () => {
             expect(new Intl.DateTimeFormat('en', opts).format(d)).toEqual('Fri, Aug 6, 20:00')
         })
 
+        it('shows 2 days before at 8pm ET for brevet id 1061 ', () => {
+            const { getBrevetRegistrationDeadline } = useAllowedStartTimes()
+            const d = getBrevetRegistrationDeadline({ ...brevet, scheduleId: "1061" })
+
+            expect(new Intl.DateTimeFormat('en', opts).format(d)).toEqual('Thu, Apr 1, 20:00')
+        })
+
         it('shows 3 days before at 11:59pm ET for brevets', () => {
             const { getBrevetRegistrationDeadline } = useAllowedStartTimes()
             const d = getBrevetRegistrationDeadline({ ...brevet, date: rideOnSaturday })
