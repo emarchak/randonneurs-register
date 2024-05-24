@@ -47,6 +47,10 @@ export const useAllowedStartTimes = () => {
                 const torontoDeadline = addDays(brevet.date, -1)
                 torontoDeadline.setUTCHours(22, 0, 0)
                 return torontoDeadline
+            case 'Simcoe':
+                const simcoeDeadline = addDays(brevet.date, -1)
+                simcoeDeadline.setUTCHours(24, 0, 0)
+                return simcoeDeadline
             default:
                 const deadline = addDays(brevet.date, -3)
                 deadline.setUTCHours(27, 59, 0)

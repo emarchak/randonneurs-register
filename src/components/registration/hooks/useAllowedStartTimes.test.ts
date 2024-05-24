@@ -4,7 +4,7 @@ import { useAllowedStartTimes } from "./useAllowedStartTimes"
 import * as utils from './utils'
 
 const brevet: Brevet = {
-    chapter: 'Simcoe',
+    chapter: 'All chapter',
     event: 'brevet',
     distance: 200,
     date: new Date('Sat April 3 2021 09:20:00 EDT'),
@@ -20,6 +20,7 @@ const brevet: Brevet = {
 const ottawaBrevet: Brevet = { ...brevet, chapter: 'Ottawa' }
 const huronBrevet: Brevet = { ...brevet, chapter: 'Huron' }
 const torontoBrevet: Brevet = { ...brevet, chapter: 'Toronto' }
+const simcoeBrevet: Brevet = { ...brevet, chapter: 'Simcoe' }
 
 const rideOnSaturday = new Date('Sat August 7 2021 09:20:00 EDT')
 const rideNextSaturday = new Date('Sat August 14 2021 09:20:00 EDT')
@@ -103,8 +104,6 @@ describe('useAllowedStartTimes', () => {
             const { allowedToRegister } = useAllowedStartTimes()
 
             expect(allowedToRegister({ ...brevet, date: rideOnSaturday })).toBeFalsy()
-
-            expect(allowedToRegister({ ...brevet, date: rideOnSaturday })).toBeTruthy()
         })
     })
 
@@ -119,14 +118,14 @@ describe('useAllowedStartTimes', () => {
             hour12: false,
         }
 
-        it('shows Friday at 6pm ET for Ottawa brevets date', () => {
+        it('shows Friday at 6pm ET for Ottawa brevets', () => {
             const { getBrevetRegistrationDeadline } = useAllowedStartTimes()
             const d = getBrevetRegistrationDeadline({ ...ottawaBrevet, date: rideOnSaturday })
 
             expect(new Intl.DateTimeFormat('en', opts).format(d)).toEqual('Fri, Aug 6, 18:00')
         })
 
-        it('shows Friday at 8pm ET for Huron brevets date', () => {
+        it('shows Friday at 8pm ET for Huron brevets', () => {
             const { getBrevetRegistrationDeadline } = useAllowedStartTimes()
             const d = getBrevetRegistrationDeadline({ ...huronBrevet, date: rideOnSaturday })
 
@@ -134,11 +133,19 @@ describe('useAllowedStartTimes', () => {
         })
 
 
-        it('shows Friday at 6pm ET for Toronto brevets date', () => {
+        it('shows the day before at 6pm ET for Toronto brevets', () => {
             const { getBrevetRegistrationDeadline } = useAllowedStartTimes()
             const d = getBrevetRegistrationDeadline({ ...torontoBrevet, date: rideOnSaturday })
 
             expect(new Intl.DateTimeFormat('en', opts).format(d)).toEqual('Fri, Aug 6, 18:00')
+        })
+
+
+        it('shows the day before at 8pm ET for Simcoe brevets', () => {
+            const { getBrevetRegistrationDeadline } = useAllowedStartTimes()
+            const d = getBrevetRegistrationDeadline({ ...simcoeBrevet, date: rideOnSaturday })
+
+            expect(new Intl.DateTimeFormat('en', opts).format(d)).toEqual('Fri, Aug 6, 20:00')
         })
 
         it('shows 3 days before at 11:59pm ET for brevets', () => {
