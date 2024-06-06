@@ -18,44 +18,78 @@ export const syncEvents = async (event: HandlerEvent): Promise<HandlerResponse> 
 
       return event
     })
+
+    // Garbage begins
     // 2. Upsert the routes
-    const { data: { insert_route: { returning: remoteRoutes } } }: RemoteQuery<{ insert_route: { returning: RemoteRoute[] } }> = await fetchQuery(`
+    const { data: { event } }: RemoteQuery<{ event: RemoteEvent[] }> = await fetchQuery(`
+      query MyQuery {
+  event(order_by: {event_id: asc}, where: {event_route: {_is_null: true}, event_id: {_gte: 960}}) {
+    event_name
+    event_id
+  }
+}
+`)
+
+    const newRoutes = event.map((event) => {
+      return routes.get(event.event_name)
+    })
+
+    // 2. Upsert the routes
+    const { data: { insert_route: { returning: newRemoteRoutes } } }: RemoteQuery<{ insert_route: { returning: RemoteRoute[] } }> = await fetchQuery(`
       mutation CreateRoutes {
-        insert_route(objects: ${JSON.stringify(Array.from(routes.values()))},
-        on_conflict: {constraint: route_route_name_route_active_key, update_columns: []}) {
-          returning {
-            route_id
-            route_name
-          }
-        }
+        insert_route(objects: ${JSON.stringify(Array.from(newRoutes.values()))},
       }`)
 
-    const eventsWithRoutes = events.map((event) => ({
-      ...event,
-      event_route: remoteRoutes.find((route) => route.route_name === event.event_name)?.route_id
-    }))
-
-    // 3. Insert the events
-    const { data, errors }: RemoteQuery<{ insert_event: { returning: RemoteEvent[] } }> = await fetchQuery(`
-      mutation CreateEvents {
-        insert_event(
-          objects: ${JSON.stringify(eventsWithRoutes)}
-        ) {
-          returning {
-            event_id
-            event_name
-          }
-        }
-      }`)
-    if (errors) {
-      throw new Error(JSON.stringify(errors))
-    }
 
     return {
       headers,
       statusCode: 200,
-      body: JSON.stringify(data),
+      body: JSON.stringify(newRemoteRoutes),
     }
+
+
+
+
+    // Garbage ends
+
+    // // 2. Upsert the routes
+    // const { data: { insert_route: { returning: remoteRoutes } } }: RemoteQuery<{ insert_route: { returning: RemoteRoute[] } }> = await fetchQuery(`
+    //   mutation CreateRoutes {
+    //     insert_route(objects: ${JSON.stringify(Array.from(routes.values()))},
+    //     on_conflict: {constraint: route_route_name_route_active_key, update_columns: []}) {
+    //       returning {
+    //         route_id
+    //         route_name
+    //       }
+    //     }
+    //   }`)
+
+    // const eventsWithRoutes = events.map((event) => ({
+    //   ...event,
+    //   event_route: remoteRoutes.find((route) => route.route_name === event.event_name)?.route_id
+    // }))
+
+    // // 3. Insert the events
+    // const { data, errors }: RemoteQuery<{ insert_event: { returning: RemoteEvent[] } }> = await fetchQuery(`
+    //   mutation CreateEvents {
+    //     insert_event(
+    //       objects: ${JSON.stringify(eventsWithRoutes)}
+    //     ) {
+    //       returning {
+    //         event_id
+    //         event_name
+    //       }
+    //     }
+    //   }`)
+    // if (errors) {
+    //   throw new Error(JSON.stringify(errors))
+    // }
+
+    // return {
+    //   headers,
+    //   statusCode: 200,
+    //   body: JSON.stringify(data),
+    // }
   } catch (error) {
     return {
       headers,
