@@ -42,12 +42,17 @@ describe('useRegistrationForm', () => {
     createContact: jest.fn().mockResolvedValue({ id: 'contactid' })
   })
 
+  const originalLocation = window.location
 
   beforeEach(() => {
     MockDate.set(new Date('Sun August 22 2021 05:01'))
   })
 
   afterEach(() => {
+    Object.defineProperty(window, 'location', {
+      writable: true,
+      value: originalLocation,
+    })
     sendSlackMsgSpy.mockClear()
     addRowSpy.mockClear()
     sendMailSpy.mockClear()
@@ -120,10 +125,10 @@ describe('useRegistrationForm', () => {
           'route': '200',
           'startTime': new Date('2021-08-28T09:01:00.000Z')
         },
-        'replyTo': 'vp@randonneurs.to',
+        'replyTo': 'vp-toronto@randonneursontario.ca',
         'to': [
           'rider@example.com',
-          'vp@randonneurs.to'
+          'vp-toronto@randonneursontario.ca'
         ],
       },
         'brevetRegistration')
@@ -146,5 +151,25 @@ describe('useRegistrationForm', () => {
       expect(sendMailSpy).toHaveBeenCalled()
       expect(registerRiderSpy).not.toHaveBeenCalled()
     })
+  })
+
+  it('gets defaultEventId from URL', async () => {
+    Object.defineProperty(window, 'location', {
+      writable: true,
+      value: {
+        ...window.location,
+        search: '?schedule-id=1',
+      },
+    })
+
+    const { result } = renderHook(() => useRegistrationForm({ formName, fieldLabels }))
+
+    expect(result.current.defaultScheduleId).toBe('1')
+  })
+
+  it('returns null defaultScheduleId if not in URL', async () => {
+    const { result } = renderHook(() => useRegistrationForm({ formName, fieldLabels }))
+
+    expect(result.current.defaultScheduleId).toBeNull()
   })
 })

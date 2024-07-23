@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Bugsnag from '@bugsnag/js'
 import { formatSlackMessage } from 'src/components/form/utils'
 import { useMail } from 'src/data/mail'
@@ -26,18 +26,25 @@ type FormData = {
 
 const permEmail = 'treasurer@randonneursontario.ca'
 const replyToEmails = {
-    "toronto": "vp@randonneurs.to",
+    "toronto": "vp-toronto@randonneursontario.ca",
     "simcoe": "vp-simcoe@randonneursontario.ca",
     "huron": "vp-huron@randonneursontario.ca",
     "ottawa": "vp-ottawa@randonneursontario.ca",
-    "default": "vp@randonneurs.to"
+    "default": "vp-toronto@randonneursontario.ca"
 }
 
 export const useRegistrationForm = ({ formName, fieldLabels }: useRegistrationFormParams) => {
     const [loading, setLoading] = useState(false)
+    const [defaultScheduleId, setDefaultScheduleId] = useState<string | null>(null)
     const { sendMail } = useMail()
     const { sendSlackMsg } = useSlack()
     const { addRow } = useSheets()
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search)
+        const eventId = params.get('schedule-id')
+        setDefaultScheduleId(eventId)
+    }, [defaultScheduleId, setDefaultScheduleId])
 
     const onSubmit = async (data: FormData) => {
         setLoading(true)
@@ -78,6 +85,7 @@ export const useRegistrationForm = ({ formName, fieldLabels }: useRegistrationFo
         return successRegistration && successSheet
     }
     return {
+        defaultScheduleId,
         loading,
         onSubmit
     }

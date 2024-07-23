@@ -3310,6 +3310,8 @@ export type Db = {
   /** fetch data from the table: "events" */
   events: Array<Db_Events>;
   memberships?: Maybe<Array<Maybe<Db_Membership>>>;
+  /** fetch data from the table: "ride" */
+  ride: Array<Db_Ride>;
   /** fetch data from the table: "riders" */
   riders: Array<Db_Riders>;
   /** fetch data from the table: "rides" */
@@ -3330,6 +3332,15 @@ export type DbEventsArgs = {
 
 export type DbMembershipsArgs = {
   where?: InputMaybe<Db_QueryInput>;
+};
+
+
+export type DbRideArgs = {
+  distinct_on?: InputMaybe<Array<Db_Ride_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Db_Ride_Order_By>>;
+  where?: InputMaybe<Db_Ride_Bool_Exp>;
 };
 
 
@@ -3357,6 +3368,19 @@ export type DbRoutesArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Db_Routes_Order_By>>;
   where?: InputMaybe<Db_Routes_Bool_Exp>;
+};
+
+/** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
+export type Db_Boolean_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['Boolean']>;
+  _gt?: InputMaybe<Scalars['Boolean']>;
+  _gte?: InputMaybe<Scalars['Boolean']>;
+  _in?: InputMaybe<Array<Scalars['Boolean']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['Boolean']>;
+  _lte?: InputMaybe<Scalars['Boolean']>;
+  _neq?: InputMaybe<Scalars['Boolean']>;
+  _nin?: InputMaybe<Array<Scalars['Boolean']>>;
 };
 
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
@@ -3547,6 +3571,14 @@ export enum Db_Order_By {
   DescNullsLast = 'desc_nulls_last'
 }
 
+/** columns and relationships of "ride" */
+export type Db_Ride = {
+  __typename?: 'db_ride';
+  ride_cancelled: Scalars['Boolean'];
+  ride_event: Scalars['Int'];
+  ride_rider: Scalars['Int'];
+};
+
 /** input type for inserting array relation for remote table "ride" */
 export type Db_Ride_Arr_Rel_Insert_Input = {
   data: Array<Db_Ride_Insert_Input>;
@@ -3559,19 +3591,30 @@ export type Db_Ride_Bool_Exp = {
   _and?: InputMaybe<Array<Db_Ride_Bool_Exp>>;
   _not?: InputMaybe<Db_Ride_Bool_Exp>;
   _or?: InputMaybe<Array<Db_Ride_Bool_Exp>>;
+  ride_cancelled?: InputMaybe<Db_Boolean_Comparison_Exp>;
+  ride_event?: InputMaybe<Db_Int_Comparison_Exp>;
+  ride_rider?: InputMaybe<Db_Int_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "ride" */
 export enum Db_Ride_Constraint {
-  /** unique or primary key constraint on columns "ride_timestamp", "ride_id" */
+  /** unique or primary key constraint on columns "ride_id", "ride_timestamp" */
   RidePkey = 'ride_pkey',
-  /** unique or primary key constraint on columns "ride_rider", "ride_event" */
+  /** unique or primary key constraint on columns "ride_event", "ride_rider" */
   RideUnique = 'ride_unique'
 }
 
+/** input type for incrementing numeric columns in table "ride" */
+export type Db_Ride_Inc_Input = {
+  ride_event?: InputMaybe<Scalars['Int']>;
+  ride_rider?: InputMaybe<Scalars['Int']>;
+};
+
 /** input type for inserting data into table "ride" */
 export type Db_Ride_Insert_Input = {
+  ride_cancelled?: InputMaybe<Scalars['Boolean']>;
   ride_event?: InputMaybe<Scalars['Int']>;
+  ride_hidden?: InputMaybe<Scalars['Boolean']>;
   ride_rider?: InputMaybe<Scalars['Int']>;
   ride_starttime?: InputMaybe<Scalars['db_timestamptz']>;
   rider?: InputMaybe<Db_Rider_Obj_Rel_Insert_Input>;
@@ -3582,6 +3625,8 @@ export type Db_Ride_Mutation_Response = {
   __typename?: 'db_ride_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Db_Ride>;
 };
 
 /** on_conflict condition type for table "ride" */
@@ -3591,11 +3636,66 @@ export type Db_Ride_On_Conflict = {
   where?: InputMaybe<Db_Ride_Bool_Exp>;
 };
 
-/** placeholder for update columns of table "ride" (current role has no relevant permissions) */
-export enum Db_Ride_Update_Column {
-  /** placeholder (do not use) */
-  Placeholder = '_PLACEHOLDER'
+/** Ordering options when selecting data from "ride". */
+export type Db_Ride_Order_By = {
+  ride_cancelled?: InputMaybe<Db_Order_By>;
+  ride_event?: InputMaybe<Db_Order_By>;
+  ride_rider?: InputMaybe<Db_Order_By>;
+};
+
+/** select columns of table "ride" */
+export enum Db_Ride_Select_Column {
+  /** column name */
+  RideCancelled = 'ride_cancelled',
+  /** column name */
+  RideEvent = 'ride_event',
+  /** column name */
+  RideRider = 'ride_rider'
 }
+
+/** input type for updating data in table "ride" */
+export type Db_Ride_Set_Input = {
+  ride_cancelled?: InputMaybe<Scalars['Boolean']>;
+  ride_event?: InputMaybe<Scalars['Int']>;
+  ride_hidden?: InputMaybe<Scalars['Boolean']>;
+  ride_rider?: InputMaybe<Scalars['Int']>;
+};
+
+/** Streaming cursor of the table "ride" */
+export type Db_Ride_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Db_Ride_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Db_Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Db_Ride_Stream_Cursor_Value_Input = {
+  ride_cancelled?: InputMaybe<Scalars['Boolean']>;
+  ride_event?: InputMaybe<Scalars['Int']>;
+  ride_rider?: InputMaybe<Scalars['Int']>;
+};
+
+/** update columns of table "ride" */
+export enum Db_Ride_Update_Column {
+  /** column name */
+  RideCancelled = 'ride_cancelled',
+  /** column name */
+  RideEvent = 'ride_event',
+  /** column name */
+  RideHidden = 'ride_hidden',
+  /** column name */
+  RideRider = 'ride_rider'
+}
+
+export type Db_Ride_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Db_Ride_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Db_Ride_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Db_Ride_Bool_Exp;
+};
 
 /** Boolean expression to filter rows from the table "rider". All fields are combined with a logical 'AND'. */
 export type Db_Rider_Bool_Exp = {
@@ -3606,7 +3706,7 @@ export type Db_Rider_Bool_Exp = {
 
 /** unique or primary key constraints on table "rider" */
 export enum Db_Rider_Constraint {
-  /** unique or primary key constraint on columns "rider_timestamp", "rider_id" */
+  /** unique or primary key constraint on columns "rider_id", "rider_timestamp" */
   RiderPkey = 'rider_pkey',
   /** unique or primary key constraint on columns "rider_lastname", "rider_firstname" */
   RiderRiderFirstnameRiderLastnameKey = 'rider_rider_firstname_rider_lastname_key'
@@ -4001,15 +4101,27 @@ export type EventPageQueryVariables = Exact<{
 
 export type EventPageQuery = { __typename?: 'Query', event?: { __typename?: 'Event', chapter?: Chapter | null, date?: any | null, distance?: number | null, eventType?: EventType | null, id: string, route?: string | null, rwgpsId?: string | null, rwgpsUrl?: string | null, scheduleId?: string | null, season?: string | null, startLocation?: string | null } | null };
 
+export type PageGrantQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PageGrantQueryQuery = { __typename?: 'Query', logos: { __typename?: 'FileConnection', nodes: Array<{ __typename?: 'File', name: string, publicURL?: string | null, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null }> }, gallery: { __typename?: 'FileConnection', nodes: Array<{ __typename?: 'File', name: string, publicURL?: string | null, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null }> } };
+
 export type IndexPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type IndexPageQueryQuery = { __typename?: 'Query', allFile: { __typename?: 'FileConnection', nodes: Array<{ __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null }> } };
+export type IndexPageQueryQuery = { __typename?: 'Query', seoImage?: { __typename?: 'File', childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null } | null, grantImage?: { __typename?: 'File', childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null } | null };
 
 export type TraceImageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type TraceImageQueryQuery = { __typename?: 'Query', file?: { __typename?: 'File', name: string, childImageSharp?: { __typename?: 'ImageSharp', gatsbyImageData: any } | null } | null };
+
+export type SchedulePageQueryVariables = Exact<{
+  scheduleId?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type SchedulePageQuery = { __typename?: 'Query', site?: { __typename?: 'Site', siteMetadata?: { __typename?: 'SiteSiteMetadata', siteURL?: string | null } | null } | null, event?: { __typename?: 'Event', path?: string | null } | null };
 
 export type AudaxImageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -4152,10 +4264,28 @@ declare module '*/{event.route}-{event.scheduleId}.tsx' {
 }
     
 
+declare module '*/grant.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const PageGrantQuery: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/trace-virtuelle.tsx' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const traceImageQuery: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/{event.scheduleId}.tsx' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const SchedulePage: DocumentNode;
 
   export default defaultDocument;
 }
@@ -4340,7 +4470,7 @@ export const GalleryQuery = gql`
   allFile(
     filter: {extension: {regex: "/(jpg|JPG|jpeg)/"}, relativeDirectory: {eq: "gallery"}}
     limit: 6
-    sort: {birthTime: DESC}
+    sort: {name: ASC}
   ) {
     nodes {
       name
@@ -4491,18 +4621,44 @@ export const EventPage = gql`
   }
 }
     `;
-export const IndexPageQuery = gql`
-    query indexPageQuery {
-  allFile(
-    filter: {extension: {regex: "/(jpg|JPG|jpeg)/"}, relativeDirectory: {eq: "gallery"}}
+export const PageGrantQuery = gql`
+    query PageGrantQuery {
+  logos: allFile(filter: {relativeDirectory: {eq: "grant"}}) {
+    nodes {
+      name
+      publicURL
+      childImageSharp {
+        gatsbyImageData(height: 600, formats: JPG)
+      }
+    }
+  }
+  gallery: allFile(
+    filter: {name: {regex: "/grant/"}, relativeDirectory: {eq: "gallery"}}
     limit: 6
-    sort: {birthTime: DESC}
+    sort: {name: ASC}
   ) {
     nodes {
       name
+      publicURL
       childImageSharp {
-        gatsbyImageData(aspectRatio: 1, height: 300, formats: JPG)
+        gatsbyImageData(aspectRatio: 1, height: 600, formats: JPG)
       }
+    }
+  }
+}
+    `;
+export const IndexPageQuery = gql`
+    query indexPageQuery {
+  seoImage: file(
+    relativePath: {eq: "gallery/Screen-Shot-2021-07-21-at-1.30.35-PM.jpg"}
+  ) {
+    childImageSharp {
+      gatsbyImageData(aspectRatio: 1, height: 600, formats: JPG)
+    }
+  }
+  grantImage: file(relativePath: {eq: "grant/slide1.png"}) {
+    childImageSharp {
+      gatsbyImageData(aspectRatio: 1, height: 600, formats: JPG)
     }
   }
 }
@@ -4514,6 +4670,20 @@ export const TraceImageQuery = gql`
     childImageSharp {
       gatsbyImageData(width: 500)
     }
+  }
+}
+    `;
+export const SchedulePage = gql`
+    query SchedulePage($scheduleId: String) {
+  site {
+    siteMetadata {
+      siteURL
+    }
+  }
+  event(scheduleId: {eq: $scheduleId}) {
+    path: gatsbyPath(
+      filePath: "/event/{event.season}/{event.chapter}/{event.route}-{event.scheduleId}"
+    )
   }
 }
     `;

@@ -31,6 +31,9 @@ hgroup {
   font-family: get-font("header");
   line-height: 1.1;
   font-weight: 700;
+  a {
+    color: get-color("text", "normal");
+  }
 }
 
 h1 {
@@ -44,6 +47,9 @@ h3 {font-size: 1.38316rem; font-weight: 800; margin-bottom: get-spacing("small")
 h4 {font-size: 1.1rem; font-style: italic; margin-bottom: get-spacing("small");}
 h5 {font-size: 1rem; margin-bottom: get-spacing("small");}
 
+.normal-text {
+  color: get-color("text", "normal");
+}
 h1 + h2 {
   margin-top: -#{get-spacing()};
 }
@@ -56,7 +62,7 @@ img {
 ul, ol, dl, dd {
   @include no-space-text;
   margin-left: get-spacing();
-  
+
 }
 
 li {

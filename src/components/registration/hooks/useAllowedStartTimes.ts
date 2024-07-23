@@ -34,6 +34,12 @@ export const useAllowedStartTimes = () => {
     }
 
     const getBrevetRegistrationDeadline = (brevet: Brevet) => {
+        // DW 2024 Lake simcoe 300
+        if (brevet.scheduleId === "1061") {
+            const dwDeadline = addDays(brevet.date, -2)
+            dwDeadline.setUTCHours(24, 0, 0)
+            return dwDeadline
+        }
         switch (brevet.chapter) {
             case 'Ottawa':
                 const ottawaDeadline = getWeekdayBefore('Fri', brevet.date)
@@ -47,6 +53,10 @@ export const useAllowedStartTimes = () => {
                 const torontoDeadline = addDays(brevet.date, -1)
                 torontoDeadline.setUTCHours(22, 0, 0)
                 return torontoDeadline
+            case 'Simcoe':
+                const simcoeDeadline = addDays(brevet.date, -1)
+                simcoeDeadline.setUTCHours(24, 0, 0)
+                return simcoeDeadline
             default:
                 const deadline = addDays(brevet.date, -3)
                 deadline.setUTCHours(27, 59, 0)
