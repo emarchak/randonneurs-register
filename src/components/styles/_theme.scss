@@ -1,32 +1,33 @@
 @use "sass:map";
+@use "sass:color";
 
 $theme-colors: (
   "primary": (
     "normal": #DBF2FF,
-    "desaturate": desaturate(#DBF2FF, 90%),
-    "light": lighten(#DBF2FF, 10%),
-    "dark": darken(#DBF2FF, 10%),
-    "darkest": desaturate(darken(#DBF2FF, 20%), 10%),
+    "desaturate": color.adjust(#DBF2FF, $saturation: -90%, $space: hsl),
+    "light": color.adjust(#DBF2FF, $lightness: 10%, $space: hsl),
+    "dark": color.adjust(#DBF2FF, $lightness: -10%, $space: hsl),
+    "darkest": color.adjust(#DBF2FF, $lightness: -20%, $saturation: -10%, $space: hsl),
   ),
   "secondary": (
     "normal": #D2879E,
-    "light": lighten(#D2879E, 20%),
-    "dark": darken(#D2879E, 30%),
-    "darkest": desaturate(darken(#D2879E, 30%), 10%),
+    "light": color.adjust(#D2879E, $lightness: 20%, $space: hsl),
+    "dark": color.adjust(#D2879E, $lightness: -30%, $space: hsl),
+    "darkest": color.adjust(#D2879E, $lightness: -30%, $saturation: -10%, $space: hsl),
   ),
   "tertiary": (
     "normal": #D9C5A9,
-    "light": lighten(#D9C5A9, 20%),
+    "light": color.adjust(#D9C5A9, $lightness: 20%, $space: hsl),
   ),
   "success": (
     "normal": #28a745,
   ),
   "text": (
     "normal": #333333,
-    "subtle": lighten(#333333, 10%),
-    "light": lighten(#333333, 20%),
-    "lighter": lighten(#333333, 60%),
-    "lightest": lighten(#333333, 75%)
+    "subtle": color.adjust(#333333, $lightness: 10%, $space: hsl),
+    "light": color.adjust(#333333, $lightness: 20%, $space: hsl),
+    "lighter": color.adjust(#333333, $lightness: 60%, $space: hsl),
+    "lightest": color.adjust(#333333, $lightness: 75%, $space: hsl),
   ),
   "info": (
     "normal": #17a2b8,
@@ -36,8 +37,8 @@ $theme-colors: (
   ),
   "background": (
     "normal": #fffffd,
-    "darken": lighten(#333333, 75%),
-    "subtle": lighten(#333333, 10%),
+    "darken": color.adjust(#333333, $lightness: 75%, $space: hsl),
+    "subtle": color.adjust(#333333, $lightness: 10%, $space: hsl),
   )
 );
 
@@ -66,9 +67,9 @@ $theme-font-size: (
 );
 
 $dropshadow: (
-  "pressed": 0 0 0.25rem transparentize(#333333, 0.75),
-  "normal":  0.05rem 0.05rem 0.25rem transparentize(#333333, 0.75),
-  "dark": 0.05rem 0.05rem 0.25rem transparentize(#333333, 0.5),
+  "pressed": 0 0 0.25rem color.scale(#333333, $alpha: -75%, $space: hsl),
+  "normal":  0.05rem 0.05rem 0.25rem color.scale(#333333, $alpha: -75%, $space: hsl),
+  "dark": 0.05rem 0.05rem 0.25rem color.scale(#333333, $alpha: -50%, $space: hsl),
 );
 
 @mixin no-space {
@@ -77,45 +78,45 @@ $dropshadow: (
 }
 
 @mixin no-space-text {
-  margin: 0 0 map-get($theme-spacing, "normal") 0;
+  margin: 0 0 map.get($theme-spacing, "normal") 0;
   padding: 0 0 0 0;
 }
 
 @mixin max-width() {
   margin: 0 auto;
   max-width: 960px;
-  padding: map-get($theme-spacing, "normal") 1.0875rem;
+  padding: map.get($theme-spacing, "normal") 1.0875rem;
 }
 
 @function get-font($name) {
-  @return map-get($theme-fonts, $name);
+  @return map.get($theme-fonts, $name);
 }
 
 @function get-font-size($name: "normal") {
-  @return map-get($theme-font-size, $name);
+  @return map.get($theme-font-size, $name);
 }
 
 @function get-color($name, $variant: "normal") {
-  $color: map-get($theme-colors, $name);
-  @return map-get($color, $variant);
+  $color: map.get($theme-colors, $name);
+  @return map.get($color, $variant);
 }
 
 @function get-hover-color($name, $variant: "normal") {
-  $color: map-get($theme-colors, $name);
-  @return darken(map-get($color, $variant), 7%)
+  $color: map.get($theme-colors, $name);
+  @return color.adjust(map.get($color, $variant), $lightness: -7%, $space: hsl),
 }
 
 @function get-outline-color($name, $variant: "normal") {
-  $color: map-get($theme-colors, $name);
-  @return darken(map-get($color, $variant), 10%)
+  $color: map.get($theme-colors, $name);
+  @return color.adjust(map.get($color, $variant), $lightness: -10%, $space: hsl)
 }
 
 @function get-spacing($name: "normal") {
-  @return map-get($theme-spacing, $name);
+  @return map.get($theme-spacing, $name);
 }
 
 @function get-dropshadow($name: "normal") {
-  @return map-get($dropshadow, $name);
+  @return map.get($dropshadow, $name);
 }
 
 @mixin media($point) {

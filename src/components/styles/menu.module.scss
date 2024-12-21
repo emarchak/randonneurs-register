@@ -1,3 +1,4 @@
+@use "sass:color";
 @import "theme";
 
 .link {
@@ -22,7 +23,7 @@
 }
 
 .listItem {
-  border-bottom: 1px solid lighten($color: get-color("text"), $amount: 50);
+  border-bottom: 1px solid color.adjust(get-color("text"), $lightness: 50%, $space: hsl);
   margin-bottom: get-spacing("small");
   &:last-of-type {
     border-bottom: 0;
