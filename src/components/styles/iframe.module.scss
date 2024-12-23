@@ -1,4 +1,4 @@
-@import "theme";
+@use "theme";
 
 .iframe {
     min-width: 100%;
@@ -6,7 +6,7 @@
     max-width: 100%;
     max-height: 100vh;
     border: none;
-    @include media(large) {
+    @include theme.media(large) {
       height: 24rem;
       min-height: auto;
     }

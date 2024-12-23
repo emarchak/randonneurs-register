@@ -1,12 +1,12 @@
 import React from 'react'
 import { PageProps } from 'gatsby'
-import { Layout } from 'src/components/layout'
-import { SEO } from 'src/components/seo'
-import { ContentWrapper } from 'src/components/content-wrapper'
-import { RegistrationFormPermanent } from 'src/components/registration'
 import { Callout } from 'src/components/callout'
-import { TabMenu } from 'src/components/Menu'
+import { ContentWrapper } from 'src/components/content-wrapper'
+import { Layout } from 'src/components/layout'
 import { Link } from 'src/components/Link'
+import { RegistrationFormPermanent } from 'src/components/registration'
+import { SEO } from 'src/components/seo'
+import { TabMenu } from 'src/components/Menu'
 
 export const PermanentRegistration = ({ path }: PageProps) => {
   return (

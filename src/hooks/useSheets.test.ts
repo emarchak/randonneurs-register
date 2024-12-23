@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 import * as fetch from 'cross-fetch'
 import { useSheets } from './useSheets'
 

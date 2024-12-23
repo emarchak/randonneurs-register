@@ -1,13 +1,14 @@
-import React from "react"
-import { graphql, PageProps, useStaticQuery } from "gatsby"
-import { ContentChild, ContentWrapper } from "src/components/content-wrapper"
-import { Gallery } from "src/components/Gallery"
-import { Layout } from "src/components/layout"
-import { Link } from "src/components/Link"
-import { SeasonsCta } from "src/components/seasons"
-import { SEO } from "src/components/seo"
-import { TabMenu } from "src/components/Menu"
-import { LatestsPosts } from "src/components/Blog"
+import React from 'react'
+import { graphql, PageProps, useStaticQuery } from 'gatsby'
+
+import { ContentChild, ContentWrapper } from 'src/components/content-wrapper'
+import { Gallery } from 'src/components/Gallery'
+import { LatestsPosts } from 'src/components/Blog'
+import { Layout } from 'src/components/layout'
+import { Link } from 'src/components/Link'
+import { SeasonsCta } from 'src/components/seasons'
+import { SEO } from 'src/components/seo'
+import { TabMenu } from 'src/components/Menu'
 
 const pageQuery = graphql`
   query eventPageQuery {
@@ -43,7 +44,7 @@ const Seasons = ({ path }: PageProps) => {
           least 1982. Here are some of our past seasons.
         </p>
         <p>
-          To view the full results of these seasons,{" "}
+          To view the full results of these seasons,{' '}
           <Link href="https://randonneursontario.ca/history/heath.html">
             visit our results archive
           </Link>

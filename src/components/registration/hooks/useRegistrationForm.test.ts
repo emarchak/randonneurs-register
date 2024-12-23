@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react-hooks'
+import { act, renderHook } from '@testing-library/react'
 import MockDate from 'mockdate'
 import { Chapter, EventType } from 'src/data/events'
 import { useRegistrationForm } from './useRegistrationForm'

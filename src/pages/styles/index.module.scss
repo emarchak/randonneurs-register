@@ -1,31 +1,31 @@
-@import "../../components/styles/theme";
+@use "../../components/styles/theme";
 
 .home-wrapper {
-  @include media(large) {
+  @include theme.media(large) {
     display: flex;
   }
 }
 
 .event-wrapper {
-  @include no-space;
+  @include theme.no-space;
 }
 
 .event-row {
   list-style: none;
   margin-bottom: 0;
-  padding: get-spacing(small) 0;
-  border-top: 1px solid get-color(text, lightest);
+  padding: theme.get-spacing(small) 0;
+  border-top: 1px solid theme.get-color(text, lightest);
 }
 
 .event-footer {
-  margin-bottom: get-spacing(large);
+  margin-bottom: theme.get-spacing(large);
   .event-cta {
     display: block;
     text-decoration: none;
     border-bottom-width: 0;
-    color: get-color(text);
+    color: theme.get-color(text);
     text-align: center;
     line-height: 2.5em;
-    background-color: get-color(primary);
+    background-color: theme.get-color(primary);
   }
 }

@@ -1,12 +1,12 @@
-@import "theme";
+@use "theme";
 
 $footer-height: 4.3rem;
-@include body-link();
+@include theme.body-link();
 body {
-  background-color: get-color(background);
+  background-color: theme.get-color(background);
 }
 .content {
-  @include max-width();
+  @include theme.max-width();
 
   .content {
     padding-left: 0;
@@ -20,38 +20,38 @@ body {
 }
 
 .contentContainer {
-  @include media(large) {
+  @include theme.media(large) {
     display: flex;
   }
 }
 
 .contentContainerChild {
-  margin-bottom: get-spacing(medium);
-  @include media(large) {
+  margin-bottom: theme.get-spacing(medium);
+  @include theme.media(large) {
     flex: 1;
   }
 }
 
 .contentContainerChild + .contentContainerChild {
-  @include media(large) {
-    padding-left: get-spacing("large");
+  @include theme.media(large) {
+    padding-left: theme.get-spacing("large");
   }
 }
 
 .header {
-  border-bottom: get-spacing("large") solid get-color(primary);
+  border-bottom: theme.get-spacing("large") solid theme.get-color(primary);
   text-align: center;
 }
 
 .headerTitle {
-  @include no-space;
-  @include media(small) {
+  @include theme.no-space;
+  @include theme.media(small) {
     font-size: get-font-size(medium);
   }
 }
 
 .headerLink {
-  color: get-color(text);
+  color: theme.get-color(text);
   text-decoration: none;
 }
 
@@ -60,8 +60,8 @@ body {
 }
 
 .footer {
-  @include body-link();
-  background: get-color(primary, desaturate);
+  @include theme.body-link();
+  background: theme.get-color(primary, desaturate);
   min-height: $footer-height;
   font-size: 0.8rem;
 }
@@ -74,22 +74,22 @@ body {
 .callout,
 .calloutAlternative,
 .aside {
-  padding: get-spacing() get-spacing(large) get-spacing(small);
-  margin-bottom: get-spacing();
-  @include border-radius();
+  padding: theme.get-spacing() theme.get-spacing(large) theme.get-spacing(small);
+  margin-bottom: theme.get-spacing();
+  @include theme.border-radius();
 }
 
 .callout {
-  background-color: get-color(secondary, light);
-  border: 0.1rem solid get-outline-color(secondary, light);
+  background-color: theme.get-color(secondary, light);
+  border: 0.1rem solid theme.get-outline-color(secondary, light);
 }
 
 .calloutAlternative {
-  background-color: get-color(tertiary, light);
-  border: 0.1rem solid get-outline-color(tertiary, light);
+  background-color: theme.get-color(tertiary, light);
+  border: 0.1rem solid theme.get-outline-color(tertiary, light);
 }
 
 .aside {
-  background-color: get-color(primary, desaturate);
-  border: 0.1rem solid get-outline-color(primary, desaturate);
+  background-color: theme.get-color(primary, desaturate);
+  border: 0.1rem solid theme.get-outline-color(primary, desaturate);
 }

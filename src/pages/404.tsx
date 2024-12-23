@@ -1,9 +1,10 @@
-import React from "react"
-import { LatestsPosts } from "src/components/Blog"
-import { ContentWrapper } from "src/components/content-wrapper"
-import { Layout } from "src/components/layout"
-import { SeasonsCta } from "src/components/seasons"
-import { SEO } from "src/components/seo"
+import React from 'react'
+
+import { ContentWrapper } from 'src/components/content-wrapper'
+import { LatestsPosts } from 'src/components/Blog'
+import { Layout } from 'src/components/layout'
+import { SeasonsCta } from 'src/components/seasons'
+import { SEO } from 'src/components/seo'
 
 const NotFoundPage = () => (
   <Layout>

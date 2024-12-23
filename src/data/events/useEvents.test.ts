@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 import { useEvents } from './useEvents'
 
 jest.mock('gatsby', () => ({

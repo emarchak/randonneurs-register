@@ -1,15 +1,17 @@
 import React from 'react'
-import { LatestsPosts } from 'src/components/Blog'
-import { LinkButton } from 'src/components/Buttons'
+import { graphql, useStaticQuery } from 'gatsby'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+
 import { Callout } from 'src/components/callout'
 import { ContentWrapper, ContentChild } from 'src/components/content-wrapper'
 import { Gallery } from 'src/components/Gallery'
+import { LatestsPosts } from 'src/components/Blog'
 import { Layout } from 'src/components/layout'
 import { Link } from 'src/components/Link'
+import { LinkButton } from 'src/components/Buttons'
 import { SeasonsCta } from 'src/components/seasons'
 import { SEO } from 'src/components/seo'
-import { graphql, useStaticQuery } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+
 import * as styles from './styles/grant.module.scss'
 import { MailingForm } from 'src/components/MailingForm/MailingForm'
 

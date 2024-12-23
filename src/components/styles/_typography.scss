@@ -114,17 +114,17 @@ tfoot td {
 }
 
 @include theme.media(medium) {
-  thead, tbody, th, td, tr { 
-      display: block; 
+  thead, tbody, th, td, tr {
+      display: block;
   }
-  
-  thead tr { 
+
+  thead tr {
       position: absolute;
       top: -9999px;
       left: -9999px;
   }
   td {
-    position: relative; 
+    position: relative;
     padding: 0 theme.get-spacing(small);
   }
   td:first-child {padding-top: theme.get-spacing()}

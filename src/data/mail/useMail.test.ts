@@ -1,5 +1,5 @@
 
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 import * as fetch from 'cross-fetch'
 import Bugsnag from '@bugsnag/js'
 import { useMail } from './useMail'

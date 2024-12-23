@@ -1,4 +1,4 @@
-@import "theme";
+@use "theme";
 
 $input-width: 40rem;
 
@@ -9,20 +9,20 @@ $input-width: 40rem;
 }
 
 .formWrapper {
-  background-color: get-color(secondary, light);
-  border-top: 0.1rem solid get-outline-color(secondary, light);
-  border-bottom: 0.1rem solid get-outline-color(secondary, light);
+  background-color: theme.get-color(secondary, light);
+  border-top: 0.1rem solid theme.get-outline-color(secondary, light);
+  border-bottom: 0.1rem solid theme.get-outline-color(secondary, light);
 }
 
 .button {
-  box-shadow: get-dropshadow();
+  box-shadow: theme.get-dropshadow();
   display: inline-block;
-  padding: get-spacing(small) get-spacing(medium);
-  color: get-color(text);
-  background: get-color(text, lighter);
-  border: 0.1rem solid get-outline-color(text, lighter);
-  box-shadow: get-dropshadow();
-  @include border-radius();
+  padding: theme.get-spacing(small) theme.get-spacing(medium);
+  color: theme.get-color(text);
+  background: theme.get-color(text, lighter);
+  border: 0.1rem solid theme.get-outline-color(text, lighter);
+  box-shadow: theme.get-dropshadow();
+  @include theme.border-radius();
   text-align: center;
 
   width: 100%;
@@ -33,57 +33,57 @@ $input-width: 40rem;
   &:hover:enabled,
   &:focus:enabled {
     cursor: pointer;
-    background-color: get-hover-color(text, lighter);
+    background-color: theme.get-hover-color(text, lighter);
   }
 
   &:active {
-    box-shadow: get-dropshadow(pressed);
+    box-shadow: theme.get-dropshadow(pressed);
   }
 
   &:focus {
     outline: none;
-    border-color: get-color(text, light);
+    border-color: theme.get-color(text, light);
   }
 
   &:disabled {
     opacity: 60%;
   }
 
-  @include media(large) {
+  @include theme.media(large) {
     width: auto;
   }
 }
 
 .primaryButton {
-  background: get-color(primary, dark);
-  border-color: get-outline-color(primary, dark);
+  background: theme.get-color(primary, dark);
+  border-color: theme.get-outline-color(primary, dark);
 
   &:hover:enabled,
   &:focus:enabled {
-    background-color: get-hover-color(primary, dark);
+    background-color: theme.get-hover-color(primary, dark);
   }
 
   &:focus {
-    border-color: get-outline-color(primary, darkest);
+    border-color: theme.get-outline-color(primary, darkest);
   }
 }
 
 .secondaryButton {
-  background: get-color(secondary, light);
-  border-color: get-outline-color(secondary, light);
+  background: theme.get-color(secondary, light);
+  border-color: theme.get-outline-color(secondary, light);
 
   &:hover:enabled,
   &:focus:enabled {
-    background-color: get-hover-color(secondary, light);
+    background-color: theme.get-hover-color(secondary, light);
   }
 
   &:focus {
-    border-color: get-outline-color(secondary);
+    border-color: theme.get-outline-color(secondary);
   }
 }
 
 .smallButton {
-  padding: get-spacing(xsmall) 0;
+  padding: theme.get-spacing(xsmall) 0;
 }
 
 .blockButton {
@@ -98,34 +98,34 @@ $input-width: 40rem;
     cursor: wait;
   }
 
-  box-shadow: get-dropshadow(pressed);
+  box-shadow: theme.get-dropshadow(pressed);
   outline: none;
-  border-color: get-color(text, light);
+  border-color: theme.get-color(text, light);
 }
 
 .fieldset {
   border: 0;
-  padding-top: get-spacing();
+  padding-top: theme.get-spacing();
   width: 100%;
 }
 
 .input {
-  background-color: get-color(background);
+  background-color: theme.get-color(background);
   height: get-font-size(large);
-  padding: 0 get-spacing(small);
-  border: 0.1rem solid get-color(secondary);
-  @include border-radius();
+  padding: 0 theme.get-spacing(small);
+  border: 0.1rem solid theme.get-color(secondary);
+  @include theme.border-radius();
 
   &:focus {
     outline-width: 0;
-    border-color: get-color(secondary, darkest);
+    border-color: theme.get-color(secondary, darkest);
   }
 
   &:disabled {
-    border-color: get-color(secondary, light);
-    background-color: get-color(text, lightest);
+    border-color: theme.get-color(secondary, light);
+    background-color: theme.get-color(text, lightest);
   }
-  @include media(large) {
+  @include theme.media(large) {
     max-width: $input-width;
   }
 }
@@ -133,18 +133,18 @@ $input-width: 40rem;
 .help {
   display: block;
   font-size: get-font-size(small);
-  color: get-color(text, subtle);
+  color: theme.get-color(text, subtle);
 }
 
 .help,
 .inputText,
 .inlineInputs {
-  width: calc(100% - #{get-spacing(small) * 2});
+  width: calc(100% - #{theme.get-spacing(small) * 2});
 }
 
 .textField {
-  height: calc(#{get-font-size(large)} * 2);
-  padding: get-spacing(small);
+  height: calc(#{theme.get-font-size(large)} * 2);
+  padding: theme.get-spacing(small);
 }
 
 .inlineInputs {
@@ -153,7 +153,7 @@ $input-width: 40rem;
   margin: 0;
 
   > * {
-    padding-left: get-spacing(small);
+    padding-left: theme.get-spacing(small);
     flex-grow: 1;
   }
 
@@ -170,9 +170,9 @@ $input-width: 40rem;
   background-image: linear-gradient(
       45deg,
       transparent 50%,
-      get-color(secondary, light) 50%
+      theme.get-color(secondary, light) 50%
     ),
-    linear-gradient(135deg, get-color(secondary, light) 50%, transparent 50%),
+    linear-gradient(135deg, theme.get-color(secondary, light) 50%, transparent 50%),
     linear-gradient(to right, #ccc, #ccc);
   background-position: calc(100% - 20px) calc(1em + 2px),
     calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.4em;
@@ -203,12 +203,12 @@ $input-width: 40rem;
 
 .error-list {
   list-style: none;
-  margin-bottom: get-spacing();
+  margin-bottom: theme.get-spacing();
   margin-left: 0;
 }
 
 .error {
-  margin-bottom: get-spacing(small);
+  margin-bottom: theme.get-spacing(small);
   &:before {
     content: "✗";
     margin-right: 0.25rem;
@@ -216,11 +216,11 @@ $input-width: 40rem;
 }
 
 .dateTimeField {
-  @include no-space-text;
+  @include theme.no-space-text;
   p {
     margin-bottom: 0;
   }
-  @include media(large) {
+  @include theme.media(large) {
     max-width: 41.6rem;
   }
 }
@@ -229,7 +229,7 @@ $input-width: 40rem;
   display: block !important;
 
   input {
-    width: calc(100% - #{get-spacing(small) * 2});
+    width: calc(100% - #{theme.get-spacing(small) * 2});
   }
 }
 
@@ -268,7 +268,7 @@ $input-width: 40rem;
     width: 0.5rem;
     height: 0.5rem;
     border-radius: 50%;
-    background: get-color(text);
+    background: theme.get-color(text);
     animation-timing-function: cubic-bezier(0, 1, 1, 0);
   }
   div:nth-child(1) {
@@ -315,16 +315,16 @@ $input-width: 40rem;
 
 .radioTable {
   &Wrapper {
-    background-color: get-color(background);
-    border: 0.1rem solid get-color(secondary);
+    background-color: theme.get-color(background);
+    border: 0.1rem solid theme.get-color(secondary);
     overflow: hidden;
-    @include border-radius();
+    @include theme.border-radius();
 
     overflow-y: scroll;
     max-height: 30rem;
     max-height: 60vh;
-    box-shadow: inset get-dropshadow();
-    margin-bottom: get-spacing();
+    box-shadow: inset theme.get-dropshadow();
+    margin-bottom: theme.get-spacing();
   }
 
   &Empty {
@@ -332,8 +332,8 @@ $input-width: 40rem;
   }
 
   thead th {
-    padding: get-spacing(small) get-spacing(small);
-    background-color: get-color(text, lighter);
+    padding: theme.get-spacing(small) theme.get-spacing(small);
+    background-color: theme.get-color(text, lighter);
     font-size: get-font-size(small);
     position: sticky;
     top: 0;
@@ -346,7 +346,7 @@ $input-width: 40rem;
   tr {
     &:hover,
     &:focus {
-      background-color: get-color(background, darken);
+      background-color: theme.get-color(background, darken);
       cursor: pointer;
     }
   }
@@ -355,21 +355,21 @@ $input-width: 40rem;
     &,
     &:hover,
     &:focus {
-      background-color: get-color(primary);
-      outline: 1px solid get-color(primary, dark);
+      background-color: theme.get-color(primary);
+      outline: 1px solid theme.get-color(primary, dark);
     }
   }
 
-  @include media(medium) {
+  @include theme.media(medium) {
     input {
       position: absolute;
       display: block;
       top: 1.8em;
-      left: get-spacing();
+      left: theme.get-spacing();
     }
 
     td {
-      padding-left: get-spacing(large);
+      padding-left: theme.get-spacing(large);
     }
   }
 }
