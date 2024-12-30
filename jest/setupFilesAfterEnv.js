@@ -1,4 +1,4 @@
-import "@testing-library/jest-dom/extend-expect"
+import "@testing-library/jest-dom"
 import MockDate from 'mockdate'
 const originalError = console.error
 const originalLog = console.log

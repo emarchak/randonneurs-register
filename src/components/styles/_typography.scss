@@ -1,22 +1,22 @@
-@import "theme";
+@use "theme";
 
 html {
   font-size: 16px;
   line-height: 1.78em;
-  font-family: get-font("body");
+  font-family: theme.get-font("body");
   color: hsla(0, 0%, 0%, 0.8);
   text-rendering: optimizeLegibility;
-  @include no-space;
+  @include theme.no-space;
 }
 
-@include media(small) {
+@include theme.media(small) {
   html {
     font-size: 100%;
   }
 }
 
 img {
-  @include no-space;
+  @include theme.no-space;
   max-width: 100%;
 }
 
@@ -27,60 +27,60 @@ h4,
 h5,
 h6,
 hgroup {
-  @include no-space-text;
-  font-family: get-font("header");
+  @include theme.no-space-text;
+  font-family: theme.get-font("header");
   line-height: 1.1;
   font-weight: 700;
   a {
-    color: get-color("text", "normal");
+    color: theme.get-color("text", "normal");
   }
 }
 
 h1 {
   text-transform: uppercase;
-  margin: 0.67rem 0 get-spacing() 0;
+  margin: 0.67rem 0 theme.get-spacing() 0;
   font-size: 2.25rem;
 }
 
 h2 {font-size: 1.62671rem; font-weight: 800; text-transform: uppercase;}
-h3 {font-size: 1.38316rem; font-weight: 800; margin-bottom: get-spacing("small");}
-h4 {font-size: 1.1rem; font-style: italic; margin-bottom: get-spacing("small");}
-h5 {font-size: 1rem; margin-bottom: get-spacing("small");}
+h3 {font-size: 1.38316rem; font-weight: 800; margin-bottom: theme.get-spacing("small");}
+h4 {font-size: 1.1rem; font-style: italic; margin-bottom: theme.get-spacing("small");}
+h5 {font-size: 1rem; margin-bottom: theme.get-spacing("small");}
 
 .normal-text {
-  color: get-color("text", "normal");
+  color: theme.get-color("text", "normal");
 }
 h1 + h2 {
-  margin-top: -#{get-spacing()};
+  margin-top: -#{theme.get-spacing()};
 }
 
 img {
-  @include no-space-text;
+  @include theme.no-space-text;
   max-width: 100%;
 }
 
 ul, ol, dl, dd {
-  @include no-space-text;
-  margin-left: get-spacing();
+  @include theme.no-space-text;
+  margin-left: theme.get-spacing();
 
 }
 
 li {
-  margin-bottom: get-spacing("small");
+  margin-bottom: theme.get-spacing("small");
 }
 
 p, figure, fieldset, form, iframe {
-  @include no-space-text;
+  @include theme.no-space-text;
   border: 0;
 }
 
 blockquote {
-  margin: get-spacing();
+  margin: theme.get-spacing();
   padding: 0;
 }
 
 hr {
-  @include no-space;
+  @include theme.no-space;
   margin-bottom: calc(1.45rem - 1px);
   background: hsla(0, 0%, 0%, 0.2);
   border: none;
@@ -88,23 +88,23 @@ hr {
 }
 
 p > a {
-  @include body-link();
+  @include theme.body-link();
 }
 
 table {
-  @include no-space-text;
+  @include theme.no-space-text;
   font-size: 1rem;
-  line-height: get-spacing();
+  line-height: theme.get-spacing();
   border-collapse: collapse;
   width: 100%;
 }
 
 td, th {
-  padding: get-spacing()  get-spacing(small);
+  padding: theme.get-spacing()  theme.get-spacing(small);
 }
 
 thead, tbody tr {
-  border-bottom: 1px solid get-color(text, lightest);
+  border-bottom: 1px solid theme.get-color(text, lightest);
   text-align: left;
 }
 
@@ -113,22 +113,22 @@ tfoot td {
   text-align: center;
 }
 
-@include media(medium) {
-  thead, tbody, th, td, tr { 
-      display: block; 
+@include theme.media(medium) {
+  thead, tbody, th, td, tr {
+      display: block;
   }
-  
-  thead tr { 
+
+  thead tr {
       position: absolute;
       top: -9999px;
       left: -9999px;
   }
   td {
-    position: relative; 
-    padding: 0 get-spacing(small);
+    position: relative;
+    padding: 0 theme.get-spacing(small);
   }
-  td:first-child {padding-top: get-spacing()}
-  td:last-child {padding-bottom: get-spacing()}
+  td:first-child {padding-top: theme.get-spacing()}
+  td:last-child {padding-bottom: theme.get-spacing()}
 }
 
 .shopify-buy-frame--product { max-width: 100% !important;}

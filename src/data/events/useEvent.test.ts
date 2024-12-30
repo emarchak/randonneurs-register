@@ -1,4 +1,4 @@
-import { renderHook } from "@testing-library/react-hooks"
+import { renderHook } from "@testing-library/react"
 import * as ReactQuery from 'react-query'
 import * as GraphQLRequest from 'graphql-request'
 import { useEvent } from "./useEvent"

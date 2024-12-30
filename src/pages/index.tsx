@@ -1,19 +1,20 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+
+import { Callout } from 'src/components/callout'
+import { Chapter, useEvents } from 'src/data/events'
 import { ContentChild, ContentWrapper } from 'src/components/content-wrapper'
 import { Gallery } from 'src/components/Gallery'
+import { LatestsPosts } from 'src/components/Blog'
 import { Layout } from 'src/components/layout'
 import { Link } from 'src/components/Link'
 import { LinkButton } from 'src/components/Buttons'
-import { LatestsPosts } from 'src/components/Blog'
 import { SEO } from 'src/components/seo'
-import { Chapter, useEvents } from 'src/data/events'
+import UpcomingEvents from 'src/components/UpcomingEvents'
 
 import * as styles from './styles/index.module.scss'
 import { iframe } from 'src/components/styles/iframe.module.scss'
-import UpcomingEvents from 'src/components/UpcomingEvents'
-import { Callout } from 'src/components/callout'
 
 const currentSeason = '2024'
 
@@ -91,11 +92,11 @@ const IndexPage = () => {
             <ContentChild>
               <h3>2023 Randonneurs Ontario Access Grant</h3>
               <p>
-                In 2023, we released the Randonneurs Ontario Access Grant to reduce
-                barriers to the ultra-distance riding community. This access
-                grant was for someone from a group under-represented in the
-                ultra-distance riding community that would have otherwise not
-                been able to participate in Randonneurs Ontario events.
+                In 2023, we released the Randonneurs Ontario Access Grant to
+                reduce barriers to the ultra-distance riding community. This
+                access grant was for someone from a group under-represented in
+                the ultra-distance riding community that would have otherwise
+                not been able to participate in Randonneurs Ontario events.
               </p>
 
               <LinkButton primary block to="grant">

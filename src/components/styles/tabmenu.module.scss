@@ -1,24 +1,24 @@
-@import "theme";
+@use "theme";
 
 .tabmenu {
   padding: 0 0 0 0;
-  margin: 0 0 get-spacing() 0;
-  border-bottom: 1px solid get-color(text, lighter);
+  margin: 0 0 theme.get-spacing() 0;
+  border-bottom: 1px solid theme.get-color(text, lighter);
 }
 
 .tabmenuList {
-  @include no-space();
+  @include theme.no-space;
 }
 
 .tabmenuSelect {
-  @include no-space();
+  @include theme.no-space;
   border-radius: 0;
   background-image: linear-gradient(
       45deg,
       transparent 50%,
-      get-color(text, light) 50%
+      theme.get-color(text, light) 50%
     ),
-    linear-gradient(135deg, get-color(text, light) 50%, transparent 50%);
+    linear-gradient(135deg, theme.get-color(text, light) 50%, transparent 50%);
   background-position: calc(100% - 20px) calc(0.5em),
     calc(100% - 15px) calc(0.5em);
   background-size: 5px 5px, 5px 5px;
@@ -37,12 +37,12 @@
 }
 
 .tabmenuListItem {
-  @include no-space();
+  @include theme.no-space;
   display: inline-block;
-  margin: 0 get-spacing(small);
+  margin: 0 theme.get-spacing(small);
 
-  @include media(large) {
-    margin: 0 get-spacing();
+  @include theme.media(large) {
+    margin: 0 theme.get-spacing();
   }
 }
 
@@ -56,13 +56,13 @@
   font-size: get-font-size(subheader);
   font-weight: bold;
   border-bottom: 3px solid transparent;
-  color: get-color(text, light);
+  color: theme.get-color(text, light);
   border-color: transparent;
   transition: border-color 0.5s ease;
 
   &:focus,
   &:hover {
-    border-bottom: 3px solid get-color(text, light);
+    border-bottom: 3px solid theme.get-color(text, light);
   }
 }
 
@@ -74,20 +74,20 @@
 }
 
 .tabmenuLinkActive {
-  color: get-color(text);
-  border-bottom: 3px solid get-color(text);
+  color: theme.get-color(text);
+  border-bottom: 3px solid theme.get-color(text);
 }
 
 .tabmenuList {
   display: none;
-  @include media(large) {
+  @include theme.media(large) {
     display: block;
   }
 }
 
 .tabmenuSelect {
   display: block;
-  @include media(large) {
+  @include theme.media(large) {
     display: none;
   }
 }

@@ -3706,9 +3706,9 @@ export type Db_Rider_Bool_Exp = {
 
 /** unique or primary key constraints on table "rider" */
 export enum Db_Rider_Constraint {
-  /** unique or primary key constraint on columns "rider_id", "rider_timestamp" */
+  /** unique or primary key constraint on columns "rider_timestamp", "rider_id" */
   RiderPkey = 'rider_pkey',
-  /** unique or primary key constraint on columns "rider_lastname", "rider_firstname" */
+  /** unique or primary key constraint on columns "rider_firstname", "rider_lastname" */
   RiderRiderFirstnameRiderLastnameKey = 'rider_rider_firstname_rider_lastname_key'
 }
 

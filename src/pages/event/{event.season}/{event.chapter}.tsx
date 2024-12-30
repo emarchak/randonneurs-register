@@ -1,18 +1,20 @@
-import React from "react"
-import { graphql, PageProps } from "gatsby"
-import { ContentChild, ContentWrapper } from "src/components/content-wrapper"
-import { getDateTimeLong, getDateTimeShort } from "src/utils"
-import { Layout } from "src/components/layout"
-import { SeasonsCta } from "src/components/seasons"
-import { SEO } from "src/components/seo"
-import { TabMenu } from "src/components/Menu"
-import { RwgpsRoute } from "src/components/RwgpsRoute"
-import { LinkButton } from "src/components/Buttons"
-import { Link, MapLink } from "src/components/Link"
-import { EventPageQuery } from "src/gatsby.gql"
-import { useEvent } from "src/data/events"
-import { Loading } from "src/components/form/components"
-import { LatestsPosts } from "src/components/Blog"
+import React from 'react'
+import { graphql, PageProps } from 'gatsby'
+
+import { ContentChild, ContentWrapper } from 'src/components/content-wrapper'
+import { EventPageQuery } from 'src/gatsby.gql'
+import { getDateTimeLong, getDateTimeShort } from 'src/utils'
+
+import { LatestsPosts } from 'src/components/Blog'
+import { Layout } from 'src/components/layout'
+import { Link, MapLink } from 'src/components/Link'
+import { LinkButton } from 'src/components/Buttons'
+import { Loading } from 'src/components/form/components'
+import { RwgpsRoute } from 'src/components/RwgpsRoute'
+import { SeasonsCta } from 'src/components/seasons'
+import { SEO } from 'src/components/seo'
+import { TabMenu } from 'src/components/Menu'
+import { useEvent } from 'src/data/events'
 
 type SeasonChapterProps = PageProps<SeasonChapterPageQuery>
 

@@ -1,15 +1,15 @@
 
-@import "theme";
+@use "theme";
 
 .registrationForm {
-    background-color: get-color(secondary, light);
+    background-color: theme.get-color(secondary, light);
 }
 
 .brevetTable {
-    background-color: get-color(background);
+    background-color: theme.get-color(background);
 
-    @include media(small) {
-        thead tr { 
+    @include theme.media(small) {
+        thead tr {
             position: absolute;
             top: -9999px;
             left: -9999px;
@@ -17,19 +17,19 @@
 
         .brevetCellSelector {
             position: absolute;
-            
+
             padding-left: 0;
-            width: get-spacing(large);
+            width: theme.get-spacing(large);
         }
 
         td {
-            position: relative; 
-            padding: 0 get-spacing(small) 0 get-spacing(large);
+            position: relative;
+            padding: 0 theme.get-spacing(small) 0 theme.get-spacing(large);
         }
 
         td:first-child,
-        .brevetCellSelector + td {padding-top: get-spacing(small)}
-        td:last-child {padding-bottom: get-spacing(small)}
+        .brevetCellSelector + td {padding-top: theme.get-spacing(small)}
+        td:last-child {padding-bottom: theme.get-spacing(small)}
     }
 }
 
@@ -39,20 +39,20 @@
 .brevetRow {
   &:hover,
   &:focus {
-      background-color: get-color(background, darken);
+      background-color: theme.get-color(background, darken);
       cursor: pointer;
   }
 }
 
 .brevetRowSelected {
     &, &:hover, &:focus {
-    background-color: get-color(primary);
-    outline: 1px solid get-color(primary, dark);
+    background-color: theme.get-color(primary);
+    outline: 1px solid theme.get-color(primary, dark);
   }
 }
 
 .brevetRadio {
-    @include media(large) {
+    @include theme.media(large) {
       margin-left: 1rem
     }
 }
@@ -63,10 +63,10 @@
 
 .brevetsShowMore {
     margin: 0 0;
-    padding: get-spacing('small');
+    padding: theme.get-spacing('small');
     width: 100%;
 
     &:hover, &:focus {
-        background-color: get-color(primary, light);
+        background-color: theme.get-color(primary, light);
     }
 }

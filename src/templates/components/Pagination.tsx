@@ -1,19 +1,29 @@
 import React from 'react'
-import { LinkButton } from "src/components/Buttons"
-import { ContentChild, ContentWrapper } from "src/components/content-wrapper"
+import { ContentChild, ContentWrapper } from 'src/components/content-wrapper'
+import { LinkButton } from 'src/components/Buttons'
 import { PageInfo } from '../types'
 
 type PaginationProps = {
   pageInfo: PageInfo
 }
 
-export const Pagination = ({pageInfo: {prevTitle, prevUrl, nextTitle, nextUrl}}:PaginationProps) => (
+export const Pagination = ({
+  pageInfo: { prevTitle, prevUrl, nextTitle, nextUrl },
+}: PaginationProps) => (
   <ContentWrapper container>
     <ContentChild>
-      {prevUrl && <LinkButton primary block to={`/${prevUrl}`}>{prevTitle}</LinkButton>}
+      {prevUrl && (
+        <LinkButton primary block to={`/${prevUrl}`}>
+          {prevTitle}
+        </LinkButton>
+      )}
     </ContentChild>
     <ContentChild>
-      {nextUrl && <LinkButton primary block to={`/${nextUrl}`}>{nextTitle}</LinkButton>}
+      {nextUrl && (
+        <LinkButton primary block to={`/${nextUrl}`}>
+          {nextTitle}
+        </LinkButton>
+      )}
     </ContentChild>
   </ContentWrapper>
 )

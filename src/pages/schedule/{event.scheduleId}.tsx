@@ -1,7 +1,8 @@
 import React from 'react'
 import { graphql, PageProps } from 'gatsby'
-import { SchedulePageQuery } from 'src/gatsby.gql'
 import { useLocation } from '@reach/router'
+
+import { SchedulePageQuery } from 'src/gatsby.gql'
 
 type ScheduleProps = PageProps<SchedulePageQuery>
 

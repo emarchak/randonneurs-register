@@ -1,15 +1,16 @@
-import React from "react"
-import { graphql, PageProps } from "gatsby"
-import { ContentWrapper } from "src/components/content-wrapper"
-import { getDateTimeLong } from "src/utils"
-import { Layout } from "src/components/layout"
-import { SeasonsCta } from "src/components/seasons"
-import { SEO } from "src/components/seo"
-import { TabMenu } from "src/components/Menu"
-import { Link } from "src/components/Link"
-import { SeasonPageQuery } from "src/gatsby.gql"
-import * as styles from "../styles/event.module.scss"
-import { LatestsPosts } from "src/components/Blog"
+import React from 'react'
+import { graphql, PageProps } from 'gatsby'
+
+import { ContentWrapper } from 'src/components/content-wrapper'
+import { getDateTimeLong } from 'src/utils'
+import { LatestsPosts } from 'src/components/Blog'
+import { Layout } from 'src/components/layout'
+import { Link } from 'src/components/Link'
+import { SeasonPageQuery } from 'src/gatsby.gql'
+import { SeasonsCta } from 'src/components/seasons'
+import { SEO } from 'src/components/seo'
+import { TabMenu } from 'src/components/Menu'
+import * as styles from '../styles/event.module.scss'
 type SeasonProps = PageProps<SeasonPageQuery>
 
 export const query = graphql`
