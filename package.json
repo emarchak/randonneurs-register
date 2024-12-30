@@ -53,6 +53,7 @@
     "@graphql-codegen/typescript-react-query": "^4.1.0",
     "@graphql-tools/jest-transform": "^1.2.1",
     "@percy/cli": "^1.21.0",
+    "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.0.0",
     "@testing-library/react": "^16.0.0",
     "@types/gtag.js": "^0.0.12",

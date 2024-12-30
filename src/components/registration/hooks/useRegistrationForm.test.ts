@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react'
+import { act, renderHook, waitFor } from '@testing-library/react'
 import MockDate from 'mockdate'
 import { Chapter, EventType } from 'src/data/events'
 import { useRegistrationForm } from './useRegistrationForm'
@@ -60,7 +60,7 @@ describe('useRegistrationForm', () => {
   })
 
   it('sets loading to true on submit', async () => {
-    const { result, waitForValueToChange } = renderHook(() => useRegistrationForm({ formName, fieldLabels }))
+    const { result } = renderHook(() => useRegistrationForm({ formName, fieldLabels }))
 
     expect(result.current.loading).toBeFalsy()
 
@@ -68,17 +68,17 @@ describe('useRegistrationForm', () => {
       result.current.onSubmit(formData)
     })
 
-    await waitForValueToChange(() => result.current.loading === true)
-
-    expect(result.current.loading).toBeFalsy()
+    await waitFor(() => {
+      expect(result.current.loading).toBeFalsy()
+    })
   })
 
   it('submits expected data to slack, row, mail and registration', async () => {
-    const { result, waitForNextUpdate } = renderHook(() => useRegistrationForm({ formName, fieldLabels }))
+    const { result } = renderHook(() => useRegistrationForm({ formName, fieldLabels }))
 
-    await act(async () => {
-      result.current.onSubmit(formData)
-      await waitForNextUpdate()
+    await result.current.onSubmit(formData)
+
+    await waitFor(() => {
 
       expect(registerRiderSpy).toHaveBeenCalledWith({
         email: 'rider@example.com',
@@ -88,7 +88,8 @@ describe('useRegistrationForm', () => {
         hideRide: false,
         lastName: 'de Silva',
       })
-      await waitForNextUpdate()
+    })
+    await waitFor(() => {
       expect(sendSlackMsgSpy).toHaveBeenCalledWith({
         'attachments': [
           'Name: Lael de Silva \nEmail: rider@example.com \nRoute: 200 \nRide Type: brevet \nChapter: Toronto \nEvent Id: 123 \nGender: X \nStart Time: Sat August 28 05:01 \nShare Ride: true',
@@ -133,7 +134,6 @@ describe('useRegistrationForm', () => {
       },
         'brevetRegistration')
     })
-
   })
 
   it('does not call register rider for permanents', async () => {
@@ -141,11 +141,10 @@ describe('useRegistrationForm', () => {
       ...formData,
       eventId: undefined
     }
-    const { result, waitForNextUpdate } = renderHook(() => useRegistrationForm({ formName, fieldLabels }))
+    const { result } = renderHook(() => useRegistrationForm({ formName, fieldLabels }))
 
-    await act(async () => {
-      result.current.onSubmit(permFormData)
-      await waitForNextUpdate()
+    await result.current.onSubmit(permFormData)
+    await waitFor(() => {
       expect(sendSlackMsgSpy).toHaveBeenCalled()
       expect(addRowSpy).toHaveBeenCalled()
       expect(sendMailSpy).toHaveBeenCalled()
