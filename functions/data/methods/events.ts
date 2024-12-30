@@ -2,9 +2,8 @@ import { HandlerEvent, HandlerResponse } from '@netlify/functions'
 import { fetchEvents, RemoteEvent, eventtypeKey, fetchQuery, RemoteRoute, buildRoute, RemoteQuery, headers } from './utils'
 
 export const syncEvents = async ({ queryStringParameters }: HandlerEvent): Promise<HandlerResponse> => {
-  const from = queryStringParameters?.from ? new Date(queryStringParameters.from) : new Date(Date.now())
   try {
-    const rawEvents = await fetchEvents(from)
+    const rawEvents = await fetchEvents(queryStringParameters)
 
     const insertRoutes = new Map<string, RemoteRoute>()
     // 1. Build the events and route map from RO

@@ -74,8 +74,8 @@ export const brevetDistance = (dist: number): number | undefined => {
     return Math.floor((dist / 100) + .5) * 100
 }
 
-export const fetchEvents = async (from: Date): Promise<RawEvent[]> => {
-    const dateRange = from.toISOString().slice(0, 10)
+export const fetchEvents = async (args: { from?: Date }): Promise<RawEvent[]> => {
+    const dateRange = (args?.from ? new Date(args.from) : new Date(Date.now())).toISOString().slice(0, 10)
 
     const response = await fetch(endpoint + '?&from=' + dateRange)
     const data = await response.json()
