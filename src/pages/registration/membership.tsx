@@ -43,7 +43,7 @@ const MemberRegistration = ({ path }: PageProps) => {
             </small>
           </p>
           <LinkButton
-            href="https://ccnbikes.com/#!/events/randonneurs-ontario-membership-2023"
+            href="https://ccnbikes.com/#!/events/randonneurs-ontario-membership-2025"
             secondary
             small
             block
@@ -64,7 +64,7 @@ const MemberRegistration = ({ path }: PageProps) => {
             </small>
           </p>
           <LinkButton
-            href="https://ccnbikes.com/#!/events/randonneurs-ontario-membership-2023"
+            href="https://ccnbikes.com/#!/events/randonneurs-ontario-membership-2025"
             primary
             small
             block
@@ -85,7 +85,7 @@ const MemberRegistration = ({ path }: PageProps) => {
             </small>
           </p>
           <LinkButton
-            href="https://ccnbikes.com/#!/events/randonneurs-ontario-membership-2023"
+            href="https://ccnbikes.com/#!/events/randonneurs-ontario-membership-2025"
             secondary
             small
             block

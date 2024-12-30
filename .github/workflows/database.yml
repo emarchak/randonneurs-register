@@ -11,3 +11,10 @@ jobs:
         env:
           DB_ENDPOINT: ${{ secrets.DB_ENDPOINT }}
         run: curl -I ${DB_ENDPOINT}
+  import:
+    name: Nightly event import
+    runs-on: ubuntu-latest
+    steps:
+      - name: Grab some events
+          DB_ENDPOINT: ${{ secrets.IMPORT_ENDPOINT }}
+        run: curl -X POST -I ${IMPORT_ENDPOINT}
