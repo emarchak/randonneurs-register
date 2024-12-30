@@ -4537,7 +4537,7 @@
     fast-glob "^3.2.11"
     image-size "^1.0.0"
 
-"@percy/cli@^1.21.0":
+"@percy/cli@^1.30.5":
   version "1.30.5"
   resolved "https://registry.yarnpkg.com/@percy/cli/-/cli-1.30.5.tgz#bc82e2d46df787bdcf1e622b166ecdf0e4e401a0"
   integrity sha512-0CMKI3wG6LXF4Ajlk3RQwr6ELQEaVoNXuf5xNTjuYpqJ0Edru3/E/kYsD5lv07HS3hNyDa1giNyXgXO3RLPiaQ==
