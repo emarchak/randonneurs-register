@@ -16,7 +16,7 @@ describe('fetchEvents', () => {
   it('throws an error if response its not okay', async () => {
     responseMock.mockResolvedValueOnce({ status: 'not okay' })
 
-    await expect(fetchEvents()).rejects.toThrow('Failed to fetch events')
+    await expect(fetchEvents({})).rejects.toThrow('Failed to fetch events')
   })
 
   it('returns the scheduled data', async () => {
@@ -24,9 +24,20 @@ describe('fetchEvents', () => {
       status: 'ok',
       schedule: ['event1', 'event2'],
     })
-    const response = await fetchEvents()
+    const response = await fetchEvents({})
 
     expect(response).toEqual(['event1', 'event2'])
+  })
+
+  it('filters by date', async () => {
+    responseMock.mockResolvedValueOnce({
+      status: 'ok',
+      schedule: ['event1', 'event2'],
+    })
+    const response = await fetchEvents({ from: new Date('2021-01-01') })
+
+    expect(response).toEqual(['event1', 'event2'])
+    expect(fetchMock).toHaveBeenCalledWith(expect.any(String))
   })
 })
 
