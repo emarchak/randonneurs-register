@@ -1261,6 +1261,17 @@
     iserror "0.0.2"
     stack-generator "^2.0.3"
 
+"@bugsnag/core@^8.1.1":
+  version "8.1.1"
+  resolved "https://registry.yarnpkg.com/@bugsnag/core/-/core-8.1.1.tgz#5a1d404757ec440590e310eb97f0064b0a4e0c96"
+  integrity sha512-ytOWqwm4H2h8rADqYPR+tQpDHsBav3NEZ5E2VSCCxPbT2R89Q0/t0PZTbQVlOS+TRutajO29VxTV9qsAREfpSw==
+  dependencies:
+    "@bugsnag/cuid" "^3.0.0"
+    "@bugsnag/safe-json-stringify" "^6.0.0"
+    error-stack-parser "^2.0.3"
+    iserror "^0.0.2"
+    stack-generator "^2.0.3"
+
 "@bugsnag/cuid@^3.0.0":
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/@bugsnag/cuid/-/cuid-3.1.1.tgz#dbd5d76559f6b7a66306fceacf503888883da514"
