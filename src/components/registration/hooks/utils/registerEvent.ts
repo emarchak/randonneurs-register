@@ -14,9 +14,7 @@ type FormData = {
   [keyof: string]: any
 }
 
-export const registerEvent = async ({ eventId, name, route, shareRide, email, gender, chapter }: FormData) => {
-  const { createContact, createList } = useMail()
-
+export const registerEvent = async ({ eventId, name, shareRide, email, gender }: FormData) => {
   if (!eventId) {
     return true
   }
@@ -24,32 +22,12 @@ export const registerEvent = async ({ eventId, name, route, shareRide, email, ge
   const [firstName, ...rest] = name.split(' ')
   const lastName = rest.join(' ')
 
-  const lists = []
-
-  try {
-    const list = await createList({ scheduleId: eventId, name: route })
-    if (!list || !list.id) {
-      throw new Error(`Unable to create list for event ${eventId}`)
-    }
-    lists.push(list.id)
-  } catch (e) {
-    Bugsnag.notify('Could not find list', null, (e, event) => {
-      event.addMetadata('route', { route })
-      event.addMetadata('eventId', { eventId })
-    })
-
-  }
-
-  const success = await Promise.all([
-    createContact({ firstName, lastName, email, chapter, lists }),
-    registerRider({
-      eventId: parseInt(eventId),
-      hideRide: !shareRide,
-      email: email,
-      firstName,
-      lastName,
-      gender
-    })
-  ])
-  return success.every(Boolean)
+  return await registerRider({
+    eventId: parseInt(eventId),
+    hideRide: !shareRide,
+    email: email,
+    firstName,
+    lastName,
+    gender
+  })
 }
