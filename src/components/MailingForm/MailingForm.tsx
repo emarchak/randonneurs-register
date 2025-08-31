@@ -1,9 +1,8 @@
 import React, { ChangeEvent, ReactNode, useState } from 'react'
 import { ContentWrapper } from '../content-wrapper'
 import { Form, InputField, ErrorsList, SubmitButton } from '../form/components'
-import { FormState, formSubmit, RequiredFields, validate } from '../form/utils'
+import { FormState, RequiredFields, validate } from '../form/utils'
 import { createContact } from 'src/data/mail/api/contact'
-import { getList } from 'src/data/mail/api/lists'
 
 const formName = 'mailing-list'
 
@@ -60,8 +59,7 @@ export const MailingForm = ({
     }
 
     try {
-      const { id } = await getList({ name: listName })
-      const success = await createContact({ ...formData, lists: [id] })
+      const success = await createContact({ ...formData, lists: [listName] })
 
       if (success) {
         setFormState('submitted')
