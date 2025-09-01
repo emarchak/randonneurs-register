@@ -213,4 +213,9 @@ const fetch = jest.fn().mockImplementation(async (endpoint = '', body = {}) => {
   })
 })
 
+// Mock @react-email/render
+jest.mock('@react-email/render', () => ({
+  render: jest.fn().mockReturnValue('<!DOCTYPE html><html><body>Mocked React Email HTML</body></html>')
+}))
+
 module.exports = fetch

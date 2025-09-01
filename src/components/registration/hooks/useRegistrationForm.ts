@@ -70,7 +70,7 @@ export const useRegistrationForm = ({ formName, fieldLabels }: useRegistrationFo
             to: [data.email, replyTo, vpPermanent, memberAtLarge].filter(Boolean),
             replyTo,
             data
-        }, 'brevetRegistration')
+        }, 'rideRegistration')
 
         if (!successSlack || !successMail || !successSheet) {
             Bugsnag.notify('Registration error', null, (e, event) => {

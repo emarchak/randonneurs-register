@@ -50,7 +50,7 @@ describe('useMail()', () => {
                 'baz': 'qux'
             }
         }
-        const response = await result.current.sendMail(emailContent, "brevetRegistration")
+        const response = await result.current.sendMail(emailContent, "rideRegistration")
 
         expect(response).toEqual(true)
         expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/send-mail/send', expect.objectContaining({

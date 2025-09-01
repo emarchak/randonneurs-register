@@ -132,7 +132,7 @@ describe('useRegistrationForm', () => {
           'vp-toronto@randonneursontario.ca'
         ],
       },
-        'brevetRegistration')
+        'rideRegistration')
     })
   })
 

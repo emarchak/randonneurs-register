@@ -1,5 +1,5 @@
 import fetch from 'cross-fetch'
-import { brevetRegistrationTemplate, BrevetRegistrationData } from '../../../templates/emails/brevetRegistration'
+import RideRegistrationEmail, { RideRegistrationData } from '../../../templates/emails/rideRegistration'
 import { defaultFormTemplate, DefaultFormData } from '../../../templates/emails/defaultForm'
 
 type sendMailParams = {
@@ -9,12 +9,14 @@ type sendMailParams = {
     data?: Object
 }
 
-type TemplateType = 'brevetRegistration' | 'defaultForm'
+type TemplateType = 'rideRegistration' | 'defaultForm'
 
-const generateEmailBody = (template: TemplateType, data: any): string => {
+const generateEmailBody = async (template: TemplateType, data: any): Promise<string> => {
     switch (template) {
-        case 'brevetRegistration':
-            return brevetRegistrationTemplate(data as BrevetRegistrationData)
+        case 'rideRegistration':
+            // Dynamic import to avoid issues in test environment
+            const { render } = await import('@react-email/render')
+            return render(RideRegistrationEmail(data as RideRegistrationData))
         case 'defaultForm':
             return defaultFormTemplate(data as DefaultFormData)
         default:
@@ -26,7 +28,7 @@ export const sendMail = async (params: sendMailParams, template?: TemplateType) 
     try {
         let body = ''
         if (template && params.data) {
-            body = generateEmailBody(template, params.data)
+            body = await generateEmailBody(template, params.data)
         }
 
         const response = await fetch('/.netlify/functions/send-mail/send', {
