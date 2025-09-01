@@ -68,6 +68,7 @@ export const useRegistrationForm = ({ formName, fieldLabels }: useRegistrationFo
         const vpPermanent = data.rideType === 'Permanent' ? permEmail : undefined
         const successMail = await sendMail({
             to: [data.email, replyTo, vpPermanent, memberAtLarge].filter(Boolean),
+            subject: `Registration for ${data.chapter} ${data.route} ${data.rideType} | Randonneurs Ontario`,
             replyTo,
             data
         }, 'rideRegistration')

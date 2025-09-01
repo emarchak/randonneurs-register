@@ -7,9 +7,9 @@ const send = async (event: HandlerEvent): Promise<HandlerResponse> => {
   try {
     const {
       to,
-      from = 'Randonneurs Ontario <no-reply@randonneurs.to>',
-      replyTo = 'Randonneurs Ontario <no-reply@randonneurs.to>',
-      subject,
+      from = 'Randonneurs Ontario <no-reply@randonneursontario.ca>',
+      replyTo = 'Randonneurs Ontario <no-reply@randonneursontario.ca>',
+      subject = 'Randonneurs Ontario',
       body = ' '
     } = JSON.parse(event.body)
 

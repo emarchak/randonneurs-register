@@ -26,6 +26,7 @@ describe('useMail()', () => {
         expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/send-mail/send', expect.objectContaining({
             body: JSON.stringify({
                 ...emailContent,
+                subject: 'Test email',
                 body: ''
             })
         }))
@@ -35,7 +36,11 @@ describe('useMail()', () => {
         const { result } = renderHook(() => useMail())
 
         const response = await result.current.sendMail({
-            to: 'foo@bar.com'
+            to: 'foo@bar.com',
+            subject: 'Test email',
+            data: {
+                body: 'Hello'
+            }
         })
 
         expect(response).toEqual(false)
@@ -46,6 +51,7 @@ describe('useMail()', () => {
         const emailContent = {
             to: 'foo@bar.com',
             from: 'bar@baz.com',
+            subject: 'Test email',
             data: {
                 'baz': 'qux'
             }

@@ -37,8 +37,6 @@ describe('useRegistrationForm', () => {
   const sendMailSpy = jest.fn().mockName('sendMail')
   jest.spyOn(Mail, 'useMail').mockReturnValue({
     sendMail: sendMailSpy,
-    createList: jest.fn().mockResolvedValue({ id: 'listid' }),
-    getList: jest.fn().mockResolvedValue({ id: 'listid' }),
     createContact: jest.fn().mockResolvedValue({ id: 'contactid' })
   })
 
@@ -127,6 +125,7 @@ describe('useRegistrationForm', () => {
           'startTime': new Date('2021-08-28T09:01:00.000Z')
         },
         'replyTo': 'vp-toronto@randonneursontario.ca',
+        'subject': 'Registration for Toronto 200 brevet | Randonneurs Ontario',
         'to': [
           'rider@example.com',
           'vp-toronto@randonneursontario.ca'

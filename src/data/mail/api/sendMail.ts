@@ -4,6 +4,7 @@ import { defaultFormTemplate, DefaultFormData } from '../../../templates/emails/
 
 type sendMailParams = {
     to: string | string[],
+    subject: string,
     replyTo?: string,
     from?: string,
     data?: Object
@@ -14,7 +15,6 @@ type TemplateType = 'rideRegistration' | 'defaultForm'
 const generateEmailBody = async (template: TemplateType, data: any): Promise<string> => {
     switch (template) {
         case 'rideRegistration':
-            // Dynamic import to avoid issues in test environment
             const { render } = await import('@react-email/render')
             return render(RideRegistrationEmail(data as RideRegistrationData))
         case 'defaultForm':
