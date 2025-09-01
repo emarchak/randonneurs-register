@@ -1,9 +1,6 @@
 import fetch from 'cross-fetch'
-
-const mailTemplates = {
-    'brevetRegistration': 'd-6d0774ec805f41e09c68b2da5e79978a',
-    'defaultForm': 'd-72b32a8ddf0d473783046d9911229cf7'
-}
+import { brevetRegistrationTemplate, BrevetRegistrationData } from '../../../templates/emails/brevetRegistration'
+import { defaultFormTemplate, DefaultFormData } from '../../../templates/emails/defaultForm'
 
 type sendMailParams = {
     to: string | string[],
@@ -12,15 +9,32 @@ type sendMailParams = {
     data?: Object
 }
 
-export const sendMail = async (params: sendMailParams, template?: keyof typeof mailTemplates) => {
+type TemplateType = 'brevetRegistration' | 'defaultForm'
+
+const generateEmailBody = (template: TemplateType, data: any): string => {
+    switch (template) {
+        case 'brevetRegistration':
+            return brevetRegistrationTemplate(data as BrevetRegistrationData)
+        case 'defaultForm':
+            return defaultFormTemplate(data as DefaultFormData)
+        default:
+            return ''
+    }
+}
+
+export const sendMail = async (params: sendMailParams, template?: TemplateType) => {
     try {
-        const templateId = mailTemplates[template] || undefined
+        let body = ''
+        if (template && params.data) {
+            body = generateEmailBody(template, params.data)
+        }
+
         const response = await fetch('/.netlify/functions/send-mail/send', {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: JSON.stringify({
                 ...params,
-                templateId
+                body
             }),
         })
 

@@ -8,11 +8,11 @@ describe('send', () => {
 
   beforeEach(() => {
     fetchMock.mockImplementation(async (endpoint): Promise<Response> => {
-      if (typeof endpoint === 'string' && endpoint.includes('field_definitions')) {
+      if (typeof endpoint === 'string' && endpoint.includes('audiences')) {
         return {
           status: 200,
           statusText: 'OK',
-          json: () => ({ custom_fields: customFields }),
+          json: () => ({ success: true }),
         } as any
       }
       return {
@@ -38,21 +38,20 @@ describe('send', () => {
     })
   })
 
-  it('returns 500 if field definition missing', async () => {
+  it('returns 200 if successful with custom fields', async () => {
     const event: HandlerEvent = {
       body: JSON.stringify({
         first_name: 'Test',
         last_name: 'User',
         email: 'test@email.com',
-        customFields: { missing_field: 'not here' }
+        customFields: {
+          chapter: 'Toronto',
+        }
       })
     } as any
 
     const response = await addContact(event)
-    expect(response).toEqual({
-      statusCode: 500,
-      body: '\"Could not find field definition for missing_field\"'
-    })
+    expect(response).toEqual({ statusCode: 200, body: '{\"status\":200,\"statusText\":\"OK\"}' })
   })
 
   it('returns 200 if successful', async () => {
@@ -70,17 +69,19 @@ describe('send', () => {
     const response = await addContact(event)
 
     expect(fetchMock).toHaveBeenCalledWith(
-      expect.stringContaining('contacts'),
+      expect.stringContaining('audiences'),
       expect.objectContaining({
-        method: 'PUT',
+        method: 'POST',
         body: JSON.stringify({
-          list_ids: [],
-          contacts: [{
-            first_name: 'Test',
-            last_name: 'User',
-            email: 'test@email.com',
-            custom_fields: { e1_T: 'Toronto' }
-          }]
+          name: 'Test User',
+          email: 'test@email.com',
+          unsubscribed: false,
+          audienceId: undefined,
+          attributes: {
+            firstName: 'Test',
+            lastName: 'User',
+            chapter: 'Toronto'
+          }
         })
       }))
     expect(response).toEqual({ statusCode: 200, body: '{\"status\":200,\"statusText\":\"OK\"}' })

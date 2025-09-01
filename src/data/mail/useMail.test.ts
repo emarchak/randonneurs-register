@@ -24,7 +24,10 @@ describe('useMail()', () => {
 
         expect(response).toEqual(true)
         expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/send-mail/send', expect.objectContaining({
-            body: JSON.stringify(emailContent)
+            body: JSON.stringify({
+                ...emailContent,
+                body: ''
+            })
         }))
     })
     it('returns false on error', async () => {
@@ -51,10 +54,7 @@ describe('useMail()', () => {
 
         expect(response).toEqual(true)
         expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/send-mail/send', expect.objectContaining({
-            body: JSON.stringify({
-                ...emailContent,
-                templateId: 'd-6d0774ec805f41e09c68b2da5e79978a'
-            })
+            body: expect.stringContaining('<!DOCTYPE html>')
         }))
     })
 })

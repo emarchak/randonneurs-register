@@ -157,43 +157,37 @@ const fetch = jest.fn().mockImplementation(async (endpoint = '', body = {}) => {
     }
   }
 
-  if (endpoint.match(/v3\/marketing\/lists/)) {
+  if (endpoint.match(/api\.resend\.com\/audiences/)) {
     return {
       status: 200,
       json: jest.fn().mockResolvedValue({
-        result: [{
+        data: [{
           id: '1234',
-          name: '420 - Example list',
+          name: '420 - Example audience',
           contact_count: 1,
-          _metadata: {
-            self: 'https://api.sendgrid.com/v3/marketing/lists/1234'
-          }
+          created_at: '2021-06-06T18:14:21Z'
         }, {
           id: '5678',
-          name: '421 - Example list',
+          name: '421 - Example audience',
           contact_count: 1,
-          _metadata: {
-            self: 'https://api.sendgrid.com/v3/marketing/lists/5678'
-          }
+          created_at: '2021-06-06T18:14:21Z'
         },{
           id: '91011',
-          name: 'Named list',
+          name: 'Named audience',
           contact_count: 2,
-          _metadata: {
-            self: 'https://api.sendgrid.com/v3/marketing/lists/91011'
-          }
+          created_at: '2021-06-06T18:14:21Z'
         }]
       })
     }
   }
 
-  if (endpoint.match(/functions\/send-mail\/list\?name=Named\+list/) && body.method === 'GET') {
+  if (endpoint.match(/functions\/send-mail\/list\?name=Named\+audience/) && body.method === 'GET') {
     return {
       status: 200,
       ok: true,
       json: jest.fn().mockResolvedValue({
         id: '91011',
-        name: 'Named list',
+        name: 'Named audience',
         scheduleId: ''
       })
     }
@@ -205,7 +199,7 @@ const fetch = jest.fn().mockImplementation(async (endpoint = '', body = {}) => {
       ok: true,
       json: jest.fn().mockResolvedValue({
         id: '1234',
-        name: '420 - Example list',
+        name: '420 - Example audience',
         scheduleId: '420'
       })
     }

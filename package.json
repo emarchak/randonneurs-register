@@ -12,7 +12,7 @@
     "@bugsnag/plugin-react": "^7.19.0",
     "@loadable/component": "^5.15.3",
     "@netlify/functions": "^1.4.0",
-    "@sendgrid/mail": "^7.7.0",
+    "resend": "^3.1.0",
     "apollo-server-lambda": "^3.12.0",
     "cross-fetch": "^3.1.5",
     "date-time-format-timezone": "^1.0.22",
@@ -86,7 +86,7 @@
     "develop": "gatsby develop -p 8000 -H 0.0.0.0",
     "develop:functions": "netlify functions:serve",
     "develop:live": "netlify dev --live",
-    "test": "jest --watch",
+    "test": "jest",
     "test:coverage": "jest --coverage",
     "test:snapshot": "yarn percy snapshot public/"
   },

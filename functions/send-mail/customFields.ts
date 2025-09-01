@@ -1,15 +1,14 @@
-// https://docs.sendgrid.com/api-reference/custom-fields/get-all-field-definitions
+// https://resend.com/docs/audiences
 export type CustomFieldName = 'chapter' | 'gender' | 'last_schedid' | 'start_time'
 export type CustomFieldType = {
-  id: string
   name: CustomFieldName
   field_type: 'Text' | 'Number' | 'Date'
 }
 
 const customFields: CustomFieldType[] = [
-  { id: 'e1_T', name: 'chapter', field_type: 'Text' },
-  { id: 'e3_N', name: 'last_schedid', field_type: 'Number' },
-  { id: 'e4_T', name: 'start_time', field_type: 'Text' }
+  { name: 'chapter', field_type: 'Text' },
+  { name: 'last_schedid', field_type: 'Number' },
+  { name: 'start_time', field_type: 'Text' }
 ]
 
 const reservedFields = [
