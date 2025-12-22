@@ -10,3 +10,6 @@
   from = "/register"
   to = "/registration"
   status = 301
+[dev]
+  targetPort = 8000
+  port = 9999

@@ -9,8 +9,19 @@ Automations and marketing for Toronto Randonneurs
 1. Clone the repo
 2. `yarn install`
 3. `yarn develop`
-4.  To run tests, `yarn test`
+4. To run tests, `yarn test`
 
-## Database 
+## Development with Netlify Dev
+
+For ease of use, it may be preferable to use Netlify's Dev tool.
+
+Follow instructions available at https://docs.netlify.com/api-and-cli-guides/cli-guides
+
+1. Install netlify cli globally
+2. `netlify login`
+3. `netlify link`
+4. `netlify dev`
+
+## Database
 
 ![Data struture](docs/database.drawio.svg)
