@@ -183,6 +183,26 @@ describe('sendMail', () => {
         })
       })
     })
+
+    it('handles unknown template type with data (falls back to empty body)', async () => {
+      const params = {
+        to: 'test@example.com',
+        subject: 'Unknown Template With Data',
+        data: { some: 'data' },
+      }
+
+      const result = await sendMail(params, 'unknownTemplate' as any)
+
+      expect(result).toBe(true)
+      expect(fetchSpy).toHaveBeenCalledWith('/.netlify/functions/send-mail/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: JSON.stringify({
+          ...params,
+          body: ''
+        })
+      })
+    })
   })
 
   describe('error handling', () => {
